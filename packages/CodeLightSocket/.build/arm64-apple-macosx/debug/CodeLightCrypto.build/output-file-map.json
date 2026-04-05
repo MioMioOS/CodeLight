@@ -1,0 +1,19 @@
+{
+  "": {
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/master.swiftdeps"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/KeyManager.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/KeyManager.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/KeyManager.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/KeyManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/KeyManager.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/KeyManager.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/MessageCrypto.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/MessageCrypto.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/MessageCrypto.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/MessageCrypto~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/MessageCrypto.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/MessageCrypto.dia"
+  }
+}

@@ -1,0 +1,3 @@
+module CodeLightCrypto {
+    header "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/include/CodeLightCrypto-Swift.h"
+}

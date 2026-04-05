@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketTests.build/master.swiftdeps"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/Tests/CodeLightSocketTests/TypeTests.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketTests.build/TypeTests.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketTests.build/TypeTests.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketTests.build/TypeTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketTests.build/TypeTests.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketTests.build/TypeTests.dia"
+  }
+}

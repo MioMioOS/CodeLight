@@ -1,0 +1,3 @@
+module CodeLightProtocol {
+    header "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/include/CodeLightProtocol-Swift.h"
+}

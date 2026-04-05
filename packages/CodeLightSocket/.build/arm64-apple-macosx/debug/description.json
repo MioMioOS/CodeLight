@@ -1,0 +1,2303 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.xctest/Contents/MacOS/CodeLightSocketPackageTests",
+      "packagePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket",
+      "productName" : "CodeLightSocketPackageTests"
+    }
+  ],
+  "copyCommands" : {
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream_Starscream.bundle/PrivacyInfo.xcprivacy" : {
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/PrivacyInfo.xcprivacy"
+        }
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream_Starscream.bundle/PrivacyInfo.xcprivacy"
+        }
+      ]
+    }
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.CodeLightCrypto-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/sources",
+      "importPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/KeyManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/MessageCrypto.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "CodeLightCrypto",
+      "moduleOutputPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/CodeLightCrypto.swiftmodule",
+      "objects" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/KeyManager.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/MessageCrypto.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j16",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/include/CodeLightCrypto-Swift.h",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "codelightcrypto"
+      ],
+      "outputFileMapPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/KeyManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/MessageCrypto.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/CodeLightCrypto.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/KeyManager.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/MessageCrypto.swift"
+      ],
+      "tempsPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.CodeLightProtocol-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/sources",
+      "importPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/Sources/CodeLightProtocol/AuthTypes.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/Sources/CodeLightProtocol/SessionEnvelope.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/Sources/CodeLightProtocol/SessionStatus.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "CodeLightProtocol",
+      "moduleOutputPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/CodeLightProtocol.swiftmodule",
+      "objects" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/AuthTypes.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionEnvelope.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionStatus.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j16",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/include/CodeLightProtocol-Swift.h",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "codelightprotocol"
+      ],
+      "outputFileMapPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/AuthTypes.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionEnvelope.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionStatus.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/CodeLightProtocol.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/Sources/CodeLightProtocol/AuthTypes.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/Sources/CodeLightProtocol/SessionEnvelope.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/Sources/CodeLightProtocol/SessionStatus.swift"
+      ],
+      "tempsPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.CodeLightSocket-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocket.build/sources",
+      "importPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/Sources/CodeLightSocket/CodeLightClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/Sources/CodeLightSocket/ServerTypes.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/SocketIO.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/CodeLightProtocol.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/CodeLightCrypto.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocket.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "CodeLightSocket",
+      "moduleOutputPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/CodeLightSocket.swiftmodule",
+      "objects" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocket.build/CodeLightClient.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocket.build/ServerTypes.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j16",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocket.build/include/CodeLightSocket-Swift.h",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "codelightsocket"
+      ],
+      "outputFileMapPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocket.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocket.build/CodeLightClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocket.build/ServerTypes.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/CodeLightSocket.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/Sources/CodeLightSocket/CodeLightClient.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/Sources/CodeLightSocket/ServerTypes.swift"
+      ],
+      "tempsPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocket.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.CodeLightSocketPackageTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.build/sources",
+      "importPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/CodeLightSocketTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "CodeLightSocketPackageTests",
+      "moduleOutputPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/CodeLightSocketPackageTests.swiftmodule",
+      "objects" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j16",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.build/include/CodeLightSocketPackageTests-Swift.h",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "codelightsocket"
+      ],
+      "outputFileMapPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/CodeLightSocketPackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.CodeLightSocketTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketTests.build/sources",
+      "importPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/Tests/CodeLightSocketTests/TypeTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/CodeLightSocket.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "CodeLightSocketTests",
+      "moduleOutputPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/CodeLightSocketTests.swiftmodule",
+      "objects" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketTests.build/TypeTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j16",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "codelightsocket"
+      ],
+      "outputFileMapPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketTests.build/TypeTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/CodeLightSocketTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/Tests/CodeLightSocketTests/TypeTests.swift"
+      ],
+      "tempsPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.SocketIO-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/sources",
+      "importPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckEmitter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketAnyEvent.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketEventHandler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientConfiguration.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientOption.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientSpec.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOStatus.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketRawView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePacketType.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePollable.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineSpec.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineWebsocket.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManagerSpec.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketPacket.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketParsable.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketExtensions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketLogger.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketStringReader.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketTypes.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/Starscream.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "SocketIO",
+      "moduleOutputPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/SocketIO.swiftmodule",
+      "objects" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckEmitter.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckManager.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAnyEvent.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEventHandler.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClient.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientConfiguration.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientOption.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientSpec.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOStatus.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketRawView.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngine.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineClient.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePacketType.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePollable.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineSpec.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineWebsocket.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManager.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManagerSpec.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketPacket.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketParsable.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketExtensions.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketLogger.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketStringReader.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketTypes.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx10.13",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j16",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/include/SocketIO-Swift.h",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-suppress-warnings"
+      ],
+      "outputFileMapPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckEmitter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAnyEvent.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEventHandler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientConfiguration.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientOption.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientSpec.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOStatus.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketRawView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePacketType.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePollable.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineSpec.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineWebsocket.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManagerSpec.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketPacket.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketParsable.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketExtensions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketLogger.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketStringReader.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketTypes.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/SocketIO.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckEmitter.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckManager.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketAnyEvent.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketEventHandler.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClient.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientConfiguration.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientOption.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientSpec.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOStatus.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketRawView.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngine.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineClient.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePacketType.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePollable.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineSpec.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineWebsocket.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManager.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManagerSpec.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketPacket.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketParsable.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketExtensions.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketLogger.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketStringReader.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketTypes.swift"
+      ],
+      "tempsPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.Starscream-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/sources",
+      "importPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Compression/Compression.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Compression/WSCompression.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/DataBytes/Data+Extensions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Engine/Engine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Engine/NativeEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Engine/WSEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/FoundationHTTPHandler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/FoundationHTTPServerHandler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/FrameCollector.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/Framer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/HTTPHandler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/StringHTTPHandler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Security/FoundationSecurity.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Security/Security.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Server/Server.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Server/WebSocketServer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Starscream/WebSocket.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Transport/FoundationTransport.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Transport/TCPTransport.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Transport/Transport.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/DerivedSources/resource_bundle_accessor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<Starscream-arm64-apple-macosx26.0-debug.module-resources>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "Starscream",
+      "moduleOutputPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/Starscream.swiftmodule",
+      "objects" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Compression.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/WSCompression.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Data+Extensions.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Engine.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/NativeEngine.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/WSEngine.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/FoundationHTTPHandler.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/FoundationHTTPServerHandler.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/FrameCollector.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Framer.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/HTTPHandler.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/StringHTTPHandler.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/FoundationSecurity.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Security.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Server.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/WebSocketServer.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/WebSocket.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/FoundationTransport.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/TCPTransport.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Transport.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/resource_bundle_accessor.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx10.13",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j16",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE",
+        "-module-cache-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/include/Starscream-Swift.h",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-suppress-warnings"
+      ],
+      "outputFileMapPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Compression.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/WSCompression.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Data+Extensions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Engine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/NativeEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/WSEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/FoundationHTTPHandler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/FoundationHTTPServerHandler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/FrameCollector.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Framer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/HTTPHandler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/StringHTTPHandler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/FoundationSecurity.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Security.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Server.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/WebSocketServer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/WebSocket.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/FoundationTransport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/TCPTransport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Transport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/resource_bundle_accessor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules/Starscream.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Compression/Compression.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Compression/WSCompression.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/DataBytes/Data+Extensions.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Engine/Engine.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Engine/NativeEngine.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Engine/WSEngine.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/FoundationHTTPHandler.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/FoundationHTTPServerHandler.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/FrameCollector.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/Framer.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/HTTPHandler.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/StringHTTPHandler.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Security/FoundationSecurity.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Security/Security.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Server/Server.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Server/WebSocketServer.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Starscream/WebSocket.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Transport/FoundationTransport.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Transport/TCPTransport.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Transport/Transport.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/DerivedSources/resource_bundle_accessor.swift"
+      ],
+      "tempsPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "CodeLightCrypto" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "CodeLightCrypto",
+      "-package-name",
+      "codelightcrypto",
+      "-c",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/KeyManager.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/MessageCrypto.swift",
+      "-I",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j16",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/include/CodeLightCrypto-Swift.h",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "codelightcrypto",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "CodeLightProtocol" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "CodeLightProtocol",
+      "-package-name",
+      "codelightprotocol",
+      "-c",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/Sources/CodeLightProtocol/AuthTypes.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/Sources/CodeLightProtocol/SessionEnvelope.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/Sources/CodeLightProtocol/SessionStatus.swift",
+      "-I",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j16",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/include/CodeLightProtocol-Swift.h",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "codelightprotocol",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "CodeLightSocket" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "CodeLightSocket",
+      "-package-name",
+      "codelightsocket",
+      "-c",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/Sources/CodeLightSocket/CodeLightClient.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/Sources/CodeLightSocket/ServerTypes.swift",
+      "-I",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j16",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocket.build/include/CodeLightSocket-Swift.h",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "codelightsocket",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "CodeLightSocketPackageTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "CodeLightSocketPackageTests",
+      "-package-name",
+      "codelightsocket",
+      "-c",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.derived/runner.swift",
+      "-I",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j16",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.build/include/CodeLightSocketPackageTests-Swift.h",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "codelightsocket",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "CodeLightSocketTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "CodeLightSocketTests",
+      "-package-name",
+      "codelightsocket",
+      "-c",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/Tests/CodeLightSocketTests/TypeTests.swift",
+      "-I",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j16",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "codelightsocket",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "SocketIO" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "SocketIO",
+      "-c",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckEmitter.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckManager.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketAnyEvent.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketEventHandler.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClient.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientConfiguration.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientOption.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientSpec.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOStatus.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketRawView.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngine.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineClient.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePacketType.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePollable.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineSpec.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineWebsocket.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManager.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManagerSpec.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketPacket.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketParsable.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketExtensions.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketLogger.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketStringReader.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketTypes.swift",
+      "-I",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx10.13",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j16",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/include/SocketIO-Swift.h",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-suppress-warnings",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "Starscream" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "Starscream",
+      "-c",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Compression/Compression.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Compression/WSCompression.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/DataBytes/Data+Extensions.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Engine/Engine.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Engine/NativeEngine.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Engine/WSEngine.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/FoundationHTTPHandler.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/FoundationHTTPServerHandler.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/FrameCollector.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/Framer.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/HTTPHandler.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/StringHTTPHandler.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Security/FoundationSecurity.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Security/Security.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Server/Server.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Server/WebSocketServer.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Starscream/WebSocket.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Transport/FoundationTransport.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Transport/TCPTransport.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Transport/Transport.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/DerivedSources/resource_bundle_accessor.swift",
+      "-I",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx10.13",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j16",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE",
+      "-module-cache-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/include/Starscream-Swift.h",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-suppress-warnings",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "CodeLightCrypto" : [
+
+    ],
+    "CodeLightProtocol" : [
+
+    ],
+    "CodeLightSocket" : [
+      "CodeLightCrypto",
+      "CodeLightProtocol",
+      "SocketIO",
+      "Starscream"
+    ],
+    "CodeLightSocketPackageTests" : [
+      "CodeLightSocketTests",
+      "CodeLightSocket",
+      "CodeLightCrypto",
+      "CodeLightProtocol",
+      "SocketIO",
+      "Starscream"
+    ],
+    "CodeLightSocketTests" : [
+      "CodeLightSocket",
+      "CodeLightCrypto",
+      "CodeLightProtocol",
+      "SocketIO",
+      "Starscream"
+    ],
+    "SocketIO" : [
+      "Starscream"
+    ],
+    "Starscream" : [
+
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.derived/runner.swift" : {
+      "inputs" : [
+
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/KeyManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/MessageCrypto.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/sources"
+    },
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/Sources/CodeLightProtocol/AuthTypes.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/Sources/CodeLightProtocol/SessionEnvelope.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/Sources/CodeLightProtocol/SessionStatus.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/sources"
+    },
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocket.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/Sources/CodeLightSocket/CodeLightClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/Sources/CodeLightSocket/ServerTypes.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocket.build/sources"
+    },
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.build/sources"
+    },
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/KeyManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/MessageCrypto.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/AuthTypes.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionEnvelope.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionStatus.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocket.build/CodeLightClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocket.build/ServerTypes.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketTests.build/TypeTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckEmitter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAnyEvent.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePacketType.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePollable.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineSpec.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineWebsocket.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEventHandler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketExtensions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientConfiguration.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientOption.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientSpec.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOStatus.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketLogger.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManagerSpec.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketPacket.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketParsable.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketRawView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketStringReader.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketTypes.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Compression.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Data+Extensions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Engine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/FoundationHTTPHandler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/FoundationHTTPServerHandler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/FoundationSecurity.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/FoundationTransport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/FrameCollector.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Framer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/HTTPHandler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/NativeEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Security.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Server.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/StringHTTPHandler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/TCPTransport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/Transport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/WSCompression.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/WSEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/WebSocket.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/WebSocketServer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/resource_bundle_accessor.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketPackageTests.product/Objects.LinkFileList"
+    },
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/Tests/CodeLightSocketTests/TypeTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/CodeLightSocketTests.build/sources"
+    },
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckEmitter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketAnyEvent.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketEventHandler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientConfiguration.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientOption.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientSpec.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOStatus.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketRawView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePacketType.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePollable.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineSpec.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineWebsocket.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManagerSpec.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketPacket.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketParsable.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketExtensions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketLogger.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketStringReader.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketTypes.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/sources"
+    },
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Compression/Compression.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Compression/WSCompression.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/DataBytes/Data+Extensions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Engine/Engine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Engine/NativeEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Engine/WSEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/FoundationHTTPHandler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/FoundationHTTPServerHandler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/FrameCollector.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/Framer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/HTTPHandler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Framer/StringHTTPHandler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Security/FoundationSecurity.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Security/Security.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Server/Server.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Server/WebSocketServer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Starscream/WebSocket.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Transport/FoundationTransport.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Transport/TCPTransport.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/Starscream/Sources/Transport/Transport.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/DerivedSources/resource_bundle_accessor.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/Starscream.build/sources"
+    },
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}

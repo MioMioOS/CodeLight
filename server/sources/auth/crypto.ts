@@ -1,6 +1,8 @@
 import nacl from 'tweetnacl';
-import { decodeBase64 } from 'tweetnacl-util';
+import tweetnaclUtil from 'tweetnacl-util';
 import jwt from 'jsonwebtoken';
+
+const { decodeBase64 } = tweetnaclUtil;
 
 export function verifySignature(
     messageBase64: string,

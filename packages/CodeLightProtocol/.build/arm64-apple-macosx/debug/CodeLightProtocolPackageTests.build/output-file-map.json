@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocolPackageTests.build/master.swiftdeps"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocolPackageTests.derived/runner.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocolPackageTests.build/runner.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocolPackageTests.build/runner.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocolPackageTests.build/runner~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocolPackageTests.build/runner.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocolPackageTests.build/runner.dia"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "": {
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/master.swiftdeps"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/Sources/CodeLightProtocol/AuthTypes.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/AuthTypes.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/AuthTypes.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/AuthTypes~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/AuthTypes.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/AuthTypes.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/Sources/CodeLightProtocol/SessionEnvelope.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionEnvelope.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionEnvelope.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionEnvelope~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionEnvelope.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionEnvelope.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/Sources/CodeLightProtocol/SessionStatus.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionStatus.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionStatus.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionStatus~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionStatus.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightProtocol/.build/arm64-apple-macosx/debug/CodeLightProtocol.build/SessionStatus.dia"
+  }
+}

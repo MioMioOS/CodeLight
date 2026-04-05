@@ -1,0 +1,3 @@
+module SocketIO {
+    header "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/include/SocketIO-Swift.h"
+}

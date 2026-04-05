@@ -1,0 +1,657 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.xctest/Contents/MacOS/CodeLightCryptoPackageTests",
+      "packagePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto",
+      "productName" : "CodeLightCryptoPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.CodeLightCrypto-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/sources",
+      "importPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/KeyManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/MessageCrypto.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "CodeLightCrypto",
+      "moduleOutputPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/Modules/CodeLightCrypto.swiftmodule",
+      "objects" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/KeyManager.swift.o",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/MessageCrypto.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j16",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/include/CodeLightCrypto-Swift.h",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "codelightcrypto"
+      ],
+      "outputFileMapPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/KeyManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/MessageCrypto.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/Modules/CodeLightCrypto.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/KeyManager.swift",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/MessageCrypto.swift"
+      ],
+      "tempsPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCrypto.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.CodeLightCryptoPackageTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.build/sources",
+      "importPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/Modules/CodeLightCryptoTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "CodeLightCryptoPackageTests",
+      "moduleOutputPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/Modules/CodeLightCryptoPackageTests.swiftmodule",
+      "objects" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j16",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.build/include/CodeLightCryptoPackageTests-Swift.h",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "codelightcrypto"
+      ],
+      "outputFileMapPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/Modules/CodeLightCryptoPackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.CodeLightCryptoTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoTests.build/sources",
+      "importPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Tests/CodeLightCryptoTests/CryptoTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/Modules/CodeLightCrypto.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "CodeLightCryptoTests",
+      "moduleOutputPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/Modules/CodeLightCryptoTests.swiftmodule",
+      "objects" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoTests.build/CryptoTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j16",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "codelightcrypto"
+      ],
+      "outputFileMapPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoTests.build/CryptoTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/Modules/CodeLightCryptoTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Tests/CodeLightCryptoTests/CryptoTests.swift"
+      ],
+      "tempsPath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "CodeLightCrypto" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "CodeLightCrypto",
+      "-package-name",
+      "codelightcrypto",
+      "-c",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/KeyManager.swift",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/MessageCrypto.swift",
+      "-I",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j16",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/include/CodeLightCrypto-Swift.h",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "codelightcrypto",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "CodeLightCryptoPackageTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "CodeLightCryptoPackageTests",
+      "-package-name",
+      "codelightcrypto",
+      "-c",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.derived/runner.swift",
+      "-I",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j16",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.build/include/CodeLightCryptoPackageTests-Swift.h",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "codelightcrypto",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "CodeLightCryptoTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "CodeLightCryptoTests",
+      "-package-name",
+      "codelightcrypto",
+      "-c",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Tests/CodeLightCryptoTests/CryptoTests.swift",
+      "-I",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j16",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "codelightcrypto",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "CodeLightCrypto" : [
+
+    ],
+    "CodeLightCryptoPackageTests" : [
+      "CodeLightCryptoTests",
+      "CodeLightCrypto"
+    ],
+    "CodeLightCryptoTests" : [
+      "CodeLightCrypto"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.derived/runner.swift" : {
+      "inputs" : [
+
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/KeyManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Sources/CodeLightCrypto/MessageCrypto.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/sources"
+    },
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.build/sources"
+    },
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/KeyManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCrypto.build/MessageCrypto.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoTests.build/CryptoTests.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoPackageTests.product/Objects.LinkFileList"
+    },
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Tests/CodeLightCryptoTests/CryptoTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoTests.build/sources"
+    },
+    "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "": {
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/master.swiftdeps"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckEmitter.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckEmitter.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckEmitter.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckEmitter~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckEmitter.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckEmitter.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckManager.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckManager.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckManager.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckManager.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAckManager.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketAnyEvent.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAnyEvent.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAnyEvent.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAnyEvent~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAnyEvent.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketAnyEvent.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketEventHandler.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEventHandler.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEventHandler.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEventHandler~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEventHandler.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEventHandler.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClient.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClient.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClient.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClient.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClient.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientConfiguration.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientConfiguration.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientConfiguration.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientConfiguration~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientConfiguration.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientConfiguration.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientOption.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientOption.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientOption.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientOption~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientOption.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientOption.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientSpec.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientSpec.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientSpec.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientSpec~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientSpec.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOClientSpec.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOStatus.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOStatus.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOStatus.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOStatus~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOStatus.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIOStatus.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketRawView.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketRawView.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketRawView.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketRawView~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketRawView.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketRawView.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngine.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngine.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngine.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngine~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngine.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngine.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineClient.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineClient.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineClient.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineClient.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineClient.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePacketType.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePacketType.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePacketType.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePacketType~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePacketType.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePacketType.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePollable.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePollable.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePollable.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePollable~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePollable.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEnginePollable.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineSpec.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineSpec.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineSpec.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineSpec~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineSpec.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineSpec.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineWebsocket.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineWebsocket.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineWebsocket.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineWebsocket~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineWebsocket.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketEngineWebsocket.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManager.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManager.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManager.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManager.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManager.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManagerSpec.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManagerSpec.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManagerSpec.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManagerSpec~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManagerSpec.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketManagerSpec.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketPacket.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketPacket.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketPacket.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketPacket~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketPacket.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketPacket.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketParsable.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketParsable.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketParsable.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketParsable~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketParsable.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketParsable.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketExtensions.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketExtensions.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketExtensions.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketExtensions~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketExtensions.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketExtensions.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketLogger.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketLogger.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketLogger.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketLogger~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketLogger.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketLogger.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketStringReader.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketStringReader.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketStringReader.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketStringReader~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketStringReader.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketStringReader.dia"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketTypes.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketTypes.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketTypes.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketTypes~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketTypes.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightSocket/.build/arm64-apple-macosx/debug/SocketIO.build/SocketTypes.dia"
+  }
+}

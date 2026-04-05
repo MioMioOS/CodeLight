@@ -1,7 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import nacl from 'tweetnacl';
-import { encodeBase64 } from 'tweetnacl-util';
+import tweetnaclUtil from 'tweetnacl-util';
 import { verifySignature, createToken, verifyToken } from './crypto';
+
+const { encodeBase64 } = tweetnaclUtil;
 
 describe('verifySignature', () => {
     it('should verify a valid Ed25519 signature', () => {

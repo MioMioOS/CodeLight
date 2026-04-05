@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoTests.build/master.swiftdeps"
+  },
+  "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/Tests/CodeLightCryptoTests/CryptoTests.swift": {
+    "dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoTests.build/CryptoTests.d",
+    "object": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoTests.build/CryptoTests.swift.o",
+    "swiftmodule": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoTests.build/CryptoTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoTests.build/CryptoTests.swiftdeps",
+    "diagnostics": "/Users/ying/Documents/AI/CodeLight/packages/CodeLightCrypto/.build/arm64-apple-macosx/debug/CodeLightCryptoTests.build/CryptoTests.dia"
+  }
+}
