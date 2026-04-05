@@ -1,0 +1,76 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Device {
+    id        String   @id @default(cuid())
+    publicKey String   @unique
+    name      String
+    seq       Int      @default(0)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    sessions   Session[]
+    pushTokens PushToken[]
+}
+
+model Session {
+    id              String   @id @default(cuid())
+    tag             String
+    deviceId        String
+    device          Device   @relation(fields: [deviceId], references: [id])
+    metadata        String
+    metadataVersion Int      @default(0)
+    seq             Int      @default(0)
+    active          Boolean  @default(true)
+    lastActiveAt    DateTime @default(now())
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+
+    messages SessionMessage[]
+
+    @@unique([deviceId, tag])
+    @@index([deviceId, updatedAt(sort: Desc)])
+}
+
+model SessionMessage {
+    id        String   @id @default(cuid())
+    sessionId String
+    session   Session  @relation(fields: [sessionId], references: [id])
+    localId   String?
+    seq       Int
+    content   String
+    createdAt DateTime @default(now())
+
+    @@unique([sessionId, localId])
+    @@index([sessionId, seq])
+}
+
+model PairingRequest {
+    id              String   @id @default(cuid())
+    tempPublicKey   String   @unique
+    serverUrl       String
+    deviceName      String
+    response        String?
+    responseDeviceId String?
+    createdAt       DateTime @default(now())
+    expiresAt       DateTime
+
+    @@index([tempPublicKey])
+}
+
+model PushToken {
+    id        String   @id @default(cuid())
+    deviceId  String
+    device    Device   @relation(fields: [deviceId], references: [id])
+    token     String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@unique([deviceId, token])
+}
