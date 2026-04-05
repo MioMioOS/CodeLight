@@ -97,10 +97,30 @@ export async function sessionRoutes(app: FastifyInstance) {
             return reply.code(404).send({ error: 'Session not found' });
         }
 
-        const startSeq = await allocateSessionSeqBatch(sessionId, messages.length);
+        // Filter out duplicates by localId
+        const newMessages = [];
+        const existingResults = [];
+        for (const msg of messages) {
+            if (msg.localId) {
+                const existing = await db.sessionMessage.findUnique({
+                    where: { sessionId_localId: { sessionId, localId: msg.localId } },
+                });
+                if (existing) {
+                    existingResults.push({ id: existing.id, seq: existing.seq, localId: existing.localId });
+                    continue;
+                }
+            }
+            newMessages.push(msg);
+        }
+
+        if (newMessages.length === 0) {
+            return { messages: existingResults };
+        }
+
+        const startSeq = await allocateSessionSeqBatch(sessionId, newMessages.length);
 
         const created = await db.$transaction(
-            messages.map((msg, i) =>
+            newMessages.map((msg, i) =>
                 db.sessionMessage.create({
                     data: {
                         sessionId,
@@ -113,11 +133,14 @@ export async function sessionRoutes(app: FastifyInstance) {
         );
 
         return {
-            messages: created.map(m => ({
-                id: m.id,
-                seq: m.seq,
-                localId: m.localId,
-            })),
+            messages: [
+                ...existingResults,
+                ...created.map(m => ({
+                    id: m.id,
+                    seq: m.seq,
+                    localId: m.localId,
+                })),
+            ],
         };
     });
 

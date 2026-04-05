@@ -8,6 +8,7 @@ import {
 import { authRoutes } from '@/auth/authRoutes';
 import { pairingRoutes } from '@/pairing/pairingRoutes';
 import { sessionRoutes } from '@/session/sessionRoutes';
+import { pushRoutes } from '@/push/pushRoutes';
 import { config } from '@/config';
 
 export async function startApi() {
@@ -28,6 +29,7 @@ export async function startApi() {
     await app.register(authRoutes);
     await app.register(pairingRoutes);
     await app.register(sessionRoutes);
+    await app.register(pushRoutes);
 
     await app.listen({ port: config.port, host: '0.0.0.0' });
     console.log(`CodeLight Server listening on port ${config.port}`);
