@@ -56,19 +56,17 @@ export function registerSessionHandler(
                 if (parsed.type === 'phase') {
                     console.log(`[Phase] session=${data.sid.substring(0,10)} phase=${parsed.phase} tool=${parsed.toolName || '-'}`);
 
-                    // Find all Live Activity tokens for this session
-                    const laTokens = await db.liveActivityToken.findMany({
-                        where: { sessionId: data.sid },
+                    // Find GLOBAL Live Activity token for this device (sessionId="__global__")
+                    const globalTokens = await db.liveActivityToken.findMany({
+                        where: { sessionId: '__global__' },
                     });
 
-                    if (laTokens.length === 0) {
-                        console.log(`[Phase]   no Live Activity tokens for session ${data.sid.substring(0,10)}`);
-                    }
-
-                    if (laTokens.length > 0) {
+                    if (globalTokens.length === 0) {
+                        console.log(`[Phase]   no global Live Activity tokens registered`);
+                    } else {
                         const session = await db.session.findUnique({
                             where: { id: data.sid },
-                            select: { metadata: true },
+                            select: { metadata: true, deviceId: true },
                         });
                         let projectName = 'Session';
                         try {
@@ -76,17 +74,23 @@ export function registerSessionHandler(
                             projectName = meta.title || 'Session';
                         } catch {}
 
+                        // Count sessions for aggregate display
+                        const totalSessions = await db.session.count();
+                        const activeSessions = await db.session.count({ where: { active: true } });
+
                         const contentState = {
+                            activeSessionId: data.sid,
+                            projectName,
                             phase: parsed.phase || 'idle',
                             toolName: parsed.toolName || null,
-                            projectName,
                             lastUserMessage: parsed.lastUserMessage || null,
                             lastAssistantSummary: parsed.lastAssistantSummary || null,
+                            totalSessions,
+                            activeSessions,
                             startedAt: Date.now() / 1000,
                         };
 
-                        // Push to all device tokens for this session
-                        for (const t of laTokens) {
+                        for (const t of globalTokens) {
                             sendLiveActivityUpdate(t.token, contentState as any).catch(() => {});
                         }
                     }

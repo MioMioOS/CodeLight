@@ -223,16 +223,8 @@ struct ChatView: View {
     }
 
     private func doStartLiveActivity() {
-        let session = appState.sessions.first { $0.id == sessionId }
-        let projectName = session?.metadata?.title ?? "Session"
-        let serverName = appState.currentServer?.name ?? "Server"
-        LiveActivityManager.shared.update(
-            sessionId: sessionId,
-            phase: session?.active == true ? "thinking" : "idle",
-            toolName: nil,
-            projectName: projectName,
-            serverName: serverName
-        )
+        // Delegate to AppState's global activity manager
+        appState.startLiveActivitiesForActiveSessions()
     }
 
     // MARK: - Compose Bar

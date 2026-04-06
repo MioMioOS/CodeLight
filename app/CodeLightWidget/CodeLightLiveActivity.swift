@@ -2,27 +2,33 @@ import ActivityKit
 import SwiftUI
 import WidgetKit
 
-/// Live Activity widget for Dynamic Island and Lock Screen.
+/// Global CodeLight Live Activity — shows aggregate session state.
 struct CodeLightLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: CodeLightActivityAttributes.self) { context in
-            // Lock Screen / StandBy presentation
             LockScreenView(state: context.state, attributes: context.attributes)
                 .activityBackgroundTint(.black)
                 .activitySystemActionForegroundColor(.white)
 
         } dynamicIsland: { context in
             DynamicIsland {
-                // Expanded Dynamic Island — compact single-line layout
+                // Expanded view — cat + project + phase + session counts + timer
                 DynamicIslandExpandedRegion(.leading) {
                     HStack(spacing: 5) {
                         PixelCharacterView(state: animationState(for: context.state.phase))
                             .scaleEffect(0.5)
                             .frame(width: 28, height: 24)
-                        Text(context.state.projectName)
-                            .font(.system(size: 13, weight: .semibold))
-                            .lineLimit(1)
-                            .foregroundStyle(.white)
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text(context.state.projectName)
+                                .font(.system(size: 13, weight: .semibold))
+                                .lineLimit(1)
+                                .foregroundStyle(.white)
+                            if context.state.activeSessions > 1 {
+                                Text("\(context.state.activeSessions) active")
+                                    .font(.system(size: 9))
+                                    .foregroundStyle(.white.opacity(0.5))
+                            }
+                        }
                     }
                 }
 
@@ -43,7 +49,7 @@ struct CodeLightLiveActivity: Widget {
                 }
 
                 DynamicIslandExpandedRegion(.bottom) {
-                    // Single line bottom: user question OR Claude summary (whichever is more recent)
+                    // Single line: most recent message (assistant summary preferred)
                     if let assistant = context.state.lastAssistantSummary, !assistant.isEmpty {
                         HStack(spacing: 5) {
                             Image(systemName: "sparkles")
@@ -71,7 +77,6 @@ struct CodeLightLiveActivity: Widget {
                     }
                 }
             } compactLeading: {
-                // Compact leading — pixel cat + project name
                 HStack(spacing: 3) {
                     PixelCharacterView(state: animationState(for: context.state.phase))
                         .scaleEffect(0.42)
@@ -82,15 +87,49 @@ struct CodeLightLiveActivity: Widget {
                         .foregroundStyle(.white)
                 }
             } compactTrailing: {
-                // Compact trailing — forced rotating status text
                 RotatingCompactText(state: context.state)
             } minimal: {
-                // Minimal — just the cat face (very small)
                 PixelCharacterView(state: animationState(for: context.state.phase))
                     .scaleEffect(0.4)
                     .frame(width: 20, height: 18)
             }
             .keylineTint(phaseColor(context.state.phase))
+        }
+    }
+}
+
+// MARK: - Rotating Compact Text
+
+struct RotatingCompactText: View {
+    let state: CodeLightActivityAttributes.ContentState
+
+    private var messages: [String] {
+        var items: [String] = []
+        if let tool = state.toolName, !tool.isEmpty {
+            items.append(tool)
+        } else {
+            items.append(phaseLabel(state.phase))
+        }
+        if let q = state.lastUserMessage, !q.isEmpty {
+            items.append("👤 \(q)")
+        }
+        if let a = state.lastAssistantSummary, !a.isEmpty {
+            items.append("✨ \(a)")
+        }
+        return items
+    }
+
+    var body: some View {
+        let now = Date()
+        let dates: [Date] = (0..<120).map { now.addingTimeInterval(Double($0) * 2.0) }
+
+        TimelineView(.explicit(dates)) { context in
+            let secs = Int(context.date.timeIntervalSinceReferenceDate / 2.0)
+            let index = abs(secs) % max(messages.count, 1)
+            Text(messages[index])
+                .font(.system(size: 12, weight: .medium))
+                .foregroundStyle(phaseColor(state.phase))
+                .lineLimit(1)
         }
     }
 }
@@ -103,33 +142,35 @@ private struct LockScreenView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            // Top row: cat + project + status + timer
+            // Top row: cat + project + phase + timer
             HStack(spacing: 12) {
                 PixelCharacterView(state: animationState(for: state.phase))
                     .frame(width: 52, height: 44)
 
                 VStack(alignment: .leading, spacing: 3) {
-                    Text(state.projectName)
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundStyle(.white)
-                        .lineLimit(1)
+                    HStack(spacing: 6) {
+                        Text(state.projectName)
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundStyle(.white)
+                            .lineLimit(1)
+
+                        if state.activeSessions > 1 {
+                            Text("(\(state.activeSessions))")
+                                .font(.system(size: 11))
+                                .foregroundStyle(.white.opacity(0.5))
+                        }
+                    }
 
                     HStack(spacing: 4) {
-                        Circle()
-                            .fill(phaseColor(state.phase))
-                            .frame(width: 6, height: 6)
+                        Circle().fill(phaseColor(state.phase)).frame(width: 6, height: 6)
                         Text(phaseLabel(state.phase))
                             .font(.system(size: 11))
                             .foregroundStyle(.white.opacity(0.7))
 
                         if let toolName = state.toolName, !toolName.isEmpty {
-                            Text("·")
-                                .foregroundStyle(.white.opacity(0.3))
-                            Image(systemName: toolIcon(toolName))
-                                .font(.system(size: 9))
-                            Text(toolName)
-                                .font(.system(size: 10, design: .monospaced))
-                                .lineLimit(1)
+                            Text("·").foregroundStyle(.white.opacity(0.3))
+                            Image(systemName: toolIcon(toolName)).font(.system(size: 9))
+                            Text(toolName).font(.system(size: 10, design: .monospaced)).lineLimit(1)
                         }
                     }
                     .foregroundStyle(.white.opacity(0.6))
@@ -142,35 +183,19 @@ private struct LockScreenView: View {
                     .foregroundStyle(.white.opacity(0.5))
             }
 
-            // Messages section
             if state.lastUserMessage != nil || state.lastAssistantSummary != nil {
-                Divider()
-                    .background(.white.opacity(0.1))
-
+                Divider().background(.white.opacity(0.1))
                 VStack(alignment: .leading, spacing: 6) {
                     if let userMsg = state.lastUserMessage, !userMsg.isEmpty {
                         HStack(alignment: .top, spacing: 6) {
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 10))
-                                .foregroundStyle(.blue)
-                                .padding(.top, 2)
-                            Text(userMsg)
-                                .font(.system(size: 12))
-                                .foregroundStyle(.white.opacity(0.9))
-                                .lineLimit(2)
+                            Image(systemName: "person.fill").font(.system(size: 10)).foregroundStyle(.blue).padding(.top, 2)
+                            Text(userMsg).font(.system(size: 12)).foregroundStyle(.white.opacity(0.9)).lineLimit(2)
                         }
                     }
-
                     if let assistant = state.lastAssistantSummary, !assistant.isEmpty {
                         HStack(alignment: .top, spacing: 6) {
-                            Image(systemName: "sparkles")
-                                .font(.system(size: 10))
-                                .foregroundStyle(.green)
-                                .padding(.top, 2)
-                            Text(assistant)
-                                .font(.system(size: 12))
-                                .foregroundStyle(.white.opacity(0.7))
-                                .lineLimit(3)
+                            Image(systemName: "sparkles").font(.system(size: 10)).foregroundStyle(.green).padding(.top, 2)
+                            Text(assistant).font(.system(size: 12)).foregroundStyle(.white.opacity(0.7)).lineLimit(3)
                         }
                     }
                 }
@@ -180,62 +205,7 @@ private struct LockScreenView: View {
     }
 }
 
-// MARK: - Compact Text
-
-private func compactText(_ state: CodeLightActivityAttributes.ContentState) -> String {
-    if let toolName = state.toolName, !toolName.isEmpty {
-        return toolName
-    }
-    return phaseLabel(state.phase)
-}
-
-/// Rotating text display for compact Dynamic Island trailing area.
-/// Cycles through: project name → user question → Claude summary.
-struct RotatingCompactText: View {
-    let state: CodeLightActivityAttributes.ContentState
-
-    private var messages: [String] {
-        var items: [String] = []
-
-        // Status indicator: tool name or phase label
-        if let tool = state.toolName, !tool.isEmpty {
-            items.append(tool)
-        } else {
-            items.append(phaseLabel(state.phase))
-        }
-
-        // User question (truncated)
-        if let q = state.lastUserMessage, !q.isEmpty {
-            items.append("👤 \(q)")
-        }
-
-        // Claude summary (truncated)
-        if let a = state.lastAssistantSummary, !a.isEmpty {
-            items.append("✨ \(a)")
-        }
-
-        return items
-    }
-
-    var body: some View {
-        // Build schedule dates at 2s intervals for rotation
-        let now = Date()
-        let dates: [Date] = (0..<120).map { now.addingTimeInterval(Double($0) * 2.0) }
-
-        TimelineView(.explicit(dates)) { context in
-            let secs = Int(context.date.timeIntervalSinceReferenceDate / 2.0)
-            let index = abs(secs) % max(messages.count, 1)
-            // Truncate long messages to fit compact view (roughly 8-10 Chinese chars)
-            let displayText = String(messages[index].prefix(12))
-            Text(displayText)
-                .font(.system(size: 12, weight: .medium))
-                .foregroundStyle(phaseColor(state.phase))
-                .lineLimit(1)
-        }
-    }
-}
-
-// MARK: - Phase → AnimationState mapping
+// MARK: - Helpers
 
 private func animationState(for phase: String) -> AnimationState {
     switch phase {
@@ -248,8 +218,6 @@ private func animationState(for phase: String) -> AnimationState {
     default: return .idle
     }
 }
-
-// MARK: - Phase Helpers
 
 private func phaseColor(_ phase: String) -> Color {
     switch phase {
@@ -265,7 +233,7 @@ private func phaseColor(_ phase: String) -> Color {
 
 private func phaseLabel(_ phase: String) -> String {
     switch phase {
-    case "thinking": return "Thinking..."
+    case "thinking": return "Thinking"
     case "tool_running": return "Running"
     case "waiting_approval": return "Needs you"
     case "idle": return "Idle"

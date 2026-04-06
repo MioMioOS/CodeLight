@@ -59,10 +59,8 @@ final class AppState: ObservableObject {
                 // Trigger Dynamic Island based on message type
                 self?.updateLiveActivity(sessionId: sessionId, content: msg.content, serverName: server.name)
             }
-            client.onEphemeral = { [weak self] sessionId, active in
-                if !active {
-                    LiveActivityManager.shared.end(sessionId: sessionId)
-                }
+            client.onEphemeral = { _, _ in
+                // No-op: global activity is managed by phase messages
             }
             isConnected = true
             print("[AppState] Connected to \(server.url)")
@@ -107,26 +105,34 @@ final class AppState: ObservableObject {
 
     // MARK: - Dynamic Island
 
-    /// Start Live Activity for the MOST RECENTLY ACTIVE session only (single-mode)
+    /// Start the GLOBAL Live Activity with the most recently active session's state
     func startLiveActivitiesForActiveSessions() {
         let serverName = currentServer?.name ?? "Server"
         guard let socket = self.socket else { return }
 
-        // Pick only the most recently active session (sessions are already sorted by updatedAt desc)
-        guard let session = sessions.first(where: { $0.active }) else { return }
+        let activeSessions = sessions.filter { $0.active }
+        let totalCount = sessions.count
+        let activeCount = activeSessions.count
+
+        guard let session = activeSessions.first ?? sessions.first else {
+            LiveActivityManager.shared.end()
+            return
+        }
 
         Task { [weak self] in
             let (phase, toolName, userMsg, assistantMsg) = await self?.fetchLatestPhaseState(sessionId: session.id, socket: socket) ?? ("idle", nil, nil, nil)
 
             await MainActor.run {
-                LiveActivityManager.shared.update(
-                    sessionId: session.id,
+                LiveActivityManager.shared.updateGlobal(
+                    activeSessionId: session.id,
+                    projectName: session.metadata?.title ?? "Session",
                     phase: phase,
                     toolName: toolName,
-                    projectName: session.metadata?.title ?? "Session",
-                    serverName: serverName,
                     lastUserMessage: userMsg,
-                    lastAssistantSummary: assistantMsg
+                    lastAssistantSummary: assistantMsg,
+                    totalSessions: totalCount,
+                    activeSessions: activeCount,
+                    serverName: serverName
                 )
                 if let u = userMsg { self?.lastUserMessageBySession[session.id] = u }
                 if let a = assistantMsg { self?.lastAssistantMessageBySession[session.id] = a }
@@ -172,7 +178,6 @@ final class AppState: ObservableObject {
         }
     }
 
-    private var idleTimers: [String: Timer] = [:]
 
     /// Track last user/assistant message per session for Dynamic Island display
     private var lastUserMessageBySession: [String: String] = [:]
@@ -185,65 +190,42 @@ final class AppState: ObservableObject {
 
         let projectName = sessions.first(where: { $0.id == sessionId })?.metadata?.title ?? "Session"
 
-        // Track user/assistant messages (truncated to fit ActivityKit 4KB limit)
+        // Track user/assistant messages
         if type == "user", let text = dict["text"] as? String {
             lastUserMessageBySession[sessionId] = String(text.prefix(120))
         } else if type == "assistant", let text = dict["text"] as? String, !text.isEmpty {
             lastAssistantMessageBySession[sessionId] = String(text.prefix(200))
         }
 
-        // Phase messages from CodeIsland — authoritative session state
-        if type == "phase" {
-            let phase = dict["phase"] as? String ?? "idle"
-            let toolName = dict["toolName"] as? String
+        // Only phase messages update the GLOBAL Live Activity (they're the event signal)
+        guard type == "phase" else { return }
 
-            // Phase messages from CodeIsland include latest user/assistant messages
-            if let userMsg = dict["lastUserMessage"] as? String {
-                lastUserMessageBySession[sessionId] = userMsg
-            }
-            if let assistantMsg = dict["lastAssistantSummary"] as? String {
-                lastAssistantMessageBySession[sessionId] = assistantMsg
-            }
-
-            LiveActivityManager.shared.update(
-                sessionId: sessionId,
-                phase: phase,
-                toolName: toolName,
-                projectName: projectName,
-                serverName: serverName,
-                lastUserMessage: lastUserMessageBySession[sessionId],
-                lastAssistantSummary: lastAssistantMessageBySession[sessionId]
-            )
-        } else if type == "user" || type == "assistant" {
-            // Update existing activity's messages without changing phase (passing nil)
-            LiveActivityManager.shared.update(
-                sessionId: sessionId,
-                phase: nil,
-                toolName: nil,
-                projectName: projectName,
-                serverName: serverName,
-                lastUserMessage: lastUserMessageBySession[sessionId],
-                lastAssistantSummary: lastAssistantMessageBySession[sessionId]
-            )
+        let phase = dict["phase"] as? String ?? "idle"
+        let toolName = dict["toolName"] as? String
+        if let userMsg = dict["lastUserMessage"] as? String {
+            lastUserMessageBySession[sessionId] = userMsg
         }
+        if let assistantMsg = dict["lastAssistantSummary"] as? String {
+            lastAssistantMessageBySession[sessionId] = assistantMsg
+        }
+
+        let totalCount = sessions.count
+        let activeCount = sessions.filter { $0.active }.count
+
+        // Update the global Live Activity to show THIS session (whichever had the latest event)
+        LiveActivityManager.shared.updateGlobal(
+            activeSessionId: sessionId,
+            projectName: projectName,
+            phase: phase,
+            toolName: toolName,
+            lastUserMessage: lastUserMessageBySession[sessionId],
+            lastAssistantSummary: lastAssistantMessageBySession[sessionId],
+            totalSessions: totalCount,
+            activeSessions: activeCount,
+            serverName: serverName
+        )
     }
 
-    private func scheduleIdle(sessionId: String, projectName: String, serverName: String, after seconds: Double) {
-        idleTimers[sessionId]?.invalidate()
-        let timer = Timer.scheduledTimer(withTimeInterval: seconds, repeats: false) { [weak self] _ in
-            Task { @MainActor in
-                LiveActivityManager.shared.update(
-                    sessionId: sessionId,
-                    phase: "idle",
-                    toolName: nil,
-                    projectName: projectName,
-                    serverName: serverName
-                )
-                self?.idleTimers[sessionId] = nil
-            }
-        }
-        idleTimers[sessionId] = timer
-    }
 
     // MARK: - Persistence
 

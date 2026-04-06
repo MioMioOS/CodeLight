@@ -3,98 +3,89 @@ import CodeLightCrypto
 import Foundation
 import os.log
 
-/// Manages Live Activities for active Claude Code sessions.
+/// Manages the GLOBAL CodeLight Live Activity (one per device, not per session).
+/// The activity shows the currently-most-active session's state and aggregate counts.
 @MainActor
 final class LiveActivityManager {
     static let shared = LiveActivityManager()
     private static let logger = Logger(subsystem: "com.codelight.app", category: "LiveActivity")
 
-    /// Active Live Activities keyed by sessionId.
-    private var activities: [String: Activity<CodeLightActivityAttributes>] = [:]
+    /// The single global activity (if started)
+    private var activity: Activity<CodeLightActivityAttributes>?
 
     private init() {}
 
-    /// Start or update a Live Activity for a session.
-    func update(
-        sessionId: String,
-        phase: String?,
-        toolName: String?,
+    /// Start or update the global Live Activity with the current focus session + counts.
+    func updateGlobal(
+        activeSessionId: String,
         projectName: String,
-        serverName: String,
-        lastUserMessage: String? = nil,
-        lastAssistantSummary: String? = nil
+        phase: String,
+        toolName: String?,
+        lastUserMessage: String?,
+        lastAssistantSummary: String?,
+        totalSessions: Int,
+        activeSessions: Int,
+        serverName: String
     ) {
-        if let existing = activities[sessionId] {
-            let prevState = existing.content.state
-            // If phase not provided, preserve existing phase
-            let finalPhase = phase ?? prevState.phase
-            let finalTool = phase == nil ? prevState.toolName : toolName
-            let newUserMsg = lastUserMessage ?? prevState.lastUserMessage
-            let newAssistantSummary = lastAssistantSummary ?? prevState.lastAssistantSummary
+        let state = CodeLightActivityAttributes.ContentState(
+            activeSessionId: activeSessionId,
+            projectName: projectName,
+            phase: phase,
+            toolName: toolName,
+            lastUserMessage: lastUserMessage,
+            lastAssistantSummary: lastAssistantSummary,
+            totalSessions: totalSessions,
+            activeSessions: activeSessions,
+            startedAt: activity?.content.state.startedAt ?? Date().timeIntervalSince1970
+        )
 
-            let state = CodeLightActivityAttributes.ContentState(
-                phase: finalPhase,
-                toolName: finalTool,
-                projectName: projectName,
-                lastUserMessage: newUserMsg,
-                lastAssistantSummary: newAssistantSummary,
-                startedAt: existing.content.state.startedAt
-            )
+        if let existing = activity {
             Task {
                 await existing.update(ActivityContent(state: state, staleDate: nil))
             }
-        } else if let phaseUnwrapped = phase {
-            // Only create new activity if phase is provided
-            let authInfo = ActivityAuthorizationInfo()
-            guard authInfo.areActivitiesEnabled else {
-                print("[LiveActivity] BLOCKED: Live Activities not enabled in iOS Settings")
+        } else {
+            guard ActivityAuthorizationInfo().areActivitiesEnabled else {
+                print("[LiveActivity] Not enabled in iOS Settings")
                 return
             }
 
-            // Enforce single Live Activity: end all others first
-            for (otherId, otherActivity) in activities where otherId != sessionId {
-                Task {
-                    await otherActivity.end(nil, dismissalPolicy: .immediate)
-                }
-                activities.removeValue(forKey: otherId)
-                print("[LiveActivity] Ended other activity: \(otherId.prefix(8)) (single-mode)")
-            }
-
-            let attributes = CodeLightActivityAttributes(sessionId: sessionId, serverName: serverName)
-            let state = CodeLightActivityAttributes.ContentState(
-                phase: phaseUnwrapped,
-                toolName: toolName,
-                projectName: projectName,
-                lastUserMessage: lastUserMessage,
-                lastAssistantSummary: lastAssistantSummary,
-                startedAt: Date().timeIntervalSince1970
-            )
+            let attributes = CodeLightActivityAttributes(serverName: serverName)
 
             do {
-                let activity = try Activity.request(
+                let newActivity = try Activity.request(
                     attributes: attributes,
                     content: ActivityContent(state: state, staleDate: nil),
-                    pushType: .token  // Use APNs push for updates
+                    pushType: .token
                 )
-                activities[sessionId] = activity
-                print("[LiveActivity] STARTED activity for \(sessionId.prefix(8))")
+                activity = newActivity
+                print("[LiveActivity] STARTED global activity")
 
-                // Observe push token updates
+                // Register push token
                 Task { [weak self] in
-                    for await tokenData in activity.pushTokenUpdates {
+                    for await tokenData in newActivity.pushTokenUpdates {
                         let tokenString = tokenData.map { String(format: "%02x", $0) }.joined()
-                        print("[LiveActivity] Push token for \(sessionId.prefix(8)): \(tokenString.prefix(16))...")
-                        await self?.registerLiveActivityToken(sessionId: sessionId, token: tokenString)
+                        print("[LiveActivity] Push token: \(tokenString.prefix(16))...")
+                        await self?.registerToken(token: tokenString)
                     }
                 }
             } catch {
-                print("[LiveActivity] FAILED to start: \(error)")
+                print("[LiveActivity] FAILED: \(error)")
             }
         }
     }
 
-    /// Register Live Activity push token with server
-    private func registerLiveActivityToken(sessionId: String, token: String) async {
+    /// End the global Live Activity.
+    func end() {
+        guard let existing = activity else { return }
+        Task {
+            await existing.end(nil, dismissalPolicy: .immediate)
+        }
+        activity = nil
+    }
+
+    /// Register the global Live Activity push token with the server.
+    /// Uses a special sessionId "__global__" to identify this as the global activity.
+    private func registerToken(token: String) async {
         guard let serverUrl = AppState.shared.currentServer?.url,
               let authToken = KeyManager(serviceName: "com.codelight.app").loadToken(forServer: serverUrl) else {
             return
@@ -106,41 +97,17 @@ final class LiveActivityManager {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
         request.httpBody = try? JSONSerialization.data(withJSONObject: [
-            "sessionId": sessionId,
+            "sessionId": "__global__",
             "token": token,
         ])
 
         do {
             let (_, response) = try await URLSession.shared.data(for: request)
             if let http = response as? HTTPURLResponse, http.statusCode == 200 {
-                print("[LiveActivity] Token registered with server")
+                print("[LiveActivity] Global token registered")
             }
         } catch {
-            print("[LiveActivity] Failed to register token: \(error)")
-        }
-    }
-
-    /// End the Live Activity for a session.
-    func end(sessionId: String) {
-        guard let activity = activities.removeValue(forKey: sessionId) else { return }
-
-        let finalState = CodeLightActivityAttributes.ContentState(
-            phase: "ended",
-            toolName: nil,
-            projectName: activity.content.state.projectName,
-            startedAt: Date().timeIntervalSince1970
-        )
-
-        Task {
-            await activity.end(ActivityContent(state: finalState, staleDate: nil), dismissalPolicy: .after(.now + 5))
-            Self.logger.info("Ended activity for \(sessionId)")
-        }
-    }
-
-    /// End all active Live Activities.
-    func endAll() {
-        for (sessionId, _) in activities {
-            end(sessionId: sessionId)
+            print("[LiveActivity] Failed to register: \(error)")
         }
     }
 }

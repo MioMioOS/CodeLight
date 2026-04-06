@@ -1,25 +1,28 @@
 import ActivityKit
 import Foundation
 
-/// ActivityAttributes for CodeLight Live Activities (Dynamic Island + Lock Screen).
-/// Shared between the main app and the widget extension.
+/// Global CodeLight Live Activity — one per device, shows aggregate session state.
 struct CodeLightActivityAttributes: ActivityAttributes {
-    /// Dynamic state — updated as session progresses.
     struct ContentState: Codable, Hashable {
+        // Active session being displayed (may switch as phase changes arrive)
+        var activeSessionId: String
+        var projectName: String
         var phase: String              // "thinking", "tool_running", "waiting_approval", "idle", "ended", "error"
-        var toolName: String?          // Current tool name
-        var projectName: String        // Project / session title
-        var lastUserMessage: String?   // Latest user question (truncated)
-        var lastAssistantSummary: String?  // Latest Claude response summary (truncated)
-        var startedAt: TimeInterval    // Unix timestamp (seconds since 1970) — must match server
+        var toolName: String?
+        var lastUserMessage: String?
+        var lastAssistantSummary: String?
 
-        /// Computed Date for display
+        // Aggregate counts across all sessions
+        var totalSessions: Int
+        var activeSessions: Int
+
+        var startedAt: TimeInterval
+
         var startedAtDate: Date {
             Date(timeIntervalSince1970: startedAt)
         }
     }
 
-    /// Fixed for the lifetime of the activity.
-    var sessionId: String
+    /// Global activity — not tied to a specific session
     var serverName: String
 }
