@@ -6,6 +6,8 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage("tokenExpiryDays") private var tokenExpiryDays: Int = 30
     @State private var selectedLanguage: String = UserDefaults.standard.stringArray(forKey: "AppleLanguages")?.first ?? ""
+    @State private var showCleanupAlert = false
+    @State private var cleanupResult: String? = nil
 
     private let expiryOptions = [7, 14, 30, 90, 180, 365]
 
@@ -93,6 +95,12 @@ struct SettingsView: View {
                     Label(String(localized: "scan_new_qr_code"), systemImage: "qrcode.viewfinder")
                 }
 
+                Button {
+                    showCleanupAlert = true
+                } label: {
+                    Label(String(localized: "cleanup_inactive_sessions"), systemImage: "trash.circle")
+                }
+
                 Button(role: .destructive) {
                     if let server = appState.currentServer {
                         appState.removeServer(server)
@@ -103,6 +111,11 @@ struct SettingsView: View {
                 }
             } header: {
                 Text(String(localized: "actions"))
+            } footer: {
+                if let cleanupResult {
+                    Text(cleanupResult)
+                        .foregroundStyle(.green)
+                }
             }
 
             // Language
@@ -171,6 +184,44 @@ struct SettingsView: View {
         }
         .navigationTitle(String(localized: "settings"))
         .navigationBarTitleDisplayMode(.inline)
+        .alert(String(localized: "cleanup_inactive_sessions"), isPresented: $showCleanupAlert) {
+            Button(String(localized: "cancel"), role: .cancel) {}
+            Button(String(localized: "clean_now"), role: .destructive) {
+                Task { await runCleanup() }
+            }
+        } message: {
+            Text(String(localized: "cleanup_confirm_message"))
+        }
+    }
+
+    private func runCleanup() async {
+        guard let serverUrl = appState.currentServer?.url,
+              let token = KeyManager(serviceName: "com.codelight.app").loadToken(forServer: serverUrl) else {
+            return
+        }
+
+        let url = URL(string: "\(serverUrl)/v1/sessions/cleanup")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        // 15 minutes threshold for manual cleanup
+        request.httpBody = try? JSONSerialization.data(withJSONObject: ["inactiveMinutes": 15])
+
+        do {
+            let (data, _) = try await URLSession.shared.data(for: request)
+            if let result = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+               let cleaned = result["cleaned"] as? Int {
+                cleanupResult = String(format: String(localized: "cleanup_result"), cleaned)
+
+                // Refresh session list
+                if let socket = appState.socket {
+                    appState.sessions = (try? await socket.fetchSessions()) ?? []
+                }
+            }
+        } catch {
+            cleanupResult = "Error: \(error.localizedDescription)"
+        }
     }
 
     private func expiryLabel(_ days: Int) -> String {

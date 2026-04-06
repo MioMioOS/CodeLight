@@ -1256,6 +1256,30 @@
     },
     "简体中文" : {
 
+    },
+    "cleanup_inactive_sessions" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cleanup Inactive Sessions" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "清理非活跃会话" } }
+      }
+    },
+    "clean_now" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Clean Now" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "立即清理" } }
+      }
+    },
+    "cleanup_confirm_message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This will mark sessions with no activity in the last 15 minutes as inactive." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "这将把最近 15 分钟没有活动的会话标记为非活跃。" } }
+      }
+    },
+    "cleanup_result" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cleaned %d session(s)" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已清理 %d 个会话" } }
+      }
     }
   },
   "version" : "1.0"

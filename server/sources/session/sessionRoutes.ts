@@ -7,6 +7,36 @@ import { getAccessibleDeviceIds, canAccessSession } from '@/auth/deviceAccess';
 
 export async function sessionRoutes(app: FastifyInstance) {
 
+    // Manual cleanup: mark sessions as inactive if no activity in given minutes
+    app.post('/v1/sessions/cleanup', {
+        preHandler: authMiddleware,
+        schema: {
+            body: z.object({
+                inactiveMinutes: z.number().min(1).max(10080).default(240), // default 4 hours
+            }),
+        },
+    }, async (request) => {
+        const { inactiveMinutes } = request.body as { inactiveMinutes: number };
+        const cutoff = new Date(Date.now() - inactiveMinutes * 60 * 1000);
+
+        const result = await db.session.updateMany({
+            where: { active: true, lastActiveAt: { lt: cutoff } },
+            data: { active: false },
+        });
+
+        // Clean up live activity tokens for now-inactive sessions
+        const inactive = await db.session.findMany({
+            where: { active: false, lastActiveAt: { lt: cutoff } },
+            select: { id: true },
+        });
+        const ids = inactive.map(s => s.id);
+        const tokensDeleted = await db.liveActivityToken.deleteMany({
+            where: { sessionId: { in: ids } },
+        });
+
+        return { cleaned: result.count, tokensDeleted: tokensDeleted.count };
+    });
+
     // List sessions — only own + linked devices, active or recently active (24h)
     app.get('/v1/sessions', {
         preHandler: authMiddleware,
