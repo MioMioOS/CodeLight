@@ -5,8 +5,18 @@ struct SettingsView: View {
     @EnvironmentObject var appState: AppState
     @Environment(\.dismiss) private var dismiss
     @AppStorage("tokenExpiryDays") private var tokenExpiryDays: Int = 30
+    @State private var selectedLanguage: String = UserDefaults.standard.stringArray(forKey: "AppleLanguages")?.first ?? ""
 
     private let expiryOptions = [7, 14, 30, 90, 180, 365]
+
+    private func applyLanguage(_ lang: String) {
+        if lang.isEmpty {
+            UserDefaults.standard.removeObject(forKey: "AppleLanguages")
+        } else {
+            UserDefaults.standard.set([lang], forKey: "AppleLanguages")
+        }
+        // Language change takes effect on next app launch
+    }
 
     var body: some View {
         List {
@@ -93,6 +103,22 @@ struct SettingsView: View {
                 }
             } header: {
                 Text(String(localized: "actions"))
+            }
+
+            // Language
+            Section {
+                Picker(selection: $selectedLanguage) {
+                    Text("Auto (System)").tag("")
+                    Text("English").tag("en")
+                    Text("简体中文").tag("zh-Hans")
+                } label: {
+                    Label(String(localized: "language"), systemImage: "globe")
+                }
+                .onChange(of: selectedLanguage) {
+                    applyLanguage(selectedLanguage)
+                }
+            } header: {
+                Text(String(localized: "language"))
             }
 
             // Notifications

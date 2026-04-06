@@ -48,28 +48,29 @@ export async function sessionRoutes(app: FastifyInstance) {
         schema: {
             params: z.object({ sessionId: z.string() }),
             querystring: z.object({
-                after_seq: z.coerce.number().default(0),
-                limit: z.coerce.number().min(1).max(500).default(100),
+                after_seq: z.coerce.number().optional(),
+                before_seq: z.coerce.number().optional(),
+                limit: z.coerce.number().min(1).max(500).default(50),
             }),
         },
     }, async (request, reply) => {
         const { sessionId } = request.params as { sessionId: string };
-        const { after_seq, limit } = request.query as { after_seq: number; limit: number };
+        const { after_seq, before_seq, limit } = request.query as { after_seq?: number; before_seq?: number; limit: number };
 
         if (!await canAccessSession(request.deviceId!, sessionId)) {
             return reply.code(403).send({ error: 'Access denied' });
         }
 
-        let messages;
-        if (after_seq === 0) {
-            const latest = await db.sessionMessage.findMany({
-                where: { sessionId },
+        if (before_seq !== undefined) {
+            // Load older messages (scroll up)
+            const older = await db.sessionMessage.findMany({
+                where: { sessionId, seq: { lt: before_seq } },
                 orderBy: { seq: 'desc' },
                 take: limit,
             });
-            messages = latest.reverse();
-            return { messages, hasMore: latest.length === limit };
-        } else {
+            return { messages: older.reverse(), hasMore: older.length === limit };
+        } else if (after_seq !== undefined && after_seq > 0) {
+            // Load newer messages (pagination forward)
             const result = await db.sessionMessage.findMany({
                 where: { sessionId, seq: { gt: after_seq } },
                 orderBy: { seq: 'asc' },
@@ -77,6 +78,14 @@ export async function sessionRoutes(app: FastifyInstance) {
             });
             const hasMore = result.length > limit;
             return { messages: result.slice(0, limit), hasMore };
+        } else {
+            // Default: latest messages
+            const latest = await db.sessionMessage.findMany({
+                where: { sessionId },
+                orderBy: { seq: 'desc' },
+                take: limit,
+            });
+            return { messages: latest.reverse(), hasMore: latest.length === limit };
         }
     });
 

@@ -148,16 +148,36 @@ final class SocketClient {
         }
     }
 
-    func fetchMessages(sessionId: String, afterSeq: Int = 0) async throws -> [ChatMessage] {
-        let result = try await getJSON(path: "/v1/sessions/\(sessionId)/messages?after_seq=\(afterSeq)&limit=100")
-        guard let messages = result["messages"] as? [[String: Any]] else { return [] }
+    struct FetchResult {
+        let messages: [ChatMessage]
+        let hasMore: Bool
+    }
 
-        return messages.compactMap { dict -> ChatMessage? in
+    /// Fetch latest messages (initial load)
+    func fetchMessages(sessionId: String, limit: Int = 50) async throws -> FetchResult {
+        let result = try await getJSON(path: "/v1/sessions/\(sessionId)/messages?limit=\(limit)")
+        return parseFetchResult(result)
+    }
+
+    /// Fetch older messages (scroll up)
+    func fetchOlderMessages(sessionId: String, beforeSeq: Int, limit: Int = 50) async throws -> FetchResult {
+        let result = try await getJSON(path: "/v1/sessions/\(sessionId)/messages?before_seq=\(beforeSeq)&limit=\(limit)")
+        return parseFetchResult(result)
+    }
+
+    private func parseFetchResult(_ result: [String: Any]) -> FetchResult {
+        let hasMore = result["hasMore"] as? Bool ?? false
+        guard let messages = result["messages"] as? [[String: Any]] else {
+            return FetchResult(messages: [], hasMore: false)
+        }
+
+        let parsed = messages.compactMap { dict -> ChatMessage? in
             guard let id = dict["id"] as? String,
                   let seq = dict["seq"] as? Int,
                   let content = dict["content"] as? String else { return nil }
             return ChatMessage(id: id, seq: seq, content: content, localId: dict["localId"] as? String)
         }
+        return FetchResult(messages: parsed, hasMore: hasMore)
     }
 
     // MARK: - Event Handling
