@@ -25,6 +25,8 @@ struct ChatView: View {
     @State private var selectedMode = "auto"
     @State private var showQuestionNav = false
     @State private var expandedTurns = Set<String>()
+    @State private var shouldAutoScroll = true
+    @State private var lastSeenSeq: Int = 0
 
     private let models = ["opus", "sonnet", "haiku"]
     private let modes = ["auto", "default", "plan"]
@@ -74,7 +76,10 @@ struct ChatView: View {
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
                 }
-                .onChange(of: messages.count) {
+                .onChange(of: messages.last?.seq ?? 0) { oldSeq, newSeq in
+                    // Only scroll to bottom when NEW messages arrive (seq increases),
+                    // not when older messages are prepended.
+                    guard shouldAutoScroll && newSeq > oldSeq else { return }
                     if let lastTurn = turns.last {
                         withAnimation(.easeOut(duration: 0.2)) {
                             proxy.scrollTo(lastTurn.anchorId, anchor: .bottom)
