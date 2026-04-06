@@ -54,10 +54,16 @@ export function registerSessionHandler(
                 const parsed = JSON.parse(data.message);
 
                 if (parsed.type === 'phase') {
+                    console.log(`[Phase] session=${data.sid.substring(0,10)} phase=${parsed.phase} tool=${parsed.toolName || '-'}`);
+
                     // Find all Live Activity tokens for this session
                     const laTokens = await db.liveActivityToken.findMany({
                         where: { sessionId: data.sid },
                     });
+
+                    if (laTokens.length === 0) {
+                        console.log(`[Phase]   no Live Activity tokens for session ${data.sid.substring(0,10)}`);
+                    }
 
                     if (laTokens.length > 0) {
                         const session = await db.session.findUnique({

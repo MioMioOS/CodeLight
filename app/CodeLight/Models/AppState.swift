@@ -107,17 +107,69 @@ final class AppState: ObservableObject {
 
     // MARK: - Dynamic Island
 
-    /// Start Live Activities for all active sessions
+    /// Start Live Activities for all active sessions — fetches latest phase per session
     func startLiveActivitiesForActiveSessions() {
         let serverName = currentServer?.name ?? "Server"
+        guard let socket = self.socket else { return }
+
         for session in sessions where session.active {
-            LiveActivityManager.shared.update(
-                sessionId: session.id,
-                phase: "idle",
-                toolName: nil,
-                projectName: session.metadata?.title ?? "Session",
-                serverName: serverName
-            )
+            Task { [weak self] in
+                // Fetch latest messages to find the most recent phase state
+                let (phase, toolName, userMsg, assistantMsg) = await self?.fetchLatestPhaseState(sessionId: session.id, socket: socket) ?? ("idle", nil, nil, nil)
+
+                await MainActor.run {
+                    LiveActivityManager.shared.update(
+                        sessionId: session.id,
+                        phase: phase,
+                        toolName: toolName,
+                        projectName: session.metadata?.title ?? "Session",
+                        serverName: serverName,
+                        lastUserMessage: userMsg,
+                        lastAssistantSummary: assistantMsg
+                    )
+                    // Cache for later updates
+                    if let u = userMsg { self?.lastUserMessageBySession[session.id] = u }
+                    if let a = assistantMsg { self?.lastAssistantMessageBySession[session.id] = a }
+                }
+            }
+        }
+    }
+
+    /// Fetch latest messages for a session and extract the most recent phase state.
+    private func fetchLatestPhaseState(sessionId: String, socket: SocketClient) async -> (phase: String, toolName: String?, userMsg: String?, assistantMsg: String?) {
+        do {
+            let result = try await socket.fetchMessages(sessionId: sessionId)
+            var phase = "idle"
+            var toolName: String? = nil
+            var userMsg: String? = nil
+            var assistantMsg: String? = nil
+
+            // Iterate most recent first
+            for msg in result.messages.reversed() {
+                guard let data = msg.content.data(using: .utf8),
+                      let dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                      let type = dict["type"] as? String else { continue }
+
+                // Latest phase message wins
+                if type == "phase", phase == "idle", toolName == nil {
+                    phase = dict["phase"] as? String ?? "idle"
+                    toolName = dict["toolName"] as? String
+                }
+                // Latest user message
+                if userMsg == nil, type == "user", let text = dict["text"] as? String {
+                    userMsg = String(text.prefix(120))
+                }
+                // Latest assistant message
+                if assistantMsg == nil, type == "assistant", let text = dict["text"] as? String, !text.isEmpty {
+                    assistantMsg = String(text.prefix(200))
+                }
+
+                if userMsg != nil && assistantMsg != nil && phase != "idle" { break }
+            }
+
+            return (phase, toolName, userMsg, assistantMsg)
+        } catch {
+            return ("idle", nil, nil, nil)
         }
     }
 
