@@ -7,15 +7,22 @@ import { getAccessibleDeviceIds, canAccessSession } from '@/auth/deviceAccess';
 
 export async function sessionRoutes(app: FastifyInstance) {
 
-    // List sessions — only own + linked devices
+    // List sessions — only own + linked devices, active or recently active (24h)
     app.get('/v1/sessions', {
         preHandler: authMiddleware,
     }, async (request) => {
         const accessibleIds = await getAccessibleDeviceIds(request.deviceId!);
+        const dayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
         const sessions = await db.session.findMany({
-            where: { deviceId: { in: accessibleIds } },
+            where: {
+                deviceId: { in: accessibleIds },
+                OR: [
+                    { active: true },
+                    { lastActiveAt: { gte: dayAgo } },
+                ],
+            },
             orderBy: { updatedAt: 'desc' },
-            take: 150,
+            take: 50,
         });
         return { sessions };
     });
