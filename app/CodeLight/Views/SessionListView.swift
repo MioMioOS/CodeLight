@@ -7,40 +7,23 @@ struct SessionListView: View {
     @State private var isLoading = true
 
     var body: some View {
-        Group {
-            if isLoading {
-                ProgressView("Loading sessions...")
-            } else if appState.sessions.isEmpty {
-                ContentUnavailableView(
-                    "No Sessions",
-                    systemImage: "bubble.left.and.bubble.right",
-                    description: Text("Start a Claude Code session on your Mac")
-                )
-            } else {
-                List {
-                    // Active sessions
-                    let active = appState.sessions.filter(\.active)
-                    if !active.isEmpty {
-                        Section("Active") {
-                            ForEach(active) { session in
-                                NavigationLink(value: session.id) {
-                                    SessionRow(session: session)
-                                }
-                            }
-                        }
-                    }
+        VStack(spacing: 0) {
+            // Connection status banner
+            ConnectionStatusBar()
 
-                    // Inactive sessions
-                    let inactive = appState.sessions.filter { !$0.active }
-                    if !inactive.isEmpty {
-                        Section("Recent") {
-                            ForEach(inactive) { session in
-                                NavigationLink(value: session.id) {
-                                    SessionRow(session: session)
-                                }
-                            }
-                        }
+            Group {
+                if isLoading {
+                    VStack(spacing: 12) {
+                        ProgressView()
+                        Text("Loading sessions...")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else if appState.sessions.isEmpty {
+                    emptyState
+                } else {
+                    sessionList
                 }
             }
         }
@@ -50,56 +33,143 @@ struct SessionListView: View {
         }
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
-                Menu {
+                HStack(spacing: 12) {
+                    // Refresh
                     Button {
-                        // Reconnect
-                        Task {
-                            isLoading = true
-                            await appState.connectTo(server)
-                            if let socket = appState.socket {
-                                appState.sessions = (try? await socket.fetchSessions()) ?? []
-                            }
-                            isLoading = false
-                        }
+                        Task { await refreshSessions() }
                     } label: {
-                        Label("Reconnect", systemImage: "arrow.clockwise")
+                        Image(systemName: "arrow.clockwise")
                     }
 
-                    Button {
-                        // Add new server (show pairing)
-                        appState.disconnect()
-                        appState.servers.removeAll()
-                        UserDefaults.standard.removeObject(forKey: "servers")
+                    // Settings
+                    NavigationLink {
+                        SettingsView()
                     } label: {
-                        Label("Scan QR Code", systemImage: "qrcode.viewfinder")
+                        Image(systemName: "gearshape")
                     }
-
-                    Divider()
-
-                    Button(role: .destructive) {
-                        appState.disconnect()
-                        appState.removeServer(server)
-                    } label: {
-                        Label("Disconnect", systemImage: "wifi.slash")
-                    }
-                } label: {
-                    Image(systemName: "ellipsis.circle")
                 }
             }
         }
         .task {
-            // Don't re-connect, RootView already did that
             if let socket = appState.socket {
                 do {
                     appState.sessions = try await socket.fetchSessions()
-                    print("[SessionList] Loaded \(appState.sessions.count) sessions")
                 } catch {
                     print("[SessionList] Fetch error: \(error)")
                 }
-            } else {
-                print("[SessionList] No socket available")
             }
             isLoading = false
+        }
+    }
+
+    // MARK: - Empty State
+
+    private var emptyState: some View {
+        VStack(spacing: 20) {
+            Spacer()
+
+            Image(systemName: "bubble.left.and.bubble.right")
+                .font(.system(size: 48))
+                .foregroundStyle(.secondary.opacity(0.5))
+
+            VStack(spacing: 8) {
+                Text("No Sessions Yet")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+
+                Text("Start a Claude Code session on your Mac\nwith CodeIsland running to see it here.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+            }
+
+            VStack(spacing: 12) {
+                HStack(spacing: 8) {
+                    Image(systemName: "1.circle.fill")
+                        .foregroundStyle(.blue)
+                    Text("Install CodeIsland on your Mac")
+                        .font(.caption)
+                }
+
+                HStack(spacing: 8) {
+                    Image(systemName: "2.circle.fill")
+                        .foregroundStyle(.blue)
+                    Text("Start a Claude Code session")
+                        .font(.caption)
+                }
+
+                HStack(spacing: 8) {
+                    Image(systemName: "3.circle.fill")
+                        .foregroundStyle(.blue)
+                    Text("Sessions appear here automatically")
+                        .font(.caption)
+                }
+            }
+            .padding()
+            .background(Color(.systemGray6), in: RoundedRectangle(cornerRadius: 12))
+
+            Button {
+                Task { await refreshSessions() }
+            } label: {
+                Label("Refresh", systemImage: "arrow.clockwise")
+                    .font(.subheadline)
+            }
+            .buttonStyle(.bordered)
+
+            Spacer()
+        }
+        .padding()
+    }
+
+    // MARK: - Session List
+
+    private var sessionList: some View {
+        List {
+            // Active sessions
+            let active = appState.sessions.filter(\.active)
+            if !active.isEmpty {
+                Section {
+                    ForEach(active) { session in
+                        NavigationLink(value: session.id) {
+                            SessionRow(session: session)
+                        }
+                    }
+                } header: {
+                    HStack {
+                        Text("Active")
+                        Spacer()
+                        Text("\(active.count)")
+                            .font(.caption2)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(.green.opacity(0.2), in: Capsule())
+                            .foregroundStyle(.green)
+                    }
+                }
+            }
+
+            // Inactive sessions
+            let inactive = appState.sessions.filter { !$0.active }
+            if !inactive.isEmpty {
+                Section("Recent") {
+                    ForEach(inactive) { session in
+                        NavigationLink(value: session.id) {
+                            SessionRow(session: session)
+                        }
+                    }
+                }
+            }
+        }
+        .refreshable {
+            await refreshSessions()
+        }
+    }
+
+    // MARK: - Helpers
+
+    private func refreshSessions() async {
+        if let socket = appState.socket {
+            appState.sessions = (try? await socket.fetchSessions()) ?? []
         }
     }
 }
@@ -109,10 +179,13 @@ private struct SessionRow: View {
     let session: SessionInfo
 
     var body: some View {
-        HStack {
-            Circle()
-                .fill(session.active ? .green : .gray)
-                .frame(width: 8, height: 8)
+        HStack(spacing: 12) {
+            // Status indicator
+            VStack {
+                Circle()
+                    .fill(session.active ? .green : .gray.opacity(0.4))
+                    .frame(width: 10, height: 10)
+            }
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(session.metadata?.title ?? session.tag)
@@ -120,19 +193,33 @@ private struct SessionRow: View {
                     .lineLimit(1)
 
                 if let path = session.metadata?.path {
-                    Text(path)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .lineLimit(1)
+                    HStack(spacing: 4) {
+                        Image(systemName: "folder")
+                            .font(.system(size: 9))
+                        Text(URL(fileURLWithPath: path).lastPathComponent)
+                            .font(.caption)
+                    }
+                    .foregroundStyle(.secondary)
                 }
             }
 
             Spacer()
 
-            Text(session.lastActiveAt, style: .relative)
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+            VStack(alignment: .trailing, spacing: 2) {
+                if let model = session.metadata?.model {
+                    Text(model.capitalized)
+                        .font(.system(size: 9, weight: .medium))
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(.blue.opacity(0.15), in: Capsule())
+                        .foregroundStyle(.blue)
+                }
+
+                Text(session.lastActiveAt, style: .relative)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
         }
-        .padding(.vertical, 2)
+        .padding(.vertical, 4)
     }
 }
