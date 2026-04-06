@@ -1,4 +1,5 @@
 import { SignJWT, importPKCS8 } from 'jose';
+import http2 from 'node:http2';
 import { config } from '@/config';
 
 /**
@@ -35,7 +36,8 @@ function getApnsConfig(): APNsConfig | null {
         teamId,
         privateKey,
         bundleId,
-        production: process.env.NODE_ENV === 'production',
+        // APNS_USE_SANDBOX=true for development-signed apps (Xcode runs)
+        production: process.env.APNS_USE_SANDBOX !== 'true' && process.env.NODE_ENV === 'production',
     };
 }
 
@@ -158,6 +160,50 @@ export interface LiveActivityContentState {
 }
 
 /**
+ * Send HTTP/2 request to APNs (required — fetch() uses HTTP/1.1).
+ */
+function apnsHttp2Request(host: string, path: string, headers: Record<string, string>, body: string): Promise<{ status: number; body: string }> {
+    return new Promise((resolve, reject) => {
+        const client = http2.connect(host);
+
+        client.on('error', (err) => {
+            client.close();
+            reject(err);
+        });
+
+        const req = client.request({
+            ':method': 'POST',
+            ':path': path,
+            ...headers,
+        });
+
+        let responseBody = '';
+        let statusCode = 0;
+
+        req.on('response', (headers) => {
+            statusCode = headers[':status'] as number;
+        });
+
+        req.on('data', (chunk) => {
+            responseBody += chunk.toString();
+        });
+
+        req.on('end', () => {
+            client.close();
+            resolve({ status: statusCode, body: responseBody });
+        });
+
+        req.on('error', (err) => {
+            client.close();
+            reject(err);
+        });
+
+        req.write(body);
+        req.end();
+    });
+}
+
+/**
  * Send a Live Activity update via APNs push.
  * This updates an existing Live Activity on the device.
  */
@@ -176,12 +222,9 @@ export async function sendLiveActivityUpdate(
         ? 'https://api.push.apple.com'
         : 'https://api.sandbox.push.apple.com';
 
-    const url = `${host}/3/device/${pushToken}`;
-
     try {
         const authToken = await getAuthToken(apnsConfig);
 
-        // Live Activity push payload format
         const apnsPayload: any = {
             aps: {
                 timestamp: Math.floor(Date.now() / 1000),
@@ -194,25 +237,22 @@ export async function sendLiveActivityUpdate(
             apnsPayload.aps['dismissal-date'] = Math.floor(Date.now() / 1000) + 5;
         }
 
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'authorization': `bearer ${authToken}`,
-                // Live Activity uses .push-type suffix on bundle id
-                'apns-topic': `${apnsConfig.bundleId}.push-type.liveactivity`,
-                'apns-push-type': 'liveactivity',
-                'apns-priority': '10',
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(apnsPayload),
-        });
+        const headers = {
+            'authorization': `bearer ${authToken}`,
+            'apns-topic': `${apnsConfig.bundleId}.push-type.liveactivity`,
+            'apns-push-type': 'liveactivity',
+            'apns-priority': '10',
+            'content-type': 'application/json',
+        };
 
-        if (response.ok) {
+        const result = await apnsHttp2Request(host, `/3/device/${pushToken}`, headers, JSON.stringify(apnsPayload));
+
+        if (result.status === 200) {
+            console.log(`[APNs LiveActivity] Push sent: phase=${contentState.phase}`);
             return true;
         }
 
-        const errorBody = await response.text();
-        console.error(`[APNs LiveActivity] Push failed: ${response.status} ${errorBody}`);
+        console.error(`[APNs LiveActivity] Push failed: ${result.status} ${result.body}`);
         return false;
     } catch (error) {
         console.error('[APNs LiveActivity] Push error:', error);

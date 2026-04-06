@@ -51,6 +51,15 @@ final class LiveActivityManager {
                 return
             }
 
+            // End all other active Live Activities first (only 1 at a time)
+            for (otherId, otherActivity) in activities where otherId != sessionId {
+                Task {
+                    await otherActivity.end(nil, dismissalPolicy: .immediate)
+                }
+                activities.removeValue(forKey: otherId)
+                print("[LiveActivity] Ended other activity: \(otherId.prefix(8))")
+            }
+
             let attributes = CodeLightActivityAttributes(sessionId: sessionId, serverName: serverName)
             let state = CodeLightActivityAttributes.ContentState(
                 phase: phaseUnwrapped,
@@ -58,7 +67,7 @@ final class LiveActivityManager {
                 projectName: projectName,
                 lastUserMessage: lastUserMessage,
                 lastAssistantSummary: lastAssistantSummary,
-                startedAt: Date()
+                startedAt: Date().timeIntervalSince1970
             )
 
             do {
@@ -119,7 +128,7 @@ final class LiveActivityManager {
             phase: "ended",
             toolName: nil,
             projectName: activity.content.state.projectName,
-            startedAt: Date()
+            startedAt: Date().timeIntervalSince1970
         )
 
         Task {

@@ -32,7 +32,7 @@ struct CodeLightLiveActivity: Widget {
                 }
 
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text(context.state.startedAt, style: .timer)
+                    Text(context.state.startedAtDate, style: .timer)
                         .font(.system(size: 11, weight: .medium, design: .monospaced))
                         .foregroundStyle(.secondary)
                         .frame(maxWidth: 50)
@@ -156,7 +156,7 @@ private struct LockScreenView: View {
 
                 Spacer()
 
-                Text(state.startedAt, style: .timer)
+                Text(state.startedAtDate, style: .timer)
                     .font(.system(size: 12, weight: .medium, design: .monospaced))
                     .foregroundStyle(.white.opacity(0.5))
             }
