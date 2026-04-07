@@ -6,7 +6,8 @@ struct SettingsView: View {
     @EnvironmentObject var appState: AppState
     @Environment(\.dismiss) private var dismiss
     @AppStorage("tokenExpiryDays") private var tokenExpiryDays: Int = 30
-    @State private var selectedLanguage: String = UserDefaults.standard.stringArray(forKey: "AppleLanguages")?.first ?? ""
+    @State private var selectedLanguage: String = SettingsView.resolveStoredLanguage()
+    @State private var showLanguageRestartAlert = false
     @State private var showCleanupAlert = false
     @State private var showResetConfirm = false
     @State private var reconnectStatus: ActionStatus = .idle
@@ -35,6 +36,25 @@ struct SettingsView: View {
         } else {
             UserDefaults.standard.set([lang], forKey: "AppleLanguages")
         }
+        UserDefaults.standard.synchronize()
+        // iOS reads AppleLanguages once at launch via Bundle.main, so the
+        // running app's strings won't update live. Tell the user explicitly
+        // — otherwise picking "English" looks like a no-op and they assume
+        // it's broken.
+        showLanguageRestartAlert = true
+    }
+
+    /// Read the stored AppleLanguages preference and resolve it to one of the
+    /// picker's tag values ("", "en", "zh-Hans"). The system stores values
+    /// like "en-CN" or "zh-Hans-US" with a region suffix that doesn't match
+    /// our coarse tags, so we prefix-match.
+    private static func resolveStoredLanguage() -> String {
+        guard let raw = UserDefaults.standard.stringArray(forKey: "AppleLanguages")?.first else {
+            return ""
+        }
+        if raw.hasPrefix("zh") { return "zh-Hans" }
+        if raw.hasPrefix("en") { return "en" }
+        return ""
     }
 
     var body: some View {
@@ -316,6 +336,17 @@ struct SettingsView: View {
             }
         } message: {
             Text(String(localized: "reset_backend_confirm"))
+        }
+        .alert(String(localized: "language_change_title"), isPresented: $showLanguageRestartAlert) {
+            Button(String(localized: "ok"), role: .cancel) {}
+            Button(String(localized: "quit_now"), role: .destructive) {
+                // iOS has no formal relaunch API; calling exit() forces a
+                // clean shutdown. Next time the user taps the icon the app
+                // launches with the new AppleLanguages preference.
+                exit(0)
+            }
+        } message: {
+            Text(String(localized: "language_change_message"))
         }
         .sheet(isPresented: $showPrivacy) {
             PrivacyPolicyView()

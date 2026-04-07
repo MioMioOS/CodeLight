@@ -1179,6 +1179,30 @@
         "zh-Hans": { "stringUnit": { "state": "translated", "value": "Claude 正在思考…" } }
       }
     },
+    "language_change_title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Restart Required" } },
+        "zh-Hans": { "stringUnit": { "state": "translated", "value": "需要重启" } }
+      }
+    },
+    "language_change_message": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Your language preference has been saved. CodeLight needs to relaunch to display in the new language." } },
+        "zh-Hans": { "stringUnit": { "state": "translated", "value": "语言偏好已保存。CodeLight 需要重启才能应用新语言。" } }
+      }
+    },
+    "quit_now": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Quit Now" } },
+        "zh-Hans": { "stringUnit": { "state": "translated", "value": "立即退出" } }
+      }
+    },
+    "ok": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "OK" } },
+        "zh-Hans": { "stringUnit": { "state": "translated", "value": "好" } }
+      }
+    },
     "archive": {
       "localizations": {
         "en": { "stringUnit": { "state": "translated", "value": "Archive" } },

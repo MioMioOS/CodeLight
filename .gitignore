@@ -2,5 +2,8 @@
 xcuserdata/
 .swiftpm/
 
+# Xcode archive / export output
+app/build/
+
 # Asset backups
 *.original.png
