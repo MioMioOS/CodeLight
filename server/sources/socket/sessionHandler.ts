@@ -12,16 +12,89 @@ import { deleteBlob } from '@/blob/blobStore';
 // worst case we miss one notification right after a restart.
 const lastPhaseBySession = new Map<string, string>();
 
+/// Pull the latest user message + the latest assistant message for a session
+/// directly from SessionMessage. We can't trust phase payload fields because
+/// CodeIsland sometimes ships a phase event before its in-memory snapshot
+/// catches up to the message that just landed in JSONL — that's how the user
+/// ended up seeing "上上次" content in the notification.
+async function fetchLatestQAndA(sessionId: string): Promise<{ userText: string; assistantText: string }> {
+    // Pull recent messages descending and pick the first match of each kind.
+    // 30 is a safe upper bound — there's never that many phase/tool events
+    // sandwiched between a Q and an A.
+    const recent = await db.sessionMessage.findMany({
+        where: { sessionId },
+        orderBy: { seq: 'desc' },
+        take: 30,
+        select: { content: true },
+    });
+
+    let userText = '';
+    let assistantText = '';
+
+    for (const m of recent) {
+        if (userText && assistantText) break;
+        try {
+            const parsed = JSON.parse(m.content);
+            if (parsed?.type === 'user' && !userText) {
+                userText = (parsed.text || '').toString();
+            } else if (parsed?.type === 'assistant' && !assistantText) {
+                assistantText = (parsed.text || '').toString();
+            }
+        } catch {
+            // Plain-text bodies (the phone path) are user messages.
+            if (!userText) {
+                userText = m.content;
+            }
+        }
+    }
+
+    return { userText, assistantText };
+}
+
+/// Strip excessive whitespace and trim a body of text to a hard limit. iOS
+/// notification body shows ~4 lines collapsed and ~10 lines expanded — 280
+/// characters is a comfortable upper bound that fills the expanded view
+/// without truncating sentences.
+function shapeNotificationText(raw: string, maxLength = 280): string {
+    const collapsed = raw.replace(/\s+/g, ' ').trim();
+    if (collapsed.length <= maxLength) return collapsed;
+    return collapsed.slice(0, maxLength - 1).trimEnd() + '…';
+}
+
+/// Resolve a STABLE project name from session metadata. We deliberately do
+/// NOT use `meta.title` here because CodeIsland sets that to a "smart title"
+/// that prefers the latest summary or user message — which means if it leaks
+/// into the Live Activity it'll show user input on the trailing side. Use the
+/// folder name (`projectName`), falling back to the last component of the
+/// path, falling back to a placeholder.
+function resolveStableProjectName(metadataJson: string | null | undefined): { name: string; path: string | null } {
+    let path: string | null = null;
+    let name = 'Session';
+    if (!metadataJson) return { name, path };
+    try {
+        const meta = JSON.parse(metadataJson);
+        if (typeof meta.path === 'string') path = meta.path;
+        if (typeof meta.projectName === 'string' && meta.projectName.trim().length > 0) {
+            name = meta.projectName.trim();
+        } else if (path) {
+            const segments = path.split('/').filter(Boolean);
+            if (segments.length > 0) name = segments[segments.length - 1];
+        }
+    } catch {}
+    return { name, path };
+}
+
 /// Send completion / approval alerts to every iPhone linked to the Mac that
 /// owns this session, respecting each iPhone's notification preferences.
 async function notifyLinkedIPhones(params: {
     macDeviceId: string;
     kind: 'completion' | 'approval' | 'error';
     title: string;
+    subtitle?: string;
     body: string;
     sessionId: string;
 }) {
-    const { macDeviceId, kind, title, body, sessionId } = params;
+    const { macDeviceId, kind, title, subtitle, body, sessionId } = params;
     // Find iPhones linked to this Mac — check both directions since DeviceLink is symmetric.
     const links = await db.deviceLink.findMany({
         where: {
@@ -58,6 +131,7 @@ async function notifyLinkedIPhones(params: {
         if (!enabled) continue;
         sendPushToDevice(d.id, {
             title,
+            subtitle,
             body,
             data: { sessionId, kind },
         }, db).then((result) => {
@@ -146,13 +220,9 @@ export function registerSessionHandler(
                             where: { id: data.sid },
                             select: { metadata: true, deviceId: true },
                         });
-                        let projectName = 'Session';
-                        let projectPath: string | null = null;
-                        try {
-                            const meta = JSON.parse(session?.metadata || '{}');
-                            projectName = meta.title || 'Session';
-                            projectPath = meta.path || null;
-                        } catch {}
+                        const resolved = resolveStableProjectName(session?.metadata);
+                        const projectName = resolved.name;
+                        const projectPath = resolved.path;
 
                         // Count sessions for aggregate display
                         const totalSessions = await db.session.count();
@@ -190,27 +260,35 @@ export function registerSessionHandler(
                             select: { deviceId: true, metadata: true },
                         });
                         if (session) {
-                            let projectName = 'Session';
-                            try {
-                                const meta = JSON.parse(session.metadata || '{}');
-                                projectName = meta.title || meta.projectName || 'Session';
-                            } catch {}
+                            const projectName = resolveStableProjectName(session.metadata).name;
 
                             if (newPhase === 'ended' && prevPhase !== 'ended') {
-                                const tail = (parsed.lastAssistantSummary || parsed.lastUserMessage || '').toString().slice(0, 80);
+                                // Pull the actual latest user question + assistant
+                                // reply from the DB so the notification reflects
+                                // *this* turn, not a stale phase-payload snapshot.
+                                const { userText, assistantText } = await fetchLatestQAndA(data.sid);
+                                const title = userText
+                                    ? shapeNotificationText(userText, 60)
+                                    : projectName;
+                                const body = assistantText
+                                    ? shapeNotificationText(assistantText, 280)
+                                    : 'Claude is ready for your next message';
                                 notifyLinkedIPhones({
                                     macDeviceId: session.deviceId,
                                     kind: 'completion',
-                                    title: projectName,
-                                    body: tail.length > 0 ? tail : 'Claude is ready for your next message',
+                                    title,
+                                    subtitle: userText ? projectName : undefined,
+                                    body,
                                     sessionId: data.sid,
                                 }).catch(() => {});
                             } else if (newPhase === 'waiting_approval') {
                                 const tool = (parsed.toolName || 'a tool').toString();
+                                const { userText } = await fetchLatestQAndA(data.sid);
                                 notifyLinkedIPhones({
                                     macDeviceId: session.deviceId,
                                     kind: 'approval',
-                                    title: projectName,
+                                    title: userText ? shapeNotificationText(userText, 60) : projectName,
+                                    subtitle: userText ? projectName : undefined,
                                     body: `Needs approval: ${tool}`,
                                     sessionId: data.sid,
                                 }).catch(() => {});
@@ -223,11 +301,7 @@ export function registerSessionHandler(
                 if (parsed.type === 'tool' && parsed.toolStatus === 'error') {
                     const session = await db.session.findUnique({ where: { id: data.sid }, select: { deviceId: true, metadata: true } });
                     if (session) {
-                        let projectName = 'Session';
-                        try {
-                            const meta = JSON.parse(session.metadata || '{}');
-                            projectName = meta.title || meta.projectName || 'Session';
-                        } catch {}
+                        const projectName = resolveStableProjectName(session.metadata).name;
                         notifyLinkedIPhones({
                             macDeviceId: session.deviceId,
                             kind: 'error',

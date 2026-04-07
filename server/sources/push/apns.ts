@@ -68,6 +68,8 @@ async function getAuthToken(apnsConfig: APNsConfig): Promise<string> {
 
 export interface PushPayload {
     title: string;
+    /// Optional smaller line shown between title and body on iOS 10+.
+    subtitle?: string;
     body: string;
     data?: Record<string, string>;
 }
@@ -95,12 +97,14 @@ export async function sendPush(deviceToken: string, payload: PushPayload): Promi
     try {
         const authToken = await getAuthToken(apnsConfig);
 
+        const alert: Record<string, string> = {
+            title: payload.title,
+            body: payload.body,
+        };
+        if (payload.subtitle) alert.subtitle = payload.subtitle;
         const apnsPayload = {
             aps: {
-                alert: {
-                    title: payload.title,
-                    body: payload.body,
-                },
+                alert,
                 sound: 'default',
                 'mutable-content': 1,
             },

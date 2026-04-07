@@ -22,6 +22,7 @@ struct LinkedMacsListView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
+                    Haptics.light()
                     showSettings = true
                 } label: {
                     Image(systemName: "gearshape")
@@ -29,6 +30,7 @@ struct LinkedMacsListView: View {
             }
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
+                    Haptics.medium()
                     showAddPair = true
                 } label: {
                     Image(systemName: "plus")
@@ -92,6 +94,7 @@ struct LinkedMacsListView: View {
             }
 
             Button {
+                Haptics.medium()
                 showAddPair = true
             } label: {
                 Label(String(localized: "pair_a_mac"), systemImage: "plus.circle.fill")
@@ -137,6 +140,7 @@ struct LinkedMacsListView: View {
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(role: .destructive) {
+                                Haptics.warning()
                                 Task { await appState.unlinkMac(mac) }
                             } label: {
                                 Label(String(localized: "unpair"), systemImage: "trash")

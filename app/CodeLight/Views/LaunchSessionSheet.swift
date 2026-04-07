@@ -46,6 +46,7 @@ struct LaunchSessionSheet: View {
                 } else {
                     ForEach(presets) { preset in
                         Button {
+                            Haptics.selection()
                             selectedPreset = preset
                         } label: {
                             HStack {
@@ -78,6 +79,7 @@ struct LaunchSessionSheet: View {
                 if !projects.isEmpty {
                     ForEach(projects) { project in
                         Button {
+                            Haptics.selection()
                             selectedProjectPath = project.path
                             customPath = ""
                         } label: {
@@ -185,16 +187,19 @@ struct LaunchSessionSheet: View {
 
     private func launch() async {
         guard let socket = appState.socket, let preset = selectedPreset else { return }
+        Haptics.rigid()
         isLaunching = true
         errorMessage = nil
         successMessage = nil
         do {
             try await socket.launchSession(macDeviceId: mac.deviceId, presetId: preset.id, projectPath: pathToUse)
             successMessage = String(format: NSLocalizedString("launched_on_mac_format", comment: ""), mac.name)
+            Haptics.success()
             try? await Task.sleep(nanoseconds: 800_000_000)
             dismiss()
         } catch {
             errorMessage = error.localizedDescription
+            Haptics.error()
         }
         isLaunching = false
     }

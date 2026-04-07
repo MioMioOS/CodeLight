@@ -8,6 +8,21 @@ struct PendingAttachment: Identifiable {
     let thumbnail: UIImage
 }
 
+/// Lifecycle of a message the user just sent. Used to fill the gap between
+/// "user pressed send" and "Claude streams a real reply" — that gap can be
+/// 2-5 seconds (server roundtrip + cmux paste + Claude warmup) and used to
+/// look like a frozen UI to the user.
+struct PendingSend: Equatable {
+    enum Stage: Equatable {
+        case sending     // emitting socket.message, waiting for ack
+        case delivered   // server stored it, waiting for Claude to start
+        case thinking    // Claude has emitted its first phase=thinking event
+    }
+    let localId: String
+    let startedAt: Date
+    var stage: Stage
+}
+
 /// A conversation turn — user question + all Claude's responses until next user message.
 struct ConversationTurn: Identifiable {
     let id: String          // Uses user message ID (or "initial" if no user msg)
@@ -26,9 +41,12 @@ struct ChatView: View {
     let sessionId: String
 
     @State private var messages: [ChatMessage] = []
+    @State private var pendingSend: PendingSend? = nil
     @State private var inputText = ""
     @State private var pendingAttachments: [PendingAttachment] = []
     @State private var pickerSelections: [PhotosPickerItem] = []
+    @State private var showPhotoLibrary = false
+    @State private var showCamera = false
     @State private var isSending = false
     @State private var showCapabilitySheet = false
     @State private var isLoading = true
@@ -90,17 +108,59 @@ struct ChatView: View {
                             TurnView(turn: turn, isExpanded: isExpanded(turn), onToggle: { toggleTurn(turn) })
                                 .id(turn.anchorId)
                         }
+
+                        // Inline status footer that fills the dead air between
+                        // "I just sent a message" and "Claude has streamed back
+                        // any real content". Without this the user stares at a
+                        // blank space for 2-5 seconds and starts to wonder if
+                        // anything happened.
+                        if let pending = pendingSend {
+                            SendStatusFooter(stage: pending.stage)
+                                .id("send-status")
+                                .padding(.top, 6)
+                        }
                     }
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
                 }
                 .onChange(of: messages.last?.seq ?? 0) { oldSeq, newSeq in
-                    // Only scroll to bottom when NEW messages arrive (seq increases),
+                    // Only scroll when NEW messages arrive (seq increases),
                     // not when older messages are prepended.
                     guard shouldAutoScroll && newSeq > oldSeq else { return }
-                    if let lastTurn = turns.last {
+                    // After SwiftUI commits the new layout, anchor to the
+                    // top of the most recent user turn so the user can see
+                    // their just-sent question. anchor:.bottom on a freshly
+                    // appended row that hasn't fully laid out yet causes the
+                    // viewport to land in dead space (the previous problem
+                    // where the new content was visually pushed off-screen).
+                    let targetId: String
+                    if pendingSend != nil, let lastTurn = turns.last {
+                        targetId = lastTurn.anchorId
+                    } else if let lastTurn = turns.last {
+                        targetId = lastTurn.anchorId
+                    } else {
+                        return
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                         withAnimation(.easeOut(duration: 0.2)) {
-                            proxy.scrollTo(lastTurn.anchorId, anchor: .bottom)
+                            proxy.scrollTo(targetId, anchor: .top)
+                        }
+                    }
+                }
+                .onChange(of: pendingSend?.stage) { _, newStage in
+                    // Don't re-scroll on stage transitions — the footer is
+                    // already onscreen and re-animating it after every state
+                    // change causes jitter. Only scroll once when the footer
+                    // first appears (handled by the .onChange below).
+                    _ = newStage
+                }
+                .onChange(of: pendingSend == nil) { _, _ in
+                    // Footer appearing/disappearing — let the next layout pass
+                    // settle and then nudge to keep the user's question visible.
+                    guard let lastTurn = turns.last else { return }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
+                        withAnimation(.easeOut(duration: 0.2)) {
+                            proxy.scrollTo(lastTurn.anchorId, anchor: .top)
                         }
                     }
                 }
@@ -151,6 +211,28 @@ struct ChatView: View {
                 }
             }
         }
+        // PhotosPicker triggered from the attachment menu
+        .photosPicker(
+            isPresented: $showPhotoLibrary,
+            selection: $pickerSelections,
+            maxSelectionCount: 6,
+            matching: .images
+        )
+        .onChange(of: pickerSelections) { _, newItems in
+            guard !newItems.isEmpty else { return }
+            Task {
+                await loadPickedImages(newItems)
+                await MainActor.run { pickerSelections = [] }
+            }
+        }
+        // Camera sheet (fullScreenCover keeps the camera viewfinder immersive)
+        .fullScreenCover(isPresented: $showCamera) {
+            CameraPicker { image in
+                showCamera = false
+                if let image { Task { await loadCapturedImage(image) } }
+            }
+            .ignoresSafeArea()
+        }
         .task {
             await loadMessages()
             startLiveActivity()
@@ -169,6 +251,16 @@ struct ChatView: View {
             // NOT enter the chat history (would cause LazyVStack scroll glitches).
             if isStatusOnly(event.message) {
                 scheduleDeltaFetch()
+                // While the user is waiting on a sent message, treat the next
+                // thinking/tool_running phase as the "Claude is now working on
+                // your prompt" signal and flip the status footer accordingly.
+                if pendingSend != nil,
+                   let phase = phaseFromMessage(event.message),
+                   (phase == "thinking" || phase == "tool_running" || phase == "waiting_approval") {
+                    if pendingSend?.stage != .thinking {
+                        pendingSend?.stage = .thinking
+                    }
+                }
                 return
             }
             // Replace optimistic local message if server echoes back with same localId.
@@ -180,6 +272,11 @@ struct ChatView: View {
             // Otherwise dedup by id and append.
             if !messages.contains(where: { $0.id == event.message.id }) {
                 messages.append(event.message)
+                // First real assistant reply after a send → clear the pending
+                // status footer; the conversation can speak for itself now.
+                if pendingSend != nil, messageType(event.message) == "assistant" {
+                    pendingSend = nil
+                }
             }
         }
         .onDisappear {
@@ -269,6 +366,16 @@ struct ChatView: View {
         return "user" // Plain text = user message from phone
     }
 
+    /// Extract the `phase` field from a phase-type status message envelope.
+    /// Returns nil for non-phase messages.
+    private func phaseFromMessage(_ msg: ChatMessage) -> String? {
+        guard let data = msg.content.data(using: .utf8),
+              let dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              (dict["type"] as? String) == "phase"
+        else { return nil }
+        return dict["phase"] as? String
+    }
+
     private func extractTextFromMessage(_ msg: ChatMessage) -> String {
         if let data = msg.content.data(using: .utf8),
            let dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
@@ -334,21 +441,33 @@ struct ChatView: View {
             HStack(spacing: 8) {
                 // Left-side tool pill — three 32pt icon buttons, consistent size/weight.
                 HStack(spacing: 2) {
-                    PhotosPicker(
-                        selection: $pickerSelections,
-                        maxSelectionCount: 6,
-                        matching: .images
-                    ) {
+                    // Attachment menu — "Take Photo" (camera) or "Choose from Library"
+                    // (PhotosPicker). Camera option is hidden on devices without a
+                    // camera (simulator).
+                    Menu {
+                        if CameraPicker.isAvailable {
+                            Button {
+                                Haptics.medium()
+                                showCamera = true
+                            } label: {
+                                Label(String(localized: "take_photo"), systemImage: "camera")
+                            }
+                        }
+                        Button {
+                            Haptics.medium()
+                            showPhotoLibrary = true
+                        } label: {
+                            Label(String(localized: "choose_from_library"), systemImage: "photo.on.rectangle")
+                        }
+                    } label: {
                         Image(systemName: "photo.on.rectangle.angled")
                             .font(.system(size: 15, weight: .medium))
                             .foregroundStyle(Theme.textSecondary)
                             .frame(width: 32, height: 32)
                     }
-                    .onChange(of: pickerSelections) { _, newItems in
-                        Task { await loadPickedImages(newItems) }
-                    }
 
                     Button {
+                        Haptics.light()
                         showCapabilitySheet = true
                     } label: {
                         Image(systemName: "bolt.fill")
@@ -358,6 +477,7 @@ struct ChatView: View {
                     }
 
                     Button {
+                        Haptics.rigid()
                         sendControlKey("escape")
                     } label: {
                         Image(systemName: "escape")
@@ -386,7 +506,10 @@ struct ChatView: View {
                 // Send button only exists when there's something to send. Lime
                 // filled circle with near-black icon for max contrast.
                 if canSend || isSending {
-                    Button { send() } label: {
+                    Button {
+                        Haptics.rigid()
+                        send()
+                    } label: {
                         ZStack {
                             Circle()
                                 .fill(Theme.brand)
@@ -444,6 +567,19 @@ struct ChatView: View {
         await MainActor.run {
             pendingAttachments.append(contentsOf: newAttachments)
             pickerSelections.removeAll()
+        }
+    }
+
+    /// Stage a freshly-captured camera photo as an attachment.
+    private func loadCapturedImage(_ image: UIImage) async {
+        // JPEG-encode first (quality 0.92), then run through ImageCompressor for
+        // downscaling + final compression — same pipeline as PhotosPicker images.
+        guard let raw = image.jpegData(compressionQuality: 0.92),
+              let compressed = ImageCompressor.compress(raw),
+              let thumb = UIImage(data: compressed) else { return }
+        let attachment = PendingAttachment(data: compressed, thumbnail: thumb)
+        await MainActor.run {
+            pendingAttachments.append(attachment)
         }
     }
 
@@ -534,6 +670,19 @@ struct ChatView: View {
         let attachmentsToSend = pendingAttachments
         guard !text.isEmpty || !attachmentsToSend.isEmpty else { return }
 
+        // Lock the current last turn open. Otherwise the new message becomes
+        // turns.last and the previous turn — which had been auto-expanded by
+        // virtue of being last — silently collapses to a 1-line header. In a
+        // long conversation that visual jump leaves the user staring at a
+        // blank screen with their just-sent message scrolled out of view.
+        if let prevLast = turns.last {
+            expandedTurns.insert(prevLast.id)
+        }
+
+        // Light haptic — user gets immediate physical confirmation that the
+        // tap was registered, even before any network round-trip.
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+
         inputText = ""
         pendingAttachments = []
         isSending = true
@@ -572,7 +721,20 @@ struct ChatView: View {
             // of producing a duplicate.
             let localId = UUID().uuidString
             await MainActor.run {
-                appState.sendMessage(payloadString, toSession: sessionId, localId: localId)
+                // Mark this send as in flight so the UI can show a "Sending…"
+                // → "Delivered" → "Claude is thinking" status footer beneath
+                // the just-appended message.
+                pendingSend = PendingSend(localId: localId, startedAt: Date(), stage: .sending)
+
+                appState.sendMessage(payloadString, toSession: sessionId, localId: localId) {
+                    // Server ack: the message landed in DB. Flip to "delivered".
+                    if pendingSend?.localId == localId, pendingSend?.stage == .sending {
+                        pendingSend?.stage = .delivered
+                        // Medium haptic to confirm delivery
+                        UIImpactFeedbackGenerator(style: .light).impactOccurred(intensity: 0.6)
+                    }
+                }
+
                 let msg = ChatMessage(id: "local-\(localId)",
                                       seq: (messages.last?.seq ?? 0) + 1,
                                       content: payloadString,
@@ -587,3 +749,54 @@ struct ChatView: View {
 
 // Animations (PulseDot, ShimmerModifier, ThinkingDots) now live in
 // ChatAnimations.swift.
+
+// MARK: - Send Status Footer
+
+/// Inline status row that lives at the bottom of ChatView while a sent
+/// message is in flight. Bridges the dead air between "user pressed send"
+/// and "Claude has streamed back any real content". Three stages:
+///   - .sending     network round-trip in progress
+///   - .delivered   server stored the message, Claude not yet engaged
+///   - .thinking    Claude has emitted its first phase=thinking event
+struct SendStatusFooter: View {
+    let stage: PendingSend.Stage
+
+    var body: some View {
+        HStack(spacing: 8) {
+            iconView
+                .frame(width: 18, height: 18)
+            Text(label)
+                .font(.system(size: 12))
+                .foregroundStyle(.secondary)
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .transition(.opacity.combined(with: .move(edge: .bottom)))
+        .animation(.easeInOut(duration: 0.2), value: stage)
+    }
+
+    @ViewBuilder
+    private var iconView: some View {
+        switch stage {
+        case .sending:
+            ProgressView()
+                .controlSize(.small)
+        case .delivered:
+            Image(systemName: "checkmark.circle.fill")
+                .font(.system(size: 13, weight: .medium))
+                .foregroundStyle(.secondary)
+        case .thinking:
+            ThinkingDots(color: .purple)
+        }
+    }
+
+    private var label: String {
+        switch stage {
+        case .sending:   return String(localized: "send_status_sending")
+        case .delivered: return String(localized: "send_status_delivered")
+        case .thinking:  return String(localized: "send_status_thinking")
+        }
+    }
+}

@@ -107,10 +107,14 @@ final class SocketClient {
 
     // MARK: - Sending
 
-    func sendMessage(sessionId: String, content: String, localId: String? = nil) {
+    func sendMessage(sessionId: String, content: String, localId: String? = nil, onAck: (() -> Void)? = nil) {
         var payload: [String: Any] = ["sid": sessionId, "message": content]
         if let localId { payload["localId"] = localId }
-        socket?.emitWithAck("message", payload).timingOut(after: 30) { _ in }
+        socket?.emitWithAck("message", payload).timingOut(after: 30) { _ in
+            // Server ack received — message landed in DB. Notify the caller so
+            // it can flip optimistic UI from "sending" → "delivered".
+            DispatchQueue.main.async { onAck?() }
+        }
     }
 
     func sendRpcCall(method: String, params: String) async -> [String: Any]? {

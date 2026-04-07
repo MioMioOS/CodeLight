@@ -24,6 +24,11 @@ final class AppState: ObservableObject {
     /// Time of the last real message received per session (not heartbeats/phase updates)
     @Published var lastMessageTimeBySession: [String: Date] = [:]
 
+    /// Single-line preview of the most recent user/assistant message per session.
+    /// Used by SessionRow's middle line so the list shows actual content (the
+    /// latest reply or question) instead of a stale auto-generated project title.
+    @Published var lastMessagePreviewBySession: [String: String] = [:]
+
     /// Images the user sent locally, keyed by the blobId. Used by MessageRow to render
     /// attached images the user just sent — server blobs are ephemeral and can't be
     /// re-downloaded after delivery, so we keep a copy here until the app is killed.
@@ -104,11 +109,25 @@ final class AppState: ObservableObject {
                 let chatMsg = ChatMessage(id: msg.id, seq: msg.seq, content: msg.content, localId: msg.localId)
                 self?.newMessageSubject.send((sessionId: sessionId, message: chatMsg))
 
+                // Track last activity time + content preview for any "real"
+                // content message (user / assistant). Phase / heartbeat /
+                // tool / thinking events don't count — they're noise that
+                // would constantly overwrite the preview text.
                 if let data = msg.content.data(using: .utf8),
                    let dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                   let type = dict["type"] as? String,
-                   type != "phase" {
+                   let type = dict["type"] as? String {
+                    if type != "phase" && type != "heartbeat" {
+                        self?.lastMessageTimeBySession[sessionId] = Date()
+                    }
+                    if type == "user" || type == "assistant" {
+                        if let text = dict["text"] as? String, !text.isEmpty {
+                            self?.lastMessagePreviewBySession[sessionId] = Self.previewLine(text)
+                        }
+                    }
+                } else {
+                    // Plain-text body (no JSON envelope) = user message from phone
                     self?.lastMessageTimeBySession[sessionId] = Date()
+                    self?.lastMessagePreviewBySession[sessionId] = Self.previewLine(msg.content)
                 }
 
                 let serverName = URL(string: url)?.host ?? "Server"
@@ -242,12 +261,22 @@ final class AppState: ObservableObject {
         }
     }
 
+    /// Collapse whitespace to spaces and cap to ~120 chars so the result fits
+    /// on a single SessionRow line without truncating mid-character.
+    static func previewLine(_ raw: String) -> String {
+        let collapsed = raw.replacingOccurrences(of: "\n", with: " ")
+            .replacingOccurrences(of: "\r", with: " ")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        if collapsed.count <= 120 { return collapsed }
+        return String(collapsed.prefix(119)) + "…"
+    }
+
     // MARK: - Messaging
 
-    func sendMessage(_ text: String, toSession sessionId: String, localId: String? = nil) {
+    func sendMessage(_ text: String, toSession sessionId: String, localId: String? = nil, onAck: (() -> Void)? = nil) {
         guard let socket else { return }
         let id = localId ?? UUID().uuidString
-        socket.sendMessage(sessionId: sessionId, content: text, localId: id)
+        socket.sendMessage(sessionId: sessionId, content: text, localId: id, onAck: onAck)
     }
 
     /// Send a model/mode change via session metadata update

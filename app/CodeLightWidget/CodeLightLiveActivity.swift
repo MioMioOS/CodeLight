@@ -77,23 +77,25 @@ struct CodeLightLiveActivity: Widget {
                     }
                 }
             } compactLeading: {
-                // Cat + rotating status text. Cat is scaled down aggressively to
-                // free up horizontal budget for the rotating text, which is the
-                // more information-dense piece.
-                HStack(spacing: 3) {
-                    PixelCharacterView(state: animationState(for: context.state.phase))
-                        .scaleEffect(0.36)
-                        .frame(width: 18, height: 18)
-                    RotatingCompactText(state: context.state)
-                }
+                // Just the cat. Apple's compact slot has a small fixed width
+                // budget — anything larger overflows past the camera cutout
+                // and visually shifts the whole island. Project name + status
+                // belong on the trailing side or in the lock-screen view.
+                PixelCharacterView(state: animationState(for: context.state.phase))
+                    .scaleEffect(0.42)
+                    .frame(width: 22, height: 20)
             } compactTrailing: {
-                // Project name on the trailing side with middle truncation so long
-                // folder names still show both ends.
-                Text(context.state.projectName)
+                // Single short status pill on the trailing side. Tool name when
+                // a tool is running, otherwise the phase label. Hard-capped to
+                // ~7 chars + minimumScaleFactor so it never pushes the slot
+                // past its budget. Project name lives on the lock screen.
+                Text(compactTrailingText(context.state))
                     .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(phaseColor(context.state.phase))
                     .lineLimit(1)
-                    .truncationMode(.middle)
-                    .foregroundStyle(.white)
+                    .truncationMode(.tail)
+                    .minimumScaleFactor(0.85)
+                    .frame(maxWidth: 64, alignment: .trailing)
             } minimal: {
                 PixelCharacterView(state: animationState(for: context.state.phase))
                     .scaleEffect(0.4)
@@ -249,6 +251,18 @@ private func phaseLabel(_ phase: String) -> String {
     case "error": return "Error"
     default: return phase
     }
+}
+
+/// Short text for the Dynamic Island compactTrailing slot. Tool name when a
+/// tool is running, otherwise the phase label. Caps at 7 characters so it
+/// can never push the slot past its budget.
+private func compactTrailingText(_ state: CodeLightActivityAttributes.ContentState) -> String {
+    let raw: String = {
+        if let tool = state.toolName, !tool.isEmpty { return tool }
+        return phaseLabel(state.phase)
+    }()
+    if raw.count <= 7 { return raw }
+    return String(raw.prefix(6)) + "…"
 }
 
 private func toolIcon(_ name: String) -> String {

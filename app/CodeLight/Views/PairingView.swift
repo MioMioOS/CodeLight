@@ -43,6 +43,7 @@ struct PairingView: View {
             }
             .pickerStyle(.segmented)
             .padding()
+            .onChange(of: selectedTab) { _, _ in Haptics.selection() }
 
             // Tab content
             Group {
@@ -218,6 +219,7 @@ struct PairingView: View {
 
     private func quickPill(_ text: String, prepend: Bool = false) -> some View {
         Button {
+            Haptics.light()
             insertIntoUrl(text, prepend: prepend)
         } label: {
             Text(text)
@@ -233,6 +235,7 @@ struct PairingView: View {
     /// Tap to fill the manual URL with a previously-used server URL.
     private func recentServerPill(_ url: String) -> some View {
         Button {
+            Haptics.selection()
             manualUrl = url
         } label: {
             HStack(spacing: 4) {
@@ -268,14 +271,17 @@ struct PairingView: View {
         guard let data = code.data(using: .utf8),
               let payload = try? JSONDecoder().decode(PairingQRPayload.self, from: data) else {
             errorMessage = String(localized: "invalid_qr_code")
+            Haptics.error()
             return
         }
 
         guard payload.isModern, let server = payload.server, let pairCode = payload.code else {
             errorMessage = String(localized: "qr_outdated_codeisland")
+            Haptics.error()
             return
         }
 
+        Haptics.rigid()
         isProcessing = true
         errorMessage = nil
         successMessage = nil
@@ -283,10 +289,12 @@ struct PairingView: View {
         do {
             let mac = try await appState.pairWithCode(pairCode, onServer: server)
             successMessage = String(format: NSLocalizedString("paired_with_format", comment: ""), mac.name)
+            Haptics.success()
             try? await Task.sleep(nanoseconds: 800_000_000)
             dismiss()
         } catch {
             errorMessage = error.localizedDescription
+            Haptics.error()
         }
 
         isProcessing = false
@@ -296,13 +304,16 @@ struct PairingView: View {
         let urlToUse = sanitizedManualUrl()
         guard !urlToUse.isEmpty else {
             errorMessage = String(localized: "server_url_required")
+            Haptics.error()
             return
         }
         guard !manualCode.isEmpty else {
             errorMessage = String(localized: "pairing_code_required")
+            Haptics.error()
             return
         }
 
+        Haptics.rigid()
         isProcessing = true
         errorMessage = nil
         successMessage = nil
@@ -311,10 +322,12 @@ struct PairingView: View {
             let mac = try await appState.pairWithCode(manualCode, onServer: urlToUse)
             successMessage = String(format: NSLocalizedString("paired_with_format", comment: ""), mac.name)
             manualCode = ""
+            Haptics.success()
             try? await Task.sleep(nanoseconds: 800_000_000)
             dismiss()
         } catch {
             errorMessage = error.localizedDescription
+            Haptics.error()
         }
 
         isProcessing = false
