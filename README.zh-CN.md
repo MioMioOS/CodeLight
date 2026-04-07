@@ -9,7 +9,7 @@
 [English](README.md) · [简体中文](README.zh-CN.md)
 
 [![GitHub stars](https://img.shields.io/github/stars/xmqywx/CodeLight?style=social)](https://github.com/xmqywx/CodeLight/stargazers)
-[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
+[![License](https://img.shields.io/badge/license-CC%20BY--NC%204.0-green?style=flat-square)](LICENSE.md)
 [![iOS](https://img.shields.io/badge/iOS-17%2B-black?style=flat-square&logo=apple)](https://github.com/xmqywx/CodeLight/releases)
 [![Swift](https://img.shields.io/badge/Swift-6-orange?style=flat-square&logo=swift)](https://swift.org)
 
@@ -88,7 +88,7 @@ Code Light 是 Claude Code 的**原生 iPhone 伴侣**。它与 Mac 上的 [Code
 | **应用内隐私政策**（Apple 审核要求） | ✅ 中英双语 | ⚠️ 外部链接 |
 | **完整中英本地化** | ✅ 含 Info.plist | ⚠️ |
 | **可自托管** | ✅ | ✅ |
-| **开源** | ✅ MIT | ✅ |
+| **开源** | ✅ CC BY-NC 4.0（仅限学习研究，禁止商用） | ✅ |
 
 ### 深度解析 —— 为什么每一项都重要
 
@@ -323,4 +323,6 @@ Bug 报告、PR、功能建议都欢迎。
 
 ## 许可证
 
-MIT —— 可用于任何用途。
+[CC BY-NC 4.0](LICENSE.md) —— **仅限个人学习、教育、学术和研究使用，禁止任何商业用途**。商业用途包括但不限于：销售本软件、将其打包进收费产品、用作收费服务的一部分等。
+
+如需商业授权，请联系 xmqywx@gmail.com。

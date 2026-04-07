@@ -9,7 +9,7 @@
 [English](README.md) · [简体中文](README.zh-CN.md)
 
 [![GitHub stars](https://img.shields.io/github/stars/xmqywx/CodeLight?style=social)](https://github.com/xmqywx/CodeLight/stargazers)
-[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
+[![License](https://img.shields.io/badge/license-CC%20BY--NC%204.0-green?style=flat-square)](LICENSE.md)
 [![iOS](https://img.shields.io/badge/iOS-17%2B-black?style=flat-square&logo=apple)](https://github.com/xmqywx/CodeLight/releases)
 [![Swift](https://img.shields.io/badge/Swift-6-orange?style=flat-square&logo=swift)](https://swift.org)
 
@@ -88,7 +88,7 @@ Both apps let you talk to Claude Code from your phone. Here's where they actuall
 | **In-app privacy policy** (Apple-compliant) | ✅ Bilingual | ⚠️ External link |
 | **Full EN/ZH localization** | ✅ Including Info.plist | ⚠️ |
 | **Self-hostable** | ✅ | ✅ |
-| **Open source** | ✅ MIT | ✅ |
+| **Open source** | ✅ CC BY-NC 4.0 (study + research, no commercial) | ✅ |
 
 ### Deep dive — why each of these matters
 
@@ -323,4 +323,6 @@ Bug reports, PRs, and feature ideas all welcome.
 
 ## License
 
-MIT — free for any use.
+[CC BY-NC 4.0](LICENSE.md) — free for personal, educational, academic, and research use. **Commercial use is not permitted.** This includes (but isn't limited to) selling the app, bundling it into a paid product, or using it in a paid service.
+
+For commercial licensing inquiries, contact xmqywx@gmail.com.
