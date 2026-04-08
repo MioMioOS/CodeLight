@@ -75,16 +75,52 @@ export interface PushPayload {
 }
 
 /**
+ * Result of an APNs send. `terminal === true` means Apple told us this
+ * device token is permanently dead (uninstalled, expired, malformed,
+ * sandbox/prod mismatch) and the caller MUST delete the token from its
+ * own storage. Apple's docs make it very clear: keep retrying these and
+ * they'll throttle the whole topic.
+ */
+export interface PushResult {
+    ok: boolean;
+    status: number;
+    reason?: string;
+    /// Caller should delete this token row from the database.
+    terminal: boolean;
+}
+
+/// APNs status/reason combinations that mean "this token is dead, delete
+/// it permanently". 410 always = gone. 400 BadDeviceToken = invalid format
+/// or sandbox/prod mismatch — equally hopeless from the server's POV.
+function isTerminalApnsError(status: number, reason?: string): boolean {
+    if (status === 410) return true;                                // Unregistered, ExpiredToken
+    if (status === 400 && reason === 'BadDeviceToken') return true;
+    if (status === 400 && reason === 'DeviceTokenNotForTopic') return true;
+    return false;
+}
+
+/// Pull the `reason` field out of an APNs response body. Apple returns a
+/// JSON envelope with `{ reason: "...", timestamp: ... }` on error.
+function parseApnsReason(body: string): string | undefined {
+    try {
+        const parsed = JSON.parse(body);
+        return typeof parsed?.reason === 'string' ? parsed.reason : undefined;
+    } catch {
+        return undefined;
+    }
+}
+
+/**
  * Send a push notification to a device token via HTTP/2. Node's built-in
  * `fetch()` uses HTTP/1.1 which APNs rejects with "fetch failed" — so we
  * reuse the same `apnsHttp2Request()` helper that the Live Activity path
  * already relies on.
  */
-export async function sendPush(deviceToken: string, payload: PushPayload): Promise<boolean> {
+export async function sendPush(deviceToken: string, payload: PushPayload): Promise<PushResult> {
     const apnsConfig = getApnsConfig();
     if (!apnsConfig) {
         console.log('[APNs] Not configured, skipping push');
-        return false;
+        return { ok: false, status: 0, terminal: false };
     }
 
     // http2.connect() interprets the authority string as a URL — without an
@@ -129,13 +165,15 @@ export async function sendPush(deviceToken: string, payload: PushPayload): Promi
         console.log(`[APNs Alert] host=${host} token=${deviceToken.substring(0, 12)} topic=${apnsConfig.bundleId} status=${result.status} apnsId=${result.apnsId ?? '-'} body=${result.body || '(empty)'}`);
 
         if (result.status >= 200 && result.status < 300) {
-            return true;
+            return { ok: true, status: result.status, terminal: false };
         }
-        console.error(`[APNs] Push failed: ${result.status} ${result.body}`);
-        return false;
+        const reason = parseApnsReason(result.body);
+        const terminal = isTerminalApnsError(result.status, reason);
+        console.error(`[APNs] Push failed: ${result.status} reason=${reason ?? '?'} terminal=${terminal}`);
+        return { ok: false, status: result.status, reason, terminal };
     } catch (error) {
         console.error('[APNs] Push error:', error);
-        return false;
+        return { ok: false, status: 0, terminal: false };
     }
 }
 
@@ -183,14 +221,29 @@ export async function sendPushToDevice(
     const results = await Promise.allSettled(
         tokens.map((t: { token: string }) => sendPush(t.token, payload))
     );
+    // Self-heal: any token that came back terminal (Unregistered / 410 /
+    // BadDeviceToken / sandbox-prod mismatch) is permanently dead. Apple
+    // explicitly tells us to delete these — keeping them around triggers
+    // throttling on the entire topic and is the root cause of "I uninstalled
+    // the app months ago and the server is still trying to push to me".
+    const tokensToDelete: string[] = [];
     results.forEach((r, i) => {
-        const tok = tokens[i].token.substring(0, 10);
+        const tok = tokens[i].token;
+        const tokPreview = tok.substring(0, 10);
         if (r.status === 'fulfilled') {
-            console.log(`[sendPushToDevice]   token=${tok} → ${r.value}`);
+            const res = r.value;
+            console.log(`[sendPushToDevice]   token=${tokPreview} status=${res.status} ok=${res.ok} terminal=${res.terminal}`);
+            if (res.terminal) tokensToDelete.push(tok);
         } else {
-            console.error(`[sendPushToDevice]   token=${tok} → REJECTED`, r.reason);
+            console.error(`[sendPushToDevice]   token=${tokPreview} → REJECTED`, r.reason);
         }
     });
+    if (tokensToDelete.length > 0) {
+        const deleted = await db.pushToken.deleteMany({
+            where: { deviceId, token: { in: tokensToDelete } },
+        });
+        console.log(`[sendPushToDevice]   self-healed: deleted ${deleted.count} dead PushTokens for device ${deviceId.substring(0, 10)}`);
+    }
 }
 
 /**
@@ -257,17 +310,20 @@ function apnsHttp2Request(host: string, path: string, headers: Record<string, st
 
 /**
  * Send a Live Activity update via APNs push.
- * This updates an existing Live Activity on the device.
+ * This updates an existing Live Activity on the device. Returns the same
+ * structured PushResult as `sendPush()` so callers can self-heal dead
+ * tokens (the Live Activity APNs feedback path is the noisiest source of
+ * stale tokens — sandbox/prod mismatches happen on every fresh install).
  */
 export async function sendLiveActivityUpdate(
     pushToken: string,
     contentState: LiveActivityContentState,
     event: 'update' | 'end' = 'update'
-): Promise<boolean> {
+): Promise<PushResult> {
     const apnsConfig = getApnsConfig();
     if (!apnsConfig) {
         console.log('[APNs] Not configured, skipping Live Activity push');
-        return false;
+        return { ok: false, status: 0, terminal: false };
     }
 
     const host = apnsConfig.production
@@ -301,13 +357,15 @@ export async function sendLiveActivityUpdate(
 
         if (result.status === 200) {
             console.log(`[APNs LiveActivity] Push sent: phase=${contentState.phase}`);
-            return true;
+            return { ok: true, status: 200, terminal: false };
         }
 
-        console.error(`[APNs LiveActivity] Push failed: ${result.status} ${result.body}`);
-        return false;
+        const reason = parseApnsReason(result.body);
+        const terminal = isTerminalApnsError(result.status, reason);
+        console.error(`[APNs LiveActivity] Push failed: ${result.status} reason=${reason ?? '?'} terminal=${terminal}`);
+        return { ok: false, status: result.status, reason, terminal };
     } catch (error) {
         console.error('[APNs LiveActivity] Push error:', error);
-        return false;
+        return { ok: false, status: 0, terminal: false };
     }
 }

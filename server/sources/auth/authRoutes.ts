@@ -30,10 +30,14 @@ export async function authRoutes(app: FastifyInstance) {
             return reply.code(401).send({ error: 'Invalid signature' });
         }
 
+        const now = new Date();
         const device = await db.device.upsert({
             where: { publicKey },
-            create: { publicKey, name: 'Unknown Device' },
-            update: {},
+            create: { publicKey, name: 'Unknown Device', lastSeenAt: now },
+            // Touch lastSeenAt on every fresh auth so the proactive
+            // staleness filter in notifyLinkedIPhones knows the iPhone
+            // is alive at this exact moment.
+            update: { lastSeenAt: now },
         });
 
         const ttl = expiryDays && expiryDays > 0 ? expiryDays : config.tokenExpiryDays;

@@ -8,14 +8,20 @@ datasource db {
 }
 
 model Device {
-  id        String   @id @default(cuid())
-  publicKey String   @unique
-  name      String
-  kind      String   @default("ios") // 'ios' | 'mac'
-  shortCode String?  @unique // Permanent 6-char pairing code for Macs (lazy-generated)
-  seq       Int      @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String    @id @default(cuid())
+  publicKey  String    @unique
+  name       String
+  kind       String    @default("ios") // 'ios' | 'mac'
+  shortCode  String?   @unique // Permanent 6-char pairing code for Macs (lazy-generated)
+  seq        Int       @default(0)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  /// Last time this device successfully authenticated (HTTP middleware
+  /// or socket handshake). Used by `notifyLinkedIPhones` to filter out
+  /// stale devices whose JWT has expired but whose APNs token is still
+  /// technically valid — without this the server keeps pushing to dead
+  /// installs forever.
+  lastSeenAt DateTime?
 
   // Notification preferences (only meaningful for iOS devices).
   // `notificationsEnabled` is the master kill-switch — when false, the server

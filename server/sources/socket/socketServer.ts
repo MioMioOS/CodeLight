@@ -1,6 +1,7 @@
 import { Server as HttpServer } from 'http';
 import { Server } from 'socket.io';
 import { verifyToken } from '@/auth/crypto';
+import { bumpLastSeenAt } from '@/auth/middleware';
 import { config } from '@/config';
 import { EventRouter, type ClientConnection } from './eventRouter';
 import { registerSessionHandler } from './sessionHandler';
@@ -44,6 +45,9 @@ export function startSocket(server: HttpServer) {
         };
 
         eventRouter.addConnection(payload.deviceId, connection);
+        // Touch lastSeenAt so notifyLinkedIPhones can tell this device is
+        // still alive even if the user only ever talks via the socket.
+        bumpLastSeenAt(payload.deviceId);
 
         registerSessionHandler(socket, payload.deviceId, eventRouter);
         registerRpcHandler(socket, payload.deviceId);

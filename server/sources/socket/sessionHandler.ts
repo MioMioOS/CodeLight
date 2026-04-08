@@ -5,6 +5,16 @@ import type { EventRouter } from './eventRouter';
 import { canAccessSession } from '@/auth/deviceAccess';
 import { sendPushToDevice, sendLiveActivityUpdate } from '@/push/apns';
 import { deleteBlob } from '@/blob/blobStore';
+import { config } from '@/config';
+
+/// How long after a device's last successful auth we keep pushing alerts
+/// to it. We use the JWT TTL plus a 1-day grace so brief downtime doesn't
+/// silence anyone — but a device that hasn't auth'd in over a JWT lifetime
+/// has effectively gone dark and we should stop spamming APNs on its behalf.
+function getStaleThresholdMs(): number {
+    const days = (config.tokenExpiryDays || 30) + 1;
+    return days * 24 * 60 * 60 * 1000;
+}
 
 // In-memory phase state per session, used to detect transitions like
 // "non-ended → ended" so we only fire a completion notification on the exact
@@ -119,15 +129,27 @@ async function notifyLinkedIPhones(params: {
             notifyOnCompletion: true,
             notifyOnApproval: true,
             notifyOnError: true,
+            lastSeenAt: true,
         },
     });
 
+    const staleCutoff = Date.now() - getStaleThresholdMs();
     console.log(`[notify] kind=${kind} mac=${macDeviceId.substring(0,10)} linkedIphones=${iPhoneIds.size} candidates=${devices.length}`);
     for (const d of devices) {
         // Master kill-switch — if the iPhone has flipped its top-level
         // notifications toggle off, skip without checking per-kind flags.
         if (!d.notificationsEnabled) {
             console.log(`[notify]   iphone=${d.id.substring(0,10)} master=OFF → skipped`);
+            continue;
+        }
+        // Staleness filter — JWT-expired iPhones can't refresh their
+        // server state but APNs may still happily deliver to them. After
+        // a JWT lifetime + grace day with no auth, treat the device as
+        // dark and stop pushing. Devices with NULL lastSeenAt are
+        // pre-migration rows (we backfilled them on deploy) and pass.
+        if (d.lastSeenAt && d.lastSeenAt.getTime() < staleCutoff) {
+            const daysAgo = Math.floor((Date.now() - d.lastSeenAt.getTime()) / (24 * 60 * 60 * 1000));
+            console.log(`[notify]   iphone=${d.id.substring(0,10)} stale=${daysAgo}d → skipped`);
             continue;
         }
         const enabled =
@@ -249,7 +271,17 @@ export function registerSessionHandler(
                         };
 
                         for (const t of globalTokens) {
-                            sendLiveActivityUpdate(t.token, contentState as any).catch(() => {});
+                            sendLiveActivityUpdate(t.token, contentState as any).then((res) => {
+                                // Self-heal: when APNs tells us the Live
+                                // Activity token is permanently dead, drop
+                                // it so we stop spamming the same dead row
+                                // forever (this is the noisiest source of
+                                // 410/BadDeviceToken errors in our logs).
+                                if (res.terminal) {
+                                    db.liveActivityToken.delete({ where: { id: t.id } }).catch(() => {});
+                                    console.log(`[LiveActivity] Self-healed: deleted dead token id=${t.id}`);
+                                }
+                            }).catch(() => {});
                         }
                     }
 
