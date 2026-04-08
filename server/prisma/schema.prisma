@@ -18,10 +18,13 @@ model Device {
   updatedAt DateTime @updatedAt
 
   // Notification preferences (only meaningful for iOS devices).
-  // Controls which phase transitions trigger a system alert push.
-  notifyOnCompletion Boolean @default(false) // non-ended → ended
-  notifyOnApproval   Boolean @default(false) // tool waiting_approval
-  notifyOnError      Boolean @default(false) // tool status=error
+  // `notificationsEnabled` is the master kill-switch — when false, the server
+  // skips ALL push delivery for this device regardless of the per-kind flags
+  // below. Existing devices default to true so the upgrade is silent.
+  notificationsEnabled Boolean @default(true)
+  notifyOnCompletion   Boolean @default(false) // non-ended → ended
+  notifyOnApproval     Boolean @default(false) // tool waiting_approval
+  notifyOnError        Boolean @default(false) // tool status=error
 
   sessions      Session[]
   pushTokens    PushToken[]

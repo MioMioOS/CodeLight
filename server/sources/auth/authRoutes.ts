@@ -11,13 +11,19 @@ export async function authRoutes(app: FastifyInstance) {
                 publicKey: z.string(),
                 challenge: z.string(),
                 signature: z.string(),
+                // Optional client-chosen TTL in days. Clamped to a sane
+                // range; falls back to the server default if absent or
+                // out of bounds. Lets the iOS Settings picker actually
+                // control how long the JWT lives.
+                expiryDays: z.number().int().min(1).max(365).optional(),
             }),
         },
     }, async (request, reply) => {
-        const { publicKey, challenge, signature } = request.body as {
+        const { publicKey, challenge, signature, expiryDays } = request.body as {
             publicKey: string;
             challenge: string;
             signature: string;
+            expiryDays?: number;
         };
 
         if (!verifySignature(challenge, signature, publicKey)) {
@@ -30,7 +36,8 @@ export async function authRoutes(app: FastifyInstance) {
             update: {},
         });
 
-        const token = createToken(device.id, config.masterSecret, config.tokenExpiryDays);
-        return { success: true, token, deviceId: device.id };
+        const ttl = expiryDays && expiryDays > 0 ? expiryDays : config.tokenExpiryDays;
+        const token = createToken(device.id, config.masterSecret, ttl);
+        return { success: true, token, deviceId: device.id, expiresInDays: ttl };
     });
 }

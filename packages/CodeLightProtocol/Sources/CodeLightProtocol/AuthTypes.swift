@@ -5,11 +5,15 @@ public struct AuthRequest: Codable, Sendable {
     public let publicKey: String   // base64
     public let challenge: String   // base64
     public let signature: String   // base64
+    /// Optional client-chosen JWT lifetime in days. The server clamps to a
+    /// sane range (1–365) and falls back to its default when absent.
+    public let expiryDays: Int?
 
-    public init(publicKey: String, challenge: String, signature: String) {
+    public init(publicKey: String, challenge: String, signature: String, expiryDays: Int? = nil) {
         self.publicKey = publicKey
         self.challenge = challenge
         self.signature = signature
+        self.expiryDays = expiryDays
     }
 }
 
@@ -18,6 +22,9 @@ public struct AuthResponse: Codable, Sendable {
     public let success: Bool
     public let token: String?
     public let deviceId: String?
+    /// Echo of the TTL the server actually used (may differ from the
+    /// requested value if the client sent something out of range).
+    public let expiresInDays: Int?
 }
 
 /// QR code pairing payload (encoded in QR).

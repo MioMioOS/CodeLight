@@ -66,7 +66,29 @@ final class AppState: ObservableObject {
     // MARK: - Server / Mac Management
 
     /// Wipe all paired Macs and disconnect. Used by the "Reset" button in Settings.
-    func reset() {
+    ///
+    /// Before clearing local state we make a best-effort attempt to tell every
+    /// known server to (a) drop our push tokens and (b) delete the DeviceLinks
+    /// for each Mac we had paired. This is what stops the "I reset and still
+    /// got pushes" failure mode (Bug 3) — without it, the iPhone could reach
+    /// a state where local says "no servers" but the server still happily
+    /// fires APNs alerts at our orphaned tokens forever. Failures are
+    /// swallowed; the local wipe always proceeds so the user can recover
+    /// from a totally unreachable server.
+    func reset() async {
+        // Snapshot before mutation: we're about to unlink each Mac, which
+        // would mutate linkedMacs while we iterate.
+        let snapshot = linkedMacs
+        let serverUrls = Array(Set(snapshot.map { $0.serverUrl }))
+        for url in serverUrls {
+            await connectToServer(url: url)
+            // Drop push tokens first so even if the per-mac unlinks below
+            // fail (network blip), this server can no longer push to us.
+            await socket?.deleteAllPushTokens()
+            for mac in snapshot where mac.serverUrl == url {
+                _ = try? await socket?.unlinkDevice(mac.deviceId)
+            }
+        }
         linkedMacs = []
         saveLinkedMacs()
         lastUsedServerUrl = nil

@@ -51,20 +51,28 @@ export async function pushRoutes(app: FastifyInstance) {
         return { tokens };
     });
 
-    // Get notification preferences for this device. Defaults (all off for
-    // completion/approval, off for error) are enforced at the schema level.
+    // Get notification preferences for this device. `notificationsEnabled`
+    // is the master kill-switch — when false, the server skips ALL push
+    // delivery regardless of the per-kind flags. Defaults are enforced at
+    // the schema level.
     app.get('/v1/notification-prefs', {
         preHandler: authMiddleware,
     }, async (request) => {
         const device = await db.device.findUnique({
             where: { id: request.deviceId! },
             select: {
+                notificationsEnabled: true,
                 notifyOnCompletion: true,
                 notifyOnApproval: true,
                 notifyOnError: true,
             },
         });
-        return device || { notifyOnCompletion: false, notifyOnApproval: false, notifyOnError: false };
+        return device || {
+            notificationsEnabled: true,
+            notifyOnCompletion: false,
+            notifyOnApproval: false,
+            notifyOnError: false,
+        };
     });
 
     // Update notification preferences. All fields optional so the client can
@@ -73,6 +81,7 @@ export async function pushRoutes(app: FastifyInstance) {
         preHandler: authMiddleware,
         schema: {
             body: z.object({
+                notificationsEnabled: z.boolean().optional(),
                 notifyOnCompletion: z.boolean().optional(),
                 notifyOnApproval: z.boolean().optional(),
                 notifyOnError: z.boolean().optional(),
@@ -80,6 +89,7 @@ export async function pushRoutes(app: FastifyInstance) {
         },
     }, async (request) => {
         const body = request.body as {
+            notificationsEnabled?: boolean;
             notifyOnCompletion?: boolean;
             notifyOnApproval?: boolean;
             notifyOnError?: boolean;
@@ -88,12 +98,25 @@ export async function pushRoutes(app: FastifyInstance) {
             where: { id: request.deviceId! },
             data: body,
             select: {
+                notificationsEnabled: true,
                 notifyOnCompletion: true,
                 notifyOnApproval: true,
                 notifyOnError: true,
             },
         });
         return updated;
+    });
+
+    // Delete every push token registered by the calling device. Used by the
+    // iOS "Reset" / "Stop notifications from this server" actions so the
+    // server forgets us before we wipe local state. Idempotent.
+    app.delete('/v1/push-tokens', {
+        preHandler: authMiddleware,
+    }, async (request) => {
+        const result = await db.pushToken.deleteMany({
+            where: { deviceId: request.deviceId! },
+        });
+        return { success: true, deleted: result.count };
     });
 
     // Register a Live Activity push token for a session

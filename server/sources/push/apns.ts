@@ -141,12 +141,34 @@ export async function sendPush(deviceToken: string, payload: PushPayload): Promi
 
 /**
  * Send push to all tokens for a device.
+ *
+ * Defense-in-depth: before pushing we verify the device still has at least
+ * one active DeviceLink. If not (e.g. the iPhone was unpaired but its push
+ * tokens lingered for some reason), we drop the push and self-heal by
+ * deleting the orphaned tokens. This is the last line of defence behind the
+ * cascade cleanup in DELETE /v1/pairing/links — if we ever miss the cascade
+ * (server crash mid-unlink, manual DB edits, etc.) this still stops the
+ * "unpaired but still receiving alerts" failure mode.
  */
 export async function sendPushToDevice(
     deviceId: string,
     payload: PushPayload,
     db: any
 ): Promise<void> {
+    const linkCount = await db.deviceLink.count({
+        where: {
+            OR: [
+                { sourceDeviceId: deviceId },
+                { targetDeviceId: deviceId },
+            ],
+        },
+    });
+    if (linkCount === 0) {
+        const cleaned = await db.pushToken.deleteMany({ where: { deviceId } });
+        console.log(`[sendPushToDevice] device=${deviceId.substring(0, 10)} has 0 DeviceLinks — orphaned, cleaned ${cleaned.count} tokens, skipped push`);
+        return;
+    }
+
     const tokens = await db.pushToken.findMany({
         where: { deviceId },
         select: { token: true },

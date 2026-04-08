@@ -567,6 +567,22 @@
         }
       }
     },
+    "enable_all_notifications": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enable All Notifications"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "启用所有通知"
+          }
+        }
+      }
+    },
     "enable_notifications": {
       "localizations": {
         "en": {

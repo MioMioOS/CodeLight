@@ -115,6 +115,7 @@ async function notifyLinkedIPhones(params: {
         where: { id: { in: Array.from(iPhoneIds) }, kind: 'ios' },
         select: {
             id: true,
+            notificationsEnabled: true,
             notifyOnCompletion: true,
             notifyOnApproval: true,
             notifyOnError: true,
@@ -123,6 +124,12 @@ async function notifyLinkedIPhones(params: {
 
     console.log(`[notify] kind=${kind} mac=${macDeviceId.substring(0,10)} linkedIphones=${iPhoneIds.size} candidates=${devices.length}`);
     for (const d of devices) {
+        // Master kill-switch — if the iPhone has flipped its top-level
+        // notifications toggle off, skip without checking per-kind flags.
+        if (!d.notificationsEnabled) {
+            console.log(`[notify]   iphone=${d.id.substring(0,10)} master=OFF → skipped`);
+            continue;
+        }
         const enabled =
             (kind === 'completion' && d.notifyOnCompletion) ||
             (kind === 'approval'   && d.notifyOnApproval)   ||

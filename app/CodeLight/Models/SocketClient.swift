@@ -37,10 +37,18 @@ final class SocketClient {
         let publicKey = try keyManager.publicKeyBase64()
         print("[SocketClient] Step 3: Signed challenge, pubkey=\(publicKey.prefix(20))...")
 
+        // The user picks token lifetime in Settings. Read it here so the
+        // server actually honors the choice instead of always issuing a
+        // 30-day token. Fall back to 30 days when the picker has never
+        // been touched (matches the @AppStorage default in SettingsView).
+        let storedExpiry = UserDefaults.standard.integer(forKey: "tokenExpiryDays")
+        let expiryDays = storedExpiry > 0 ? storedExpiry : 30
+
         let request = AuthRequest(
             publicKey: publicKey,
             challenge: challengeData.base64EncodedString(),
-            signature: signature.base64EncodedString()
+            signature: signature.base64EncodedString(),
+            expiryDays: expiryDays
         )
 
         let url = URL(string: "\(serverUrl)/v1/auth")!
@@ -333,6 +341,10 @@ final class SocketClient {
     // MARK: - Notification Preferences
 
     struct NotificationPrefs: Codable, Equatable {
+        /// Master kill-switch — when false, the server skips ALL pushes for
+        /// this device regardless of the per-kind toggles below. Defaults to
+        /// true so an installer who never opens Settings keeps getting alerts.
+        var notificationsEnabled: Bool = true
         var notifyOnCompletion: Bool
         var notifyOnApproval: Bool
         var notifyOnError: Bool
@@ -359,6 +371,21 @@ final class SocketClient {
                           userInfo: [NSLocalizedDescriptionKey: "Failed to update notification prefs"])
         }
         return try JSONDecoder().decode(NotificationPrefs.self, from: data)
+    }
+
+    /// Delete every push token registered by this device on the server.
+    /// Used by the iOS Reset / "stop notifications from this server" flow
+    /// so the server forgets us before we wipe local state. Idempotent and
+    /// best-effort — failures are swallowed because the caller is usually
+    /// in the middle of tearing down a connection that may already be dead.
+    func deleteAllPushTokens() async {
+        guard let token else { return }
+        let url = URL(string: "\(serverUrl)/v1/push-tokens")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.timeoutInterval = 5
+        _ = try? await URLSession.shared.data(for: request)
     }
 
     /// Upload an image blob. Returns the blobId on success.

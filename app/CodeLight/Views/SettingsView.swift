@@ -21,6 +21,7 @@ struct SettingsView: View {
         case failure(String)
     }
     @State private var notificationPrefs = SocketClient.NotificationPrefs(
+        notificationsEnabled: true,
         notifyOnCompletion: false,
         notifyOnApproval: false,
         notifyOnError: false
@@ -213,6 +214,25 @@ struct SettingsView: View {
                     }
                 }
 
+                // Master kill-switch: when off, the server skips ALL pushes
+                // for this device regardless of the per-kind toggles below.
+                // The per-kind toggles are also disabled visually so it's
+                // obvious why nothing is firing.
+                Toggle(isOn: Binding(
+                    get: { notificationPrefs.notificationsEnabled },
+                    set: { newValue in
+                        notificationPrefs.notificationsEnabled = newValue
+                        Task { await syncPrefs() }
+                    }
+                )) {
+                    Label {
+                        Text(String(localized: "enable_all_notifications"))
+                    } icon: {
+                        Image(systemName: "bell.slash")
+                    }
+                }
+                .disabled(!prefsLoaded)
+
                 Toggle(isOn: Binding(
                     get: { notificationPrefs.notifyOnCompletion },
                     set: { newValue in
@@ -226,7 +246,7 @@ struct SettingsView: View {
                         Image(systemName: "checkmark.circle")
                     }
                 }
-                .disabled(!prefsLoaded)
+                .disabled(!prefsLoaded || !notificationPrefs.notificationsEnabled)
 
                 Toggle(isOn: Binding(
                     get: { notificationPrefs.notifyOnApproval },
@@ -241,7 +261,7 @@ struct SettingsView: View {
                         Image(systemName: "hand.raised")
                     }
                 }
-                .disabled(!prefsLoaded)
+                .disabled(!prefsLoaded || !notificationPrefs.notificationsEnabled)
 
                 Toggle(isOn: Binding(
                     get: { notificationPrefs.notifyOnError },
@@ -256,7 +276,7 @@ struct SettingsView: View {
                         Image(systemName: "exclamationmark.triangle")
                     }
                 }
-                .disabled(!prefsLoaded)
+                .disabled(!prefsLoaded || !notificationPrefs.notificationsEnabled)
             } header: {
                 Text(String(localized: "notifications"))
             } footer: {
@@ -319,8 +339,10 @@ struct SettingsView: View {
             Button(String(localized: "cancel"), role: .cancel) {}
             Button(String(localized: "reset"), role: .destructive) {
                 Haptics.rigid()
-                appState.reset()
-                dismiss()
+                Task {
+                    await appState.reset()
+                    dismiss()
+                }
             }
         } message: {
             Text(String(localized: "reset_backend_confirm"))

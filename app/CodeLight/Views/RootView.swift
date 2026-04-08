@@ -67,7 +67,7 @@ struct RootView: View {
                     .buttonStyle(.borderedProminent)
 
                     Button(role: .destructive) {
-                        appState.reset()
+                        Task { await appState.reset() }
                     } label: {
                         Text(String(localized: "reset_connection"))
                     }

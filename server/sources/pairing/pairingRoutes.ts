@@ -210,6 +210,11 @@ export async function pairingRoutes(app: FastifyInstance) {
     });
 
     // Unlink the caller from a target device. Notifies the target via socket.
+    // After deleting the link, cascade-cleanup any device that no longer has
+    // ANY remaining DeviceLinks: drop its push tokens so we don't keep firing
+    // APNs alerts at an iPhone that thinks it's no longer paired. Without
+    // this, "unpair last Mac" left orphaned PushTokens that kept receiving
+    // alerts forever (the user's reported Bug 3).
     app.delete('/v1/pairing/links/:targetDeviceId', {
         preHandler: authMiddleware,
         schema: {
@@ -230,6 +235,24 @@ export async function pairingRoutes(app: FastifyInstance) {
 
         if (deleted.count === 0) {
             return reply.code(404).send({ error: 'Link not found' });
+        }
+
+        // Cascade push-token cleanup for any device that just became unlinked.
+        for (const id of [myDeviceId, targetDeviceId]) {
+            const remaining = await db.deviceLink.count({
+                where: {
+                    OR: [
+                        { sourceDeviceId: id },
+                        { targetDeviceId: id },
+                    ],
+                },
+            });
+            if (remaining === 0) {
+                const tokenResult = await db.pushToken.deleteMany({ where: { deviceId: id } });
+                if (tokenResult.count > 0) {
+                    console.log(`[pairing] Cascade-deleted ${tokenResult.count} push tokens for ${id}`);
+                }
+            }
         }
 
         // Notify the other side so it can clean local state
