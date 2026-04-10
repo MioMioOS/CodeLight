@@ -217,13 +217,13 @@ Strict per-device isolation via `DeviceLink` in the server DB. An iPhone paired 
 ### 1. Deploy the server
 
 ```bash
-git clone https://github.com/MioMioOS/CodeLight.git
-cd CodeLight/server
+git clone https://github.com/MioMioOS/MioServer.git
+cd MioServer
 npm install
 cp .env.example .env
 # Set DATABASE_URL, MASTER_SECRET (64-char hex), PORT
 npx prisma db push
-npm start
+npx tsx --env-file=.env ./sources/main.ts
 ```
 
 Put Nginx in front with TLS. `pm2 start npm --name codelight-server -- start` for production.
@@ -334,6 +334,7 @@ Launch presets use **Mac-generated UUIDs** as primary keys on the server, not se
 | Project | Role |
 |---|---|
 | [MioIsland](https://github.com/MioMioOS/MioIsland) | **Required** — the Mac-side bridge |
+| [MioServer](https://github.com/MioMioOS/MioServer) | **Required** — self-hosted relay server |
 | [cmux](https://cmux.io) | **Recommended** — the terminal multiplexer that makes precise routing possible |
 
 ---
