@@ -36,12 +36,14 @@ struct RootView: View {
             }
         }
         .preferredColorScheme(.dark)
-        .sheet(isPresented: $appState.showSubscriptionPaywall) {
-            SubscriptionView(reason: appState.subscriptionReason)
-                .environmentObject(appState)
-        }
-        .sheet(isPresented: $appState.showDeviceLimit) {
-            DeviceLimitView()
+        .fullScreenCover(item: $appState.activeSheet) { sheet in
+            switch sheet {
+            case .subscription:
+                SubscriptionView(reason: appState.subscriptionReason)
+                    .environmentObject(appState)
+            case .deviceLimit:
+                DeviceLimitView()
+            }
         }
     }
 
