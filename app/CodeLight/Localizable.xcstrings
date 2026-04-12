@@ -4,9 +4,6 @@
     "" : {
 
     },
-    "·" : {
-
-    },
     "/Users/you/code/myproject" : {
 
     },
@@ -2141,6 +2138,182 @@
         }
       }
     },
+    "redeem_already_used" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have already used this code."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你已经使用过此兑换码。"
+          }
+        }
+      }
+    },
+    "redeem_code_button" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Have a redeem code?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "有兑换码？"
+          }
+        }
+      }
+    },
+    "redeem_exhausted" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This code has been fully redeemed."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此兑换码已被全部使用。"
+          }
+        }
+      }
+    },
+    "redeem_expired" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This code has expired."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此兑换码已过期。"
+          }
+        }
+      }
+    },
+    "redeem_failed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redeem failed. Please try again."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "兑换失败，请重试。"
+          }
+        }
+      }
+    },
+    "redeem_invalid" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid redeem code."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "兑换码无效。"
+          }
+        }
+      }
+    },
+    "redeem_network_error" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network error. Please check connection."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "网络错误，请检查连接。"
+          }
+        }
+      }
+    },
+    "redeem_no_auth" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Authentication required. Please reconnect."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要认证，请重新连接。"
+          }
+        }
+      }
+    },
+    "redeem_no_server" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not connected to a server."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未连接服务器。"
+          }
+        }
+      }
+    },
+    "redeem_placeholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter redeem code"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "输入兑换码"
+          }
+        }
+      }
+    },
+    "redeem_submit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redeem"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "兑换"
+          }
+        }
+      }
+    },
     "refresh" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2911,7 +3084,136 @@
         }
       }
     },
+    "sub_feat_island_desc" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live session status on your Lock Screen"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "锁屏实时显示会话状态"
+          }
+        }
+      }
+    },
+    "sub_feat_island_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dynamic Island"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "灵动岛"
+          }
+        }
+      }
+    },
+    "sub_feat_mac_desc" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connect one iPhone to multiple Macs"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一台 iPhone 连接多台 Mac"
+          }
+        }
+      }
+    },
+    "sub_feat_mac_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Multi-Mac Pairing"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "多 Mac 配对"
+          }
+        }
+      }
+    },
+    "sub_feat_sessions_desc" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monitor all Claude Code sessions in real time"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "实时监控所有 Claude Code 会话"
+          }
+        }
+      }
+    },
+    "sub_feat_sessions_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlimited Sessions"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无限会话"
+          }
+        }
+      }
+    },
+    "sub_feat_sync_desc" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Messages, approvals, and commands from your phone"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "消息、审批、指令，手机全搞定"
+          }
+        }
+      }
+    },
+    "sub_feat_sync_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Real-time Sync"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "实时同步"
+          }
+        }
+      }
+    },
     "sub_feature_island" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2928,6 +3230,7 @@
       }
     },
     "sub_feature_lifetime" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2944,6 +3247,7 @@
       }
     },
     "sub_feature_multi_mac" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2960,6 +3264,7 @@
       }
     },
     "sub_feature_sessions" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2976,6 +3281,7 @@
       }
     },
     "sub_feature_sync" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3117,72 +3423,6 @@
             "value" : "已解锁！"
           }
         }
-      }
-    },
-    "redeem_placeholder" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter redeem code" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "输入兑换码" } }
-      }
-    },
-    "redeem_submit" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Redeem" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "兑换" } }
-      }
-    },
-    "redeem_code_button" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Have a redeem code?" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "有兑换码？" } }
-      }
-    },
-    "redeem_invalid" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Invalid redeem code." } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "兑换码无效。" } }
-      }
-    },
-    "redeem_expired" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "This code has expired." } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "此兑换码已过期。" } }
-      }
-    },
-    "redeem_exhausted" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "This code has been fully redeemed." } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "此兑换码已被全部使用。" } }
-      }
-    },
-    "redeem_already_used" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "You have already used this code." } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "你已经使用过此兑换码。" } }
-      }
-    },
-    "redeem_failed" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Redeem failed. Please try again." } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "兑换失败，请重试。" } }
-      }
-    },
-    "redeem_network_error" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Network error. Please check connection." } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "网络错误，请检查连接。" } }
-      }
-    },
-    "redeem_no_server" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Not connected to a server." } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "未连接服务器。" } }
-      }
-    },
-    "redeem_no_auth" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Authentication required. Please reconnect." } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "需要认证，请重新连接。" } }
       }
     },
     "sub_terms" : {

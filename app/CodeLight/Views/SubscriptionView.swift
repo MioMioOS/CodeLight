@@ -86,16 +86,15 @@ struct SubscriptionView: View {
                             // Purchase button
                             purchaseButton
 
-                            // Restore
-                            restoreButton
-
-                            // Redeem code
-                            redeemSection
-
                             // Error messages
                             errorArea
 
-                            // Footer
+                            // Redeem code input (shown when tapped)
+                            if showRedeemInput {
+                                redeemInputField
+                            }
+
+                            // Footer (restore + redeem + privacy + terms)
                             footerLinks
                         }
 
@@ -168,40 +167,53 @@ struct SubscriptionView: View {
 
     private var appIcon: some View {
         Image(systemName: "bolt.fill")
-            .font(.system(size: 48))
-            .foregroundStyle(Theme.brand)
-            .frame(width: 80, height: 80)
-            .background(Theme.bgElevated, in: RoundedRectangle(cornerRadius: 20))
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Theme.border, lineWidth: 0.5)
-            )
+            .font(.system(size: 32))
+            .foregroundStyle(.black)
+            .frame(width: 64, height: 64)
+            .background(Theme.brand, in: RoundedRectangle(cornerRadius: 16))
     }
 
     // MARK: - Feature List
 
     private var featureList: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            featureRow("checkmark.circle.fill", String(localized: "sub_feature_sessions"))
-            featureRow("checkmark.circle.fill", String(localized: "sub_feature_multi_mac"))
-            featureRow("checkmark.circle.fill", String(localized: "sub_feature_sync"))
-            featureRow("checkmark.circle.fill", String(localized: "sub_feature_island"))
-            featureRow("star.circle.fill", String(localized: "sub_feature_lifetime"), highlight: true)
+        VStack(spacing: 0) {
+            featureRow("bolt.fill",
+                        String(localized: "sub_feat_sessions_title"),
+                        String(localized: "sub_feat_sessions_desc"))
+            featureRow("arrow.triangle.2.circlepath",
+                        String(localized: "sub_feat_sync_title"),
+                        String(localized: "sub_feat_sync_desc"))
+            featureRow("desktopcomputer",
+                        String(localized: "sub_feat_mac_title"),
+                        String(localized: "sub_feat_mac_desc"))
+            featureRow("sparkles",
+                        String(localized: "sub_feat_island_title"),
+                        String(localized: "sub_feat_island_desc"))
         }
-        .padding(20)
-        .brandSurface(corner: 12)
-        .padding(.horizontal, 32)
+        .padding(.vertical, 8)
+        .brandSurface(corner: 16)
+        .padding(.horizontal, 24)
     }
 
-    private func featureRow(_ icon: String, _ text: String, highlight: Bool = false) -> some View {
-        HStack(spacing: 12) {
+    private func featureRow(_ icon: String, _ title: String, _ desc: String) -> some View {
+        HStack(spacing: 14) {
             Image(systemName: icon)
                 .foregroundStyle(Theme.brand)
-                .font(.system(size: 18))
-            Text(text)
-                .font(highlight ? .body.bold() : .body)
-                .foregroundStyle(highlight ? Theme.brand : Theme.textPrimary)
+                .font(.system(size: 16, weight: .semibold))
+                .frame(width: 40, height: 40)
+                .background(Theme.bgElevated, in: RoundedRectangle(cornerRadius: 10))
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(Theme.textPrimary)
+                Text(desc)
+                    .font(.caption)
+                    .foregroundStyle(Theme.textSecondary)
+            }
+            Spacer()
         }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
     }
 
     // MARK: - Price
@@ -318,64 +330,74 @@ struct SubscriptionView: View {
     // MARK: - Footer
 
     private var footerLinks: some View {
-        HStack(spacing: 16) {
-            Link(String(localized: "privacy_policy"),
-                 destination: URL(string: "https://github.com/MioMioOS/CodeLight/blob/main/PRIVACY.md")!)
-                .font(.caption2)
-                .foregroundStyle(Theme.textTertiary)
+        VStack(spacing: 8) {
+            HStack(spacing: 20) {
+                Button {
+                    Task { await handleRestore() }
+                } label: {
+                    Text(String(localized: "sub_restore_purchase").uppercased())
+                        .font(.caption2.weight(.medium))
+                        .foregroundStyle(Theme.textTertiary)
+                }
+                .disabled(isRestoring)
 
-            Text("·")
-                .font(.caption2)
-                .foregroundStyle(Theme.textTertiary)
+                redeemInlineButton
+            }
 
-            Link(String(localized: "sub_terms"),
-                 destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
-                .font(.caption2)
+            HStack(spacing: 16) {
+                Link(String(localized: "privacy_policy").uppercased(),
+                     destination: URL(string: "https://github.com/MioMioOS/CodeLight/blob/main/PRIVACY.md")!)
+                    .font(.caption2.weight(.medium))
+                    .foregroundStyle(Theme.textTertiary)
+
+                Link(String(localized: "sub_terms").uppercased(),
+                     destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
+                    .font(.caption2.weight(.medium))
+                    .foregroundStyle(Theme.textTertiary)
+            }
+        }
+    }
+
+    private var redeemInlineButton: some View {
+        Button {
+            withAnimation { showRedeemInput = true }
+        } label: {
+            Text(String(localized: "redeem_code_button").uppercased())
+                .font(.caption2.weight(.medium))
                 .foregroundStyle(Theme.textTertiary)
         }
     }
 
-    // MARK: - Redeem Code
+    // MARK: - Redeem Code Input
 
-    private var redeemSection: some View {
-        VStack(spacing: 10) {
-            if showRedeemInput {
-                HStack(spacing: 8) {
-                    TextField(String(localized: "redeem_placeholder"), text: $redeemCode)
-                        .textFieldStyle(.roundedBorder)
-                        .textInputAutocapitalization(.characters)
-                        .autocorrectionDisabled()
-                        .font(.system(.body, design: .monospaced))
+    private var redeemInputField: some View {
+        VStack(spacing: 8) {
+            HStack(spacing: 8) {
+                TextField(String(localized: "redeem_placeholder"), text: $redeemCode)
+                    .textFieldStyle(.roundedBorder)
+                    .textInputAutocapitalization(.characters)
+                    .autocorrectionDisabled()
+                    .font(.system(.subheadline, design: .monospaced))
 
-                    Button {
-                        Task { await handleRedeem() }
-                    } label: {
-                        if isRedeeming {
-                            ProgressView().controlSize(.small)
-                        } else {
-                            Text(String(localized: "redeem_submit"))
-                                .font(.subheadline.bold())
-                                .foregroundStyle(Theme.brand)
-                        }
-                    }
-                    .disabled(redeemCode.trimmingCharacters(in: .whitespaces).isEmpty || isRedeeming)
-                }
-                .padding(.horizontal, 40)
-
-                if let redeemError {
-                    Text(redeemError)
-                        .font(.caption)
-                        .foregroundStyle(Theme.danger)
-                        .padding(.horizontal, 40)
-                }
-            } else {
                 Button {
-                    withAnimation { showRedeemInput = true }
+                    Task { await handleRedeem() }
                 } label: {
-                    Text(String(localized: "redeem_code_button"))
-                        .font(.caption)
-                        .foregroundStyle(Theme.textTertiary)
+                    if isRedeeming {
+                        ProgressView().controlSize(.small)
+                    } else {
+                        Text(String(localized: "redeem_submit"))
+                            .font(.subheadline.bold())
+                            .foregroundStyle(Theme.brand)
+                    }
                 }
+                .disabled(redeemCode.trimmingCharacters(in: .whitespaces).isEmpty || isRedeeming)
+            }
+            .padding(.horizontal, 24)
+
+            if let redeemError {
+                Text(redeemError)
+                    .font(.caption)
+                    .foregroundStyle(Theme.danger)
             }
         }
     }
