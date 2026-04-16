@@ -624,6 +624,54 @@
         }
       }
     },
+    "device_reregistered_message %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\"%@\" has re-registered with a new pairing code. Your current pairing is no longer valid. Please re-pair in MioIsland."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 已使用新的配对码重新注册，当前配对已失效。请在 MioIsland 上重新配对。"
+          }
+        }
+      }
+    },
+    "device_reregistered_repair" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Re-pair Now"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "立即重新配对"
+          }
+        }
+      }
+    },
+    "device_reregistered_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mac Re-registered"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mac 已重新注册"
+          }
+        }
+      }
+    },
     "disabled" : {
       "localizations" : {
         "en" : {
@@ -1446,7 +1494,6 @@
       }
     },
     "ok" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2280,24 +2327,6 @@
             "value" : "未连接服务器。"
           }
         }
-      }
-    },
-    "device_reregistered_title" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Mac Re-registered" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Mac 已重新注册" } }
-      }
-    },
-    "device_reregistered_message %@" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "\"%@\" has re-registered with a new pairing code. Your current pairing is no longer valid. Please re-pair in MioIsland." } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 已使用新的配对码重新注册，当前配对已失效。请在 MioIsland 上重新配对。" } }
-      }
-    },
-    "device_reregistered_repair" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Re-pair Now" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "立即重新配对" } }
       }
     },
     "redeem_placeholder" : {

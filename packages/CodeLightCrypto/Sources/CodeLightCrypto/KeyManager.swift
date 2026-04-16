@@ -17,10 +17,14 @@ public final class KeyManager: Sendable {
         migrateKeychainAccessibility()
     }
 
-    /// One-time migration: update all existing Keychain items under this service
-    /// to use kSecAttrAccessibleWhenUnlocked. Prevents macOS authorization prompts
-    /// when the app binary is re-signed (new build / new certificate).
+    /// One-time migration: re-save all existing Keychain items under this service
+    /// with an open-access ACL so any app version can read them without prompting.
+    /// Ad-hoc signed apps have a different code-signature hash on every update, so
+    /// items that use the default app-based ACL always trigger a password dialog
+    /// after an update. Calling SecAccessCreate with nil trusted apps removes that
+    /// restriction permanently.
     private func migrateKeychainAccessibility() {
+        #if os(macOS)
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: serviceName,
@@ -37,13 +41,6 @@ public final class KeyManager: Sendable {
             guard let account = item[kSecAttrAccount as String] as? String,
                   let data = item[kSecValueData as String] as? Data else { continue }
 
-            // Check if already migrated
-            if let accessible = item[kSecAttrAccessible as String] as? String,
-               accessible == (kSecAttrAccessibleWhenUnlocked as String) {
-                continue
-            }
-
-            // Delete old item and re-add with correct accessibility
             let deleteQuery: [String: Any] = [
                 kSecClass as String: kSecClassGenericPassword,
                 kSecAttrService as String: serviceName,
@@ -53,9 +50,15 @@ public final class KeyManager: Sendable {
 
             var addQuery = deleteQuery
             addQuery[kSecValueData as String] = data
-            addQuery[kSecAttrAccessible as String] = kSecAttrAccessibleWhenUnlocked
+            // Open-access ACL: any application can read without password prompt
+            var accessRef: SecAccess?
+            if SecAccessCreate(serviceName as CFString, nil, &accessRef) == errSecSuccess,
+               let accessRef {
+                addQuery[kSecAttrAccess as String] = accessRef
+            }
             SecItemAdd(addQuery as CFDictionary, nil)
         }
+        #endif
     }
 
     // MARK: - Ed25519 Identity Key
@@ -145,7 +148,21 @@ public final class KeyManager: Sendable {
 
         var addQuery = query
         addQuery[kSecValueData as String] = data
+
+        #if os(macOS)
+        // On macOS, use SecAccess with nil trusted apps so any app version can read
+        // this item without a password prompt. The default behavior ties the ACL to
+        // the calling binary's code signature hash, which changes on every ad-hoc
+        // re-sign (i.e. every update), causing macOS to prompt for the keychain
+        // password on each launch after an update.
+        var accessRef: SecAccess?
+        if SecAccessCreate(serviceName as CFString, nil, &accessRef) == errSecSuccess,
+           let accessRef {
+            addQuery[kSecAttrAccess as String] = accessRef
+        }
+        #else
         addQuery[kSecAttrAccessible as String] = kSecAttrAccessibleWhenUnlocked
+        #endif
 
         let status = SecItemAdd(addQuery as CFDictionary, nil)
         guard status == errSecSuccess else {
