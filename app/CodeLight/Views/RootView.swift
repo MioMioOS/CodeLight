@@ -47,9 +47,20 @@ struct RootView: View {
         }
         .alert(String(localized: "device_reregistered_title"), isPresented: $appState.showDeviceReregistered) {
             Button(String(localized: "device_reregistered_repair")) {
-                // Navigate to pairing view by clearing linked macs for this server
+                Task {
+                    // Remove the stale Mac pairing
+                    if let oldId = appState.deviceReregisteredOldDeviceId,
+                       let staleMac = appState.linkedMacs.first(where: { $0.deviceId == oldId }) {
+                        await appState.unlinkMac(staleMac)
+                    }
+                    // If no Macs left, RootView automatically shows PairingView
+                    // If other Macs remain, user can tap + to add new pairing
+                    appState.deviceReregisteredOldDeviceId = nil
+                }
             }
-            Button(String(localized: "ok"), role: .cancel) {}
+            Button(String(localized: "ok"), role: .cancel) {
+                appState.deviceReregisteredOldDeviceId = nil
+            }
         } message: {
             Text(String(localized: "device_reregistered_message \(appState.deviceReregisteredMacName)"))
         }

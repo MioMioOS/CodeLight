@@ -61,6 +61,7 @@ final class AppState: ObservableObject {
     // MARK: - Device Re-registration Alert
     @Published var showDeviceReregistered: Bool = false
     @Published var deviceReregisteredMacName: String = ""
+    var deviceReregisteredOldDeviceId: String?
 
     enum SheetType: Identifiable {
         case subscription
@@ -221,7 +222,9 @@ final class AppState: ObservableObject {
             }
             client.onDeviceReregistered = { [weak self] info in
                 let macName = info["name"] as? String ?? "Mac"
+                let oldDeviceId = info["oldDeviceId"] as? String
                 self?.deviceReregisteredMacName = macName
+                self?.deviceReregisteredOldDeviceId = oldDeviceId
                 self?.showDeviceReregistered = true
             }
             client.onEphemeral = { _, _ in }
