@@ -3972,6 +3972,22 @@
         }
       }
     },
+    "bad_response" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bad response"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "服务器响应异常"
+          }
+        }
+      }
+    },
     "X7K2M9" : {
 
     },

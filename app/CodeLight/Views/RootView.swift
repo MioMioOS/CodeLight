@@ -55,7 +55,7 @@ struct RootView: View {
                 appState.deviceReregisteredOldDeviceId = nil
             }
         } message: {
-            Text(String(localized: "device_reregistered_message \(appState.deviceReregisteredMacName)"))
+            Text(String(format: String(localized: "device_reregistered_message %@"), appState.deviceReregisteredMacName))
         }
     }
 

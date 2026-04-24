@@ -648,22 +648,21 @@ struct MessageRow: View {
     }
 
     private func thinkingView(_ parsed: ParsedMessage) -> some View {
-        // The left-side rail icon already shows a brain — don't repeat it here.
-        HStack(spacing: 6) {
-            if parsed.text.isEmpty {
-                ThinkingDots(color: .purple)
-            } else {
-                Text(parsed.text)
-                    .font(.system(size: 12))
-                    .italic()
-                    .lineLimit(3)
-            }
-        }
-        .foregroundStyle(.purple.opacity(0.9))
-        .padding(.horizontal, 10)
-        .padding(.vertical, 6)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.purple.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
+        // Empty thinking content means Claude thought but we have no text to show
+        // (e.g. a completed historical session). Hide rather than showing stale dots.
+        // Live "thinking in progress" animation is handled by SendStatusFooter.
+        guard !parsed.text.isEmpty else { return AnyView(EmptyView()) }
+        return AnyView(
+            Text(parsed.text)
+                .font(.system(size: 12))
+                .italic()
+                .lineLimit(3)
+                .foregroundStyle(.purple.opacity(0.9))
+                .padding(.horizontal, 10)
+                .padding(.vertical, 6)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(.purple.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
+        )
     }
 
     // MARK: - Code Block Parsing

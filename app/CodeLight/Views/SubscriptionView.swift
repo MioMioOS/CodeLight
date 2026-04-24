@@ -346,7 +346,7 @@ struct SubscriptionView: View {
 
             HStack(spacing: 16) {
                 Link(String(localized: "privacy_policy").uppercased(),
-                     destination: URL(string: "https://github.com/MioMioOS/CodeLight/blob/main/PRIVACY.md")!)
+                     destination: URL(string: "https://code.7ove.online/privacy")!)
                     .font(.caption2.weight(.medium))
                     .foregroundStyle(Theme.textTertiary)
 

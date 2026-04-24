@@ -25,24 +25,42 @@ final class SocketClient {
     var onDeviceReregistered: (([String: Any]) -> Void)?   // Mac re-registered with new pairing code
     var onSubscriptionUpdated: (([String: Any]) -> Void)?  // subscription status changed
 
+    private static let isoFormatter = ISO8601DateFormatter()
+
     init(serverUrl: String, keyManager: KeyManager) {
-        self.serverUrl = serverUrl
+        // Strip any trailing slash so "/v1/auth" always produces a clean URL.
+        self.serverUrl = serverUrl.hasSuffix("/") ? String(serverUrl.dropLast()) : serverUrl
         self.keyManager = keyManager
         self.token = keyManager.loadToken(forServer: serverUrl)
+    }
+
+    /// Build a URL from `serverUrl + path`. Throws `URLError(.badURL)` if
+    /// the server URL stored by the user is malformed (e.g., contains spaces).
+    private func buildURL(_ path: String) throws -> URL {
+        guard let url = URL(string: "\(serverUrl)\(path)") else {
+            throw URLError(.badURL)
+        }
+        return url
     }
 
     // MARK: - Auth
 
     func authenticate() async throws {
+        #if DEBUG
         print("[SocketClient] Step 1: Creating key...")
+        #endif
         let _ = try keyManager.getOrCreateIdentityKey()
+        #if DEBUG
         print("[SocketClient] Step 2: Key ready")
+        #endif
 
         let challenge = UUID().uuidString
         let challengeData = Data(challenge.utf8)
         let signature = try keyManager.sign(challengeData)
         let publicKey = try keyManager.publicKeyBase64()
-        print("[SocketClient] Step 3: Signed challenge, pubkey=\(publicKey.prefix(20))...")
+        #if DEBUG
+        print("[SocketClient] Step 3: Signed challenge")
+        #endif
 
         // The user picks token lifetime in Settings. Read it here so the
         // server actually honors the choice instead of always issuing a
@@ -58,17 +76,21 @@ final class SocketClient {
             expiryDays: expiryDays
         )
 
-        let url = URL(string: "\(serverUrl)/v1/auth")!
+        let url = try buildURL("/v1/auth")
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.httpBody = try JSONEncoder().encode(request)
         urlRequest.timeoutInterval = 10
 
+        #if DEBUG
         print("[SocketClient] Step 4: Sending auth to \(url)...")
+        #endif
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        #if DEBUG
         let httpResponse = response as? HTTPURLResponse
         print("[SocketClient] Step 5: Got \(httpResponse?.statusCode ?? -1), body=\(String(data: data, encoding: .utf8)?.prefix(100) ?? "nil")")
+        #endif
         let authResponse = try JSONDecoder().decode(AuthResponse.self, from: data)
 
         if let t = authResponse.token {
@@ -81,8 +103,10 @@ final class SocketClient {
 
     func connect() {
         guard let token else { return }
-
-        let url = URL(string: serverUrl)!
+        guard let url = URL(string: serverUrl) else {
+            onConnectionChange?(false)
+            return
+        }
         manager = SocketManager(socketURL: url, config: [
             .log(false),
             .path("/v1/updates"),
@@ -216,7 +240,7 @@ final class SocketClient {
                 metadata = try? JSONDecoder().decode(SessionMetadata.self, from: data)
             }
 
-            let lastActive = (dict["lastActiveAt"] as? String).flatMap { ISO8601DateFormatter().date(from: $0) } ?? Date()
+            let lastActive = (dict["lastActiveAt"] as? String).flatMap { SocketClient.isoFormatter.date(from: $0) } ?? Date()
 
             // Owner device info — projected by the server from the Session→Device join.
             let ownerDeviceId = dict["ownerDeviceId"] as? String
@@ -250,12 +274,12 @@ final class SocketClient {
                           userInfo: [NSLocalizedDescriptionKey: result["error"] as? String ?? "Pairing failed"])
         }
         let kind = result["kind"] as? String ?? "mac"
-        return LinkedDevice(deviceId: macId, name: name, kind: kind, createdAt: ISO8601DateFormatter().string(from: Date()))
+        return LinkedDevice(deviceId: macId, name: name, kind: kind, createdAt: SocketClient.isoFormatter.string(from: Date()))
     }
 
     /// List all devices linked to this iPhone.
     func fetchLinks() async throws -> [LinkedDevice] {
-        let url = URL(string: "\(serverUrl)/v1/pairing/links")!
+        let url = try buildURL("/v1/pairing/links")
         var request = URLRequest(url: url)
         if let token { request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization") }
         let (data, _) = try await URLSession.shared.data(for: request)
@@ -264,7 +288,7 @@ final class SocketClient {
 
     /// Unlink a paired Mac.
     func unlinkDevice(_ deviceId: String) async throws {
-        let url = URL(string: "\(serverUrl)/v1/pairing/links/\(deviceId)")!
+        let url = try buildURL("/v1/pairing/links/\(deviceId)")
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         if let token { request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization") }
@@ -277,16 +301,16 @@ final class SocketClient {
 
     /// Fetch a paired Mac's launch presets.
     func fetchPresets(macDeviceId: String) async throws -> [LaunchPresetDTO] {
-        let url = URL(string: "\(serverUrl)/v1/devices/\(macDeviceId)/presets")!
+        let url = try buildURL("/v1/devices/\(macDeviceId)/presets")
         var request = URLRequest(url: url)
         if let token { request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization") }
-        let (data, _) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await URLSession.shared.data(for: request)
         return (try? JSONDecoder().decode([LaunchPresetDTO].self, from: data)) ?? []
     }
 
     /// Fetch a paired Mac's known project paths.
     func fetchProjects(macDeviceId: String, limit: Int = 30) async throws -> [KnownProjectDTO] {
-        let url = URL(string: "\(serverUrl)/v1/devices/\(macDeviceId)/projects?limit=\(limit)")!
+        let url = try buildURL("/v1/devices/\(macDeviceId)/projects?limit=\(limit)")
         var request = URLRequest(url: url)
         if let token { request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization") }
         let (data, _) = try await URLSession.shared.data(for: request)
@@ -317,7 +341,7 @@ final class SocketClient {
     }
 
     private func postJSON(path: String, body: [String: Any]) async throws -> [String: Any] {
-        let url = URL(string: "\(serverUrl)\(path)")!
+        let url = try buildURL(path)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -375,11 +399,7 @@ final class SocketClient {
     // MARK: - Event Handling
 
     private func handleUpdate(_ dict: [String: Any]) {
-        guard let type = dict["type"] as? String else {
-            print("[SocketClient] handleUpdate: no 'type' in dict, keys=\(dict.keys)")
-            return
-        }
-        print("[SocketClient] handleUpdate: type=\(type)")
+        guard let type = dict["type"] as? String else { return }
 
         switch type {
         case "new-message":
@@ -387,21 +407,16 @@ final class SocketClient {
                let msgDict = dict["message"] as? [String: Any],
                let msgData = try? JSONSerialization.data(withJSONObject: msgDict),
                let msg = try? JSONDecoder().decode(UpdateMessage.self, from: msgData) {
-                print("[SocketClient] new-message: session=\(sessionId.prefix(10)) seq=\(msg.seq)")
                 onNewMessage?(sessionId, msg)
-            } else {
-                print("[SocketClient] new-message: PARSE FAILED, keys=\(dict.keys)")
             }
         case "message-updated":
             if let sessionId = dict["sessionId"] as? String,
                let msgDict = dict["message"] as? [String: Any],
                let msgData = try? JSONSerialization.data(withJSONObject: msgDict),
                let msg = try? JSONDecoder().decode(UpdateMessage.self, from: msgData) {
-                print("[SocketClient] message-updated: session=\(sessionId.prefix(10)) seq=\(msg.seq)")
                 onMessageUpdated?(sessionId, msg)
             }
         case "sessions-changed":
-            print("[SocketClient] sessions-changed")
             onSessionsChanged?()
         default:
             break
@@ -411,7 +426,7 @@ final class SocketClient {
     // MARK: - HTTP Helpers
 
     private func getJSON(path: String) async throws -> [String: Any] {
-        let url = URL(string: "\(serverUrl)\(path)")!
+        let url = try buildURL(path)
         var request = URLRequest(url: url)
         if let token { request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization") }
         let (data, _) = try await URLSession.shared.data(for: request)
@@ -421,7 +436,7 @@ final class SocketClient {
     /// Fetch the capability snapshot (slash commands, skills, MCP servers) uploaded
     /// by MioIsland for this device. Used by the phone's command picker.
     func fetchCapabilities() async throws -> CapabilitySnapshot {
-        let url = URL(string: "\(serverUrl)/v1/capabilities")!
+        let url = try buildURL("/v1/capabilities")
         var request = URLRequest(url: url)
         if let token { request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization") }
         let (data, response) = try await URLSession.shared.data(for: request)
@@ -445,7 +460,7 @@ final class SocketClient {
     }
 
     func fetchNotificationPrefs() async throws -> NotificationPrefs {
-        let url = URL(string: "\(serverUrl)/v1/notification-prefs")!
+        let url = try buildURL("/v1/notification-prefs")
         var request = URLRequest(url: url)
         if let token { request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization") }
         let (data, _) = try await URLSession.shared.data(for: request)
@@ -453,7 +468,7 @@ final class SocketClient {
     }
 
     func updateNotificationPrefs(_ prefs: NotificationPrefs) async throws -> NotificationPrefs {
-        let url = URL(string: "\(serverUrl)/v1/notification-prefs")!
+        let url = try buildURL("/v1/notification-prefs")
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -474,7 +489,7 @@ final class SocketClient {
     /// in the middle of tearing down a connection that may already be dead.
     func deleteAllPushTokens() async {
         guard let token else { return }
-        let url = URL(string: "\(serverUrl)/v1/push-tokens")!
+        guard let url = URL(string: "\(serverUrl)/v1/push-tokens") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -484,7 +499,7 @@ final class SocketClient {
 
     /// Upload an image blob. Returns the blobId on success.
     func uploadBlob(data: Data, mime: String) async throws -> String {
-        let url = URL(string: "\(serverUrl)/v1/blobs")!
+        let url = try buildURL("/v1/blobs")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue(mime, forHTTPHeaderField: "Content-Type")

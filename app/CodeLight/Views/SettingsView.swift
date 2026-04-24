@@ -526,7 +526,7 @@ struct SettingsView: View {
                 }
             } else {
                 Haptics.error()
-                cleanupStatus = .failure("Bad response")
+                cleanupStatus = .failure(String(localized: "bad_response"))
             }
         } catch {
             Haptics.error()

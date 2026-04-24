@@ -5,6 +5,7 @@ import CodeLightProtocol
 /// Camera-based QR code scanner using DataScannerViewController.
 struct QRScannerView: UIViewControllerRepresentable {
     let onCodeScanned: (String) -> Void
+    var onScannerError: ((String) -> Void)? = nil
 
     func makeUIViewController(context: Context) -> DataScannerViewController {
         let scanner = DataScannerViewController(
@@ -19,20 +20,28 @@ struct QRScannerView: UIViewControllerRepresentable {
 
     func updateUIViewController(_ uiViewController: DataScannerViewController, context: Context) {
         if !uiViewController.isScanning {
-            try? uiViewController.startScanning()
+            do {
+                try uiViewController.startScanning()
+            } catch {
+                DispatchQueue.main.async {
+                    context.coordinator.onScannerError?(error.localizedDescription)
+                }
+            }
         }
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(onCodeScanned: onCodeScanned)
+        Coordinator(onCodeScanned: onCodeScanned, onScannerError: onScannerError)
     }
 
     class Coordinator: NSObject, DataScannerViewControllerDelegate {
         let onCodeScanned: (String) -> Void
+        let onScannerError: ((String) -> Void)?
         private var hasScanned = false
 
-        init(onCodeScanned: @escaping (String) -> Void) {
+        init(onCodeScanned: @escaping (String) -> Void, onScannerError: ((String) -> Void)?) {
             self.onCodeScanned = onCodeScanned
+            self.onScannerError = onScannerError
         }
 
         func dataScanner(_ dataScanner: DataScannerViewController, didAdd addedItems: [RecognizedItem], allItems: [RecognizedItem]) {

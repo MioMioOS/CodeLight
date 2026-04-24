@@ -61,14 +61,11 @@ struct ChatView: View {
     @State private var deltaFetchTask: Task<Void, Never>? = nil
     @State private var isReadingScreen = false
     @State private var readScreenSentAt: Date? = nil
+    @State private var scrollToBottomToken = UUID()
+    @State private var turns: [ConversationTurn] = []
 
     private let models = ["opus", "sonnet", "haiku"]
     private let modes = ["auto", "default", "plan"]
-
-    // Group messages into turns
-    private var turns: [ConversationTurn] {
-        groupMessagesIntoTurns(messages)
-    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -121,6 +118,11 @@ struct ChatView: View {
                                 .id("send-status")
                                 .padding(.top, 6)
                         }
+
+                        // Sentinel — always sits at the absolute bottom of the
+                        // list so scrollTo("chat-bottom") reliably lands there
+                        // regardless of how tall the last turn is.
+                        Color.clear.frame(height: 1).id("chat-bottom")
                     }
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
@@ -166,6 +168,11 @@ struct ChatView: View {
                         }
                     }
                 }
+                .onChange(of: scrollToBottomToken) { _, _ in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        proxy.scrollTo("chat-bottom", anchor: .bottom)
+                    }
+                }
                 .sheet(isPresented: $showQuestionNav) {
                     QuestionNavSheet(
                         turns: turns,
@@ -194,19 +201,22 @@ struct ChatView: View {
         .navigationTitle(sessionTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .primaryAction) {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button {
+                    Task { await forceRefresh() }
+                } label: {
+                    if isLoading {
+                        ProgressView().controlSize(.small)
+                    } else {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                }
+                .disabled(isLoading)
+
                 Button {
                     showQuestionNav = true
                 } label: {
                     Image(systemName: "list.bullet.indent")
-                }
-            }
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    Task { await forceRefresh() }
-                } label: {
-                    Image(systemName: "arrow.clockwise")
-                        .font(.system(size: 14, weight: .medium))
                 }
             }
         }
@@ -249,12 +259,12 @@ struct ChatView: View {
             // the socket finished connecting.
             scheduleDeltaFetch()
             startLiveActivity()
+            // Scroll to the sentinel so the very bottom of the conversation is
+            // visible on open, not just the top of the last turn.
+            scrollToBottomToken = UUID()
         }
         .refreshable {
-            // Pull-down at top of chat = load older history (matches user mental model
-            // for chat apps). New messages already arrive in real-time via socket, so
-            // refreshing the latest is meaningless here.
-            if hasMoreOlder { await loadOlderMessages() }
+            await loadOlderMessages()
         }
         .onReceive(appState.newMessageSubject) { event in
             guard event.sessionId == sessionId else { return }
@@ -313,6 +323,9 @@ struct ChatView: View {
             // second trigger is the one that actually succeeds.
             guard connected else { return }
             scheduleDeltaFetch()
+        }
+        .onChange(of: messages) { _, _ in
+            turns = groupMessagesIntoTurns(messages)
         }
         .onDisappear {
             deltaFetchTask?.cancel()
@@ -678,9 +691,11 @@ struct ChatView: View {
 
     private func forceRefresh() async {
         messages = []
+        turns = []
         hasMoreOlder = false
         await loadMessages()
         scheduleDeltaFetch()
+        scrollToBottomToken = UUID()
     }
 
     private func loadMessages() async {
@@ -693,6 +708,7 @@ struct ChatView: View {
         if let socket = appState.socket {
             let result = (try? await socket.fetchMessages(sessionId: sessionId, limit: 50)) ?? SocketClient.FetchResult(messages: [], hasMore: false)
             messages = result.messages.filter { !isStatusOnly($0) }
+            turns = groupMessagesIntoTurns(messages)
             hasMoreOlder = result.hasMore
         }
         isLoading = false
@@ -779,7 +795,7 @@ struct ChatView: View {
                 for att in attachmentsToSend {
                     if let id = try? await socket.uploadBlob(data: att.data, mime: "image/jpeg") {
                         blobIds.append(id)
-                        await MainActor.run { appState.sentImageCache[id] = att.data }
+                        await MainActor.run { appState.addSentImage(att.data, forBlobId: id) }
                     }
                 }
             }

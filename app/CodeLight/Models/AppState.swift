@@ -78,7 +78,18 @@ final class AppState: ObservableObject {
     /// Images the user sent locally, keyed by the blobId. Used by MessageRow to render
     /// attached images the user just sent — server blobs are ephemeral and can't be
     /// re-downloaded after delivery, so we keep a copy here until the app is killed.
+    /// Capped at 40 entries to prevent unbounded memory growth.
     @Published var sentImageCache: [String: Data] = [:]
+    private var sentImageInsertionOrder: [String] = []
+
+    func addSentImage(_ data: Data, forBlobId id: String) {
+        sentImageCache[id] = data
+        sentImageInsertionOrder.append(id)
+        if sentImageInsertionOrder.count > 40 {
+            let evicted = sentImageInsertionOrder.removeFirst()
+            sentImageCache.removeValue(forKey: evicted)
+        }
+    }
 
     /// New message events — ChatView subscribes to this
     let newMessageSubject = PassthroughSubject<(sessionId: String, message: ChatMessage), Never>()
@@ -297,11 +308,8 @@ final class AppState: ObservableObject {
                     self?.latencyMs = nil
                 }
             }
-            isConnected = true
-            startPingTimer()
             currentServerUrl = url
             lastUsedServerUrl = url
-            print("[AppState] Connected to \(url)")
 
             // Retry any pending StoreKit verify that failed while offline.
             Task { await StoreManager.shared.retryPendingVerify() }
@@ -318,14 +326,18 @@ final class AppState: ObservableObject {
                 let fetched = try await client.fetchSessions()
                 self.sessions = fetched
             } catch {
+                #if DEBUG
                 print("[AppState] Failed to fetch sessions: \(error)")
+                #endif
             }
             _ = await subTask
             _ = await linksTask
         } catch {
             isConnected = false
             currentServerUrl = nil
+            #if DEBUG
             print("[AppState] Connection failed: \(error)")
+            #endif
         }
     }
 
@@ -357,7 +369,9 @@ final class AppState: ObservableObject {
                 }
             }
         } catch {
+            #if DEBUG
             print("[AppState] Failed to fetch subscription status: \(error)")
+            #endif
         }
     }
 
@@ -392,7 +406,9 @@ final class AppState: ObservableObject {
             linkedMacs = otherServerRows + thisServerRowsStillValid + newOnes
             saveLinkedMacs()
         } catch {
+            #if DEBUG
             print("[AppState] Failed to fetch links: \(error)")
+            #endif
         }
     }
 
@@ -520,11 +536,11 @@ final class AppState: ObservableObject {
     /// Send a model/mode change via session metadata update
     func updateModelMode(sessionId: String, model: String, mode: String) {
         guard let socket else { return }
-        let metadata: [String: Any] = ["model": model, "mode": mode]
-        if let data = try? JSONSerialization.data(withJSONObject: metadata),
-           let str = String(data: data, encoding: .utf8) {
-            socket.sendMessage(sessionId: sessionId, content: "{\"type\":\"config\",\"model\":\"\(model)\",\"mode\":\"\(mode)\"}", localId: "config-\(UUID().uuidString)")
-        }
+        socket.sendMessage(
+            sessionId: sessionId,
+            content: "{\"type\":\"config\",\"model\":\"\(model)\",\"mode\":\"\(mode)\"}",
+            localId: "config-\(UUID().uuidString)"
+        )
     }
 
     // MARK: - Dynamic Island
@@ -692,7 +708,9 @@ final class AppState: ObservableObject {
             didRemove = true
         }
         if didRemove {
+            #if DEBUG
             print("[AppState] Cleared legacy state keys; lastUsedServerUrl=\(lastUsedServerUrl ?? "nil")")
+            #endif
         }
     }
 }

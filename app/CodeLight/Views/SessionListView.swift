@@ -87,20 +87,18 @@ struct MacSessionListView: View {
             ChatView(sessionId: sessionId)
         }
         .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                HStack(spacing: 12) {
-                    Button {
-                        Haptics.light()
-                        Task { await refreshSessions() }
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
-                    }
-                    Button {
-                        Haptics.medium()
-                        showLaunchSheet = true
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                    }
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button {
+                    Haptics.light()
+                    Task { await refreshSessions() }
+                } label: {
+                    Image(systemName: "arrow.clockwise")
+                }
+                Button {
+                    Haptics.medium()
+                    showLaunchSheet = true
+                } label: {
+                    Image(systemName: "plus.circle.fill")
                 }
             }
         }

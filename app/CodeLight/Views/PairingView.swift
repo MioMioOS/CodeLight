@@ -22,8 +22,8 @@ struct PairingView: View {
     @State private var manualUrl: String = AppState.shared.lastUsedServerUrl ?? "https://code.7ove.online"
     @State private var manualCode: String = ""
 
-    private var isScannerAvailable: Bool {
-        DataScannerViewController.isSupported && DataScannerViewController.isAvailable
+    private var isScannerSupported: Bool {
+        DataScannerViewController.isSupported
     }
 
     /// All unique server URLs the user has paired with before — shown as quick-pick
@@ -75,10 +75,16 @@ struct PairingView: View {
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showScanner) {
             NavigationStack {
-                QRScannerView { code in
-                    showScanner = false
-                    Task { await handleQRPayload(code) }
-                }
+                QRScannerView(
+                    onCodeScanned: { code in
+                        showScanner = false
+                        Task { await handleQRPayload(code) }
+                    },
+                    onScannerError: { msg in
+                        showScanner = false
+                        errorMessage = msg
+                    }
+                )
                 .navigationTitle(String(localized: "scan_qr_code"))
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
@@ -111,7 +117,7 @@ struct PairingView: View {
             }
 
             Button {
-                if isScannerAvailable {
+                if isScannerSupported {
                     showScanner = true
                 } else {
                     errorMessage = String(localized: "camera_not_available")
