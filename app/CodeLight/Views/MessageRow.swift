@@ -620,12 +620,9 @@ struct MessageRow: View {
         case "Glob":
             return input["pattern"] ?? ""
 
-        // Shell commands
+        // Shell commands — hide command content, show only tool name + status
         case "Bash":
-            if let cmd = input["command"] {
-                return String(cmd.prefix(200))
-            }
-            return input["description"] ?? ""
+            return ""
 
         // Web tools
         case "WebSearch":
