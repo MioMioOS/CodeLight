@@ -83,6 +83,9 @@ final class AppState: ObservableObject {
     /// New message events — ChatView subscribes to this
     let newMessageSubject = PassthroughSubject<(sessionId: String, message: ChatMessage), Never>()
 
+    /// Message-updated events — tool status running→success updates
+    let messageUpdatedSubject = PassthroughSubject<(sessionId: String, message: ChatMessage), Never>()
+
     /// UserDefaults-backed: the server URL used in the most recent successful connection.
     /// Drives auto-connect on launch and prefills the pairing form.
     var lastUsedServerUrl: String? {
@@ -246,6 +249,10 @@ final class AppState: ObservableObject {
 
                 let serverName = URL(string: url)?.host ?? "Server"
                 self?.updateLiveActivity(sessionId: sessionId, content: msg.content, serverName: serverName)
+            }
+            client.onMessageUpdated = { [weak self] sessionId, msg in
+                let chatMsg = ChatMessage(id: msg.id, seq: msg.seq, content: msg.content, localId: msg.localId)
+                self?.messageUpdatedSubject.send((sessionId: sessionId, message: chatMsg))
             }
             client.onSubscriptionRequired = { [weak self] info in
                 let trialExpired = (info["trialExpired"] as? Bool) ?? false

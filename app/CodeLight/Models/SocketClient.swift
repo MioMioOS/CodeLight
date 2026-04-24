@@ -15,7 +15,8 @@ final class SocketClient {
     private var socket: SocketIOClient?
 
     var onSessionsUpdate: (([SessionInfo]) -> Void)?
-    var onNewMessage: ((String, UpdateMessage) -> Void)?  // (sessionId, message)
+    var onNewMessage: ((String, UpdateMessage) -> Void)?      // (sessionId, message)
+    var onMessageUpdated: ((String, UpdateMessage) -> Void)?  // (sessionId, updated message)
     var onEphemeral: ((String, Bool) -> Void)?             // (sessionId, active)
     var onConnectionChange: ((Bool) -> Void)?              // connected state
     var onSessionsChanged: (() -> Void)?                   // session list changed on server
@@ -390,6 +391,14 @@ final class SocketClient {
                 onNewMessage?(sessionId, msg)
             } else {
                 print("[SocketClient] new-message: PARSE FAILED, keys=\(dict.keys)")
+            }
+        case "message-updated":
+            if let sessionId = dict["sessionId"] as? String,
+               let msgDict = dict["message"] as? [String: Any],
+               let msgData = try? JSONSerialization.data(withJSONObject: msgDict),
+               let msg = try? JSONDecoder().decode(UpdateMessage.self, from: msgData) {
+                print("[SocketClient] message-updated: session=\(sessionId.prefix(10)) seq=\(msg.seq)")
+                onMessageUpdated?(sessionId, msg)
             }
         case "sessions-changed":
             print("[SocketClient] sessions-changed")

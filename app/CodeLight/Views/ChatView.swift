@@ -284,6 +284,16 @@ struct ChatView: View {
                 }
             }
         }
+        .onReceive(appState.messageUpdatedSubject) { event in
+            guard event.sessionId == sessionId else { return }
+            // In-place update for tool status changes (running→success)
+            if let idx = messages.firstIndex(where: { $0.id == event.message.id }) {
+                messages[idx] = event.message
+            } else if let lid = event.message.localId,
+                      let idx = messages.firstIndex(where: { $0.localId == lid }) {
+                messages[idx] = event.message
+            }
+        }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             // App returned from background — socket was likely suspended by iOS,
             // so delta-fetch any messages we missed while backgrounded.
