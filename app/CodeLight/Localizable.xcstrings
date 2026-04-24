@@ -30,19 +30,34 @@
 
     },
     "7_days" : {
-
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "7 days" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "7 天" } }
+      }
     },
     "14_days" : {
-
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "14 days" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "14 天" } }
+      }
     },
     "30_days" : {
-
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "30 days" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "30 天" } }
+      }
     },
     "90_days" : {
-
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "90 days" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "90 天" } }
+      }
     },
     "180_days" : {
-
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "180 days" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "180 天" } }
+      }
     },
     "about" : {
       "localizations" : {
@@ -852,10 +867,10 @@
         }
       }
     },
-    "https://github.com/xmqywx/CodeLight" : {
+    "https://code.7ove.online" : {
 
     },
-    "https://island.wdao.chat" : {
+    "https://github.com/xmqywx/CodeLight" : {
 
     },
     "inactive_status" : {
@@ -2361,6 +2376,22 @@
         }
       }
     },
+    "redeemed_days_left_format" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active (%lld days left)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已激活（剩余 %lld 天）"
+          }
+        }
+      }
+    },
     "refresh" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -3001,6 +3032,7 @@
       }
     },
     "status_unknown" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3824,22 +3856,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "控制认证令牌多久失效并需要重新验证。"
-          }
-        }
-      }
-    },
-    "redeemed_days_left_format" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Active (%lld days left)"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已激活（剩余 %lld 天）"
           }
         }
       }

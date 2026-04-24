@@ -264,7 +264,7 @@ final class AppState: ObservableObject {
                     } else {
                         self?.trialDaysLeft = nil
                     }
-                    if status == "active" {
+                    if status == "active" || status == "trial" {
                         self?.isSubscriptionBlocked = false
                         self?.showSubscriptionPaywall = false
                     }
@@ -330,6 +330,10 @@ final class AppState: ObservableObject {
                 if let status = info["status"] as? String {
                     self.subscriptionStatus = status
                     self.cachedSubscriptionStatus = status
+                    if status == "trial" || status == "active" {
+                        self.isSubscriptionBlocked = false
+                        self.showSubscriptionPaywall = false
+                    }
                 }
                 if let days = info["daysLeft"] as? Int {
                     self.trialDaysLeft = days
