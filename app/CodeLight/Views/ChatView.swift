@@ -942,7 +942,7 @@ struct ChatView: View {
     private func sendTextOnly(_ text: String) {
         uploadStates = [:]
         pendingAttachments = []
-        guard !text.isEmpty, let socket = appState.socket else { return }
+        guard !text.isEmpty, appState.socket != nil else { return }
         let localId = UUID().uuidString
         pendingSend = PendingSend(localId: localId, startedAt: Date(), stage: .sending)
         appState.sendMessage(text, toSession: sessionId, localId: localId) {
@@ -956,7 +956,6 @@ struct ChatView: View {
                               content: text,
                               localId: localId)
         messages.append(msg)
-        _ = socket  // silence unused warning
     }
 }
 
